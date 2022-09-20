@@ -1,0 +1,68 @@
+<app-header></app-header><br>
+<h1>
+    Listado de Usuarios</h1>
+<hr>
+
+
+<div class="row">
+    <div class="col text-right">
+        <button routerLink="/usuario/nuevo" class="btn btn-primary">
+      <i class="fa fa-plus"></i>
+      Agregar
+    </button>
+    </div>
+</div>
+
+<!--  -->
+<table *ngIf="!cargando && usuarios.length > 0" class="table mt-3 animated fadeIn faster animated fadeIn faster">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Carrera</th>
+            <th scope="col">Categoría</th>
+            <th scope="col">Rol</th>
+            <th scope="col">Tools</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let usuario of usuarios; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.carrera }}</td>
+            <td>{{ usuario.categoria }}</td>
+
+            <td>{{ usuario.rol }}</td>
+            <td class="text-right">
+                <!--  -->
+                <button class="btn btn-info mr-1" [routerLink]="['/usuario', usuario.uid ]">
+                <i class="fa fa-pen"></i>
+                </button>
+                <!--  -->
+                <button class="btn btn-danger" (click)="borrarUsuario( usuario, i ) ">
+                <i class="fa fa-trash"></i>
+                </button>
+
+
+            </td>
+        </tr>
+    </tbody>
+</table>
+<!--  -->
+<div *ngIf="!cargando && usuarios.length === 0" class="alert alert-warning text-center mt-3 animated fadeIn faster">
+    <h4 class="alert-heading">No hay registros</h4>
+    <p>
+        <i class="fa fa-exclamation fa-2x"></i>
+    </p>
+</div>
+<!--  -->
+<div *ngIf="cargando" class="alert alert-info text-center mt-3 animated fadeIn faster">
+    <h4 class="alert-heading">Cargando</h4>
+    <p>
+        <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+    </p>
+    <p class="mb-0">
+        Espere por favor
+    </p>
+</div>

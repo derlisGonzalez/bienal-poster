@@ -1,0 +1,48 @@
+<app-header></app-header><br>
+<h1>
+    Categoria <small>Descripción Categoria</small> </h1>
+<hr>
+
+
+<div class="row text-right">
+    <div class="col">
+        <button class="btn btn-danger" routerLink="/categorias">
+      <i class="fa fa-arrow-left"></i>
+      Regresar
+    </button>
+    </div>
+</div>
+
+
+
+<div class="row animated fadeIn faster">
+    <div class="col">
+        <!-- se llama al metodo guardar de heroe.componet.ts -->
+        <form (ngSubmit)="guardar( f )" #f="ngForm">
+
+            <div class="form-group">
+                <label>Firebase ID</label>
+                <input type="text" class="form-control" placeholder="Firebase ID" [(ngModel)]="categoria.id" name="id" disabled="disabled">
+                <small class="form-text text-muted">Este campo es autogenerado</small>
+            </div>
+
+
+            <div class="form-group">
+                <label>Descripcion</label>
+                <input type="text" class="form-control" placeholder="Descripcion de la Categoria" [(ngModel)]="categoria.descripcion" name="descripcion" required>
+            </div>
+
+            <hr>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary w-25">
+          <i class="fa fa-save"></i>
+          Guardar
+        </button>
+            </div>
+
+
+        </form>
+
+
+    </div>
+</div>

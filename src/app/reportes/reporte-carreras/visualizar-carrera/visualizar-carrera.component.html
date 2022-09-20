@@ -1,0 +1,81 @@
+<h1 class="text-center">
+    Vista previa
+</h1>
+<hr>
+
+
+<div class="row text-right">
+    <div class="col">
+        <button class="btn btn-danger" routerLink="/lista-carreras">
+            <i class="fa fa-arrow-left"></i>
+            Regresar
+        </button>
+    </div>
+</div>
+
+
+
+<div class="row animated fadeIn faster">
+    <div class="col">
+        <!-- se llama al metodo guardar de proyecto.componet.ts -->
+        <form [formGroup]="forma" (ngSubmit)="guardar()">
+
+
+            <div class="form-group">
+                <label>ID</label>
+                <input class="form-control" type="text" placeholder="ID" [(ngModel)]="carrera.id"
+                    [attr.disabled]="true" formControlName="id">
+                
+            </div>
+
+
+
+
+
+
+            <div class="form-group">
+                <label>Descripcion</label>
+                <input class="form-control" type="text" placeholder="Descripcion" [(ngModel)]="carrera.descripcion"
+                    formControlName="descripcion" [attr.disabled]="true">
+            </div>
+
+            <hr>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary w-25">
+                    <i class="fa fa-save"></i>
+                    Descargar
+                </button>
+            </div>
+
+
+        </form>
+
+        <!-- <div class="form-group">
+            <label *ngFor="let criterio of proyecto.criterios" class="form-control"
+                   type="text">
+                   {{criterio.descripcion}}
+                </label>
+            
+        </div> -->
+
+        <hr>
+        <pre>
+        Estado del formulario: {{ forma.valid }}
+        <br>
+        Status: {{ forma.status }}
+        </pre>
+
+        <pre>
+
+        {{ forma.value | json }}
+
+        </pre>
+
+        <pre>
+
+            {{ carrera | json }}
+    
+        </pre>
+
+    </div>
+</div>

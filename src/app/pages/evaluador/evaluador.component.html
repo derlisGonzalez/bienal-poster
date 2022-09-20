@@ -1,0 +1,79 @@
+<app-header></app-header><br>
+
+<div class="row">
+    <div class="col  text-left">
+        <h2>Registro de evaluadores</h2>
+    </div>
+    <div class="col text-right">
+        <button class="btn btn-danger" routerLink="/evaluadores"><i class="fa fa-arrow-left"></i>Regresar</button>
+    </div>
+</div>
+
+
+
+<div class="row animated fadeIn faster">
+    <div class="col">
+        <!-- se llama al metodo guardar de evaluador.componet.ts -->
+        <form [formGroup]="forma" (ngSubmit)="guardar()">
+
+            <div class="form-group">
+                <label>Firebase ID</label>
+                <input type="text" class="form-control" placeholder="Firebase ID" [(ngModel)]="evaluador.id" [attr.disabled]="true" formControlName="id">
+                <small class="form-text text-muted">Este campo es autogenerado</small>
+            </div>
+
+
+            <div class="form-group">
+                <label>Nombre</label>
+                <input id="nombre" type="text" class="form-control" placeholder="Nombre del Evaluador" [(ngModel)]="evaluador.nombre" formControlName="nombre">
+            </div>
+
+            <div class="form-group">
+                <label>Usuario</label>
+                <input type="text" id="usuario" class="form-control" placeholder="Usuario" [(ngModel)]="evaluador.usuario" formControlName="usuario">
+            </div>
+
+            <div class="form-group">
+                <label>Documento</label>
+                <input type="text" class="form-control" placeholder="Documento del Evaluador" [(ngModel)]="evaluador.documento" formControlName="documento">
+            </div>
+
+            
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="text" class="form-control" placeholder="Password del Evaluador" [(ngModel)]="evaluador.password" formControlName="password">
+            </div>
+
+            <div class="form-group row">
+                <label class="col-2 col-form-label">Carreras</label>
+                <div class="col-8" placeholder="Seleccione Carrera">
+                    <select class="form-control" [disabled]="carreras.length === 0" [(ngModel)]="carrera" formControlName="carrera">
+                    <option *ngFor="let carrera of carreras" [ngValue]="carrera">
+                            <!-- [value]="carrera.id"> -->
+                      {{ carrera.descripcion }}
+                    </option>
+                  </select>
+
+                </div>
+            </div>
+
+            <hr>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary w-25">
+          <i class="fa fa-save"></i>
+          Guardar
+        </button>
+            </div>
+
+
+        </form>
+
+        <pre>
+
+            {{ evaluador | json }}
+    
+        </pre>
+
+    </div>
+</div>

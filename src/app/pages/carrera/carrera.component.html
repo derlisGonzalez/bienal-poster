@@ -1,0 +1,70 @@
+<app-header></app-header><br>
+<h1>
+    Area <small>Descripcion Area</small> </h1>
+<hr>
+
+
+<div>
+  
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" routerLink="/areas" >Areas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/categorias">Categorias</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/disertantes">Disertantes</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/evaluadores">Evaluador</a>
+        </li>
+    </ul>
+</div>
+
+<div class="row text-right">
+    <div class="col">
+        <button class="btn btn-danger" routerLink="/areas">
+      <i class="fa fa-arrow-left"></i>
+      Regresar
+    </button>
+    </div>
+</div>
+
+
+
+<div class="row animated fadeIn faster">
+    <div class="col">
+        <!-- se llama al metodo guardar de heroe.componet.ts -->
+        <form (ngSubmit)="guardar( f )" #f="ngForm">
+
+            <div class="form-group">
+                <label>Firebase ID</label>
+                <input type="text" class="form-control" placeholder="Firebase ID" [(ngModel)]="carrera.id" name="id" disabled="disabled">
+                <small class="form-text text-muted">Este campo es autogenerado</small>
+            </div>
+
+
+            <div class="form-group">
+                <label>Descripcion</label>
+                <input type="text" class="form-control" placeholder="Descripcion de la Carrera" [(ngModel)]="carrera.descripcion" name="descripcion" required>
+            </div>
+
+            <hr>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary w-25">
+                  <i class="fa fa-save"></i>
+                  Guardar
+                </button>
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+    <pre>
+        {{carrera | json}}
+    </pre>
