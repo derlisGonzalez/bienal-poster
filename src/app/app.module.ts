@@ -42,6 +42,10 @@ import { ReporteCategoriasComponent } from './reportes/reporte-categorias/report
 import { AddUsuarioComponent } from './pages/add-usuario/add-usuario.component';
 import { BuscadorComponent } from './components/buscador/buscador.component';
 
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guard/auth.guard';
+
+
 
 
 @NgModule({
@@ -89,7 +93,7 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

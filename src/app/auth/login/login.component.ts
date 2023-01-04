@@ -1,7 +1,9 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-//import { UsuarioService } from '../../services/usuario.service';
+import { EvaluadoresService } from '../../services/evaluadores.service';
+import { AuthService } from '../../services/auth.service';
+import { EvaluadorModel } from '../../models/evaluador.model';
 import Swal from 'sweetalert2';
 
 declare const gapi:any;
@@ -13,6 +15,8 @@ declare const gapi:any;
 })
 export class LoginComponent implements OnInit {
 
+  evaluador: EvaluadorModel = new EvaluadorModel();
+
   public formSubmitted = false;
   public auth2: any;
 
@@ -23,13 +27,20 @@ export class LoginComponent implements OnInit {
   });
 
 
-  constructor( private router: Router,
+  constructor( private authService: AuthService,
+               private router: Router,
                private fb: FormBuilder,
                //private usuarioService: UsuarioService,
                private ngZone: NgZone ) { }
 
   ngOnInit(): void {
-    this.renderButton();
+    //this.renderButton();
+  }
+
+
+    hacerLogin(){
+    console.log(this.evaluador);
+    this.authService.fazerLogin(this.evaluador);
   }
 
 
