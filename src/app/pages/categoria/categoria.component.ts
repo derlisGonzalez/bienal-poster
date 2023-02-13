@@ -80,7 +80,7 @@ export class CategoriaComponent implements OnInit {
     console.log(form);
     console.log(this.categoria);
 
-    location.reload();
+    //location.reload();
 
 
   }

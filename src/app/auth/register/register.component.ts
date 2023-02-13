@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -15,17 +16,17 @@ export class RegisterComponent {
   public formSubmitted = false;
 
   public registerForm = this.fb.group({
-    nombre: ['User', Validators.required ],
-    email: ['user@gmail.com', [ Validators.required, Validators.email ] ],
-    password: ['123456', Validators.required ],
-    password2: ['123456', Validators.required ],
-    //terminos: [ true, Validators.required ],
+    nombre: ['der', Validators.required ],
+    email: ['der@gmail.com', [ Validators.required, Validators.email ] ],
+    password: ['123', Validators.required ],
+    password2: ['123', Validators.required ],
+    terminos: [ true, Validators.required ],
   }, {
     validators: this.passwordsIguales('password', 'password2')
   });
 
   constructor( private fb: FormBuilder,
-               //private usuarioService: UsuarioService,
+               private userService: UserService,
                private router: Router ) { }
 
   crearUsuario() {
@@ -37,16 +38,17 @@ export class RegisterComponent {
     }
 
     // Realizar el posteo
-    /*this.usuarioService.crearUsuario( this.registerForm.value )
+    this.userService.crearUser( this.registerForm.value )
         .subscribe( resp => {
-          
+          console.log("usuario creado");
+          console.log(resp);
           // Navegar al Dashboard
-          this.router.navigateByUrl('/');
+          //this.router.navigateByUrl('/');
 
         }, (err) => {
           // Si sucede un error
           Swal.fire('Error', err.error.msg, 'error' );
-        });*/
+        });
 
 
   }
@@ -89,7 +91,6 @@ export class RegisterComponent {
       } else {
         pass2Control.setErrors({ noEsIgual: true })
       }
-
 
     }
   }

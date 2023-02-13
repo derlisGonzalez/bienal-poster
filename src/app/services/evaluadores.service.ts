@@ -61,6 +61,16 @@ export class EvaluadoresService {
     );
   }
 
+
+    getAdmins() {
+    return this.http.get(`${ this.url }/evaluadores.json`)
+    .pipe(
+      map( this.crearArregloAdmin ),
+      delay(500)
+    );
+  }
+
+
   //CODIGO DE EJEMPLO
   /*
   saveUserBucketListInDb(bucketListItems: Array<object> ) {
@@ -70,7 +80,31 @@ export class EvaluadoresService {
     });
   }*/
 
-  private crearArreglo( evaluadoresObj: object ) {
+  private crearArregloAdmin( evaluadoresObj: object ) {
+
+    const evaluadores: EvaluadorModel[] = [];
+
+    if ( evaluadoresObj === null ) { return []; }
+
+    Object.keys( evaluadoresObj ).forEach( key => {
+
+      const evaluador: EvaluadorModel = evaluadoresObj[key];
+      evaluador.id = key;
+
+      if (evaluador.rol === "administrador") {
+        evaluadores.push( evaluador );
+      }
+      
+    });
+
+
+    return evaluadores;
+
+  }
+
+
+
+    private crearArreglo( evaluadoresObj: object ) {
 
     const evaluadores: EvaluadorModel[] = [];
 
@@ -82,11 +116,17 @@ export class EvaluadoresService {
       evaluador.id = key;
 
 
-      evaluadores.push( evaluador );
+      if (evaluador.rol === "evaluador") {
+        evaluadores.push( evaluador );
+      }
+
+      
+      
     });
 
 
     return evaluadores;
 
   }
+
 }

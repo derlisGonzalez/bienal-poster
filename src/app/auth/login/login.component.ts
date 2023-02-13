@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     //this.renderButton();
   }
-    hacerLogin(){
+
+  hacerLogin(){
     console.log(this.evaluador);
     this.authService.fazerLogin(this.evaluador);
   }

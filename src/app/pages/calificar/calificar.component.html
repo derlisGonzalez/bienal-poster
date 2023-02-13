@@ -52,7 +52,8 @@
                 <div *ngFor="let criterio of proyecto.evaluador1.criterios">
                     <div class="form group">
                         <label [(ngModel)]="proyecto.criterio" name="criterios" required>{{ criterio.descripcion }}{{criterio.puntajeAsignado}}</label>
-                        <div class="text-right">
+                        <br>
+                        <div class="text-center">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input"
                                        type="radio" 

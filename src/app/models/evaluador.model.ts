@@ -6,6 +6,7 @@ export class EvaluadorModel {
 
     id: string;
     nombre: string;
+    email?: string;
     carrera?: CarreraModel;
     criterios?: CriterioModel[]=[];
     documento?: string;
@@ -14,6 +15,7 @@ export class EvaluadorModel {
     usuario?: string;
     subtotal?: number;
     estado: boolean  = true;
+    uid?: string;
 
 
 

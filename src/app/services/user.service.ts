@@ -1,10 +1,11 @@
+import { RegisterForm } from './../interfaces/register-form.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CriterioModel } from '../models/criterio.model';
 import { ProyectoModel } from '../models/proyecto.model';
 import { DisertanteModel } from '../models/disertante.model';
 import { UsuarioModel } from '../models/usuario.model';
-import { map, delay } from 'rxjs/operators';
+import { map, delay, tap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -19,9 +20,29 @@ export class UserService {
 
   private url = 'https://angular-bienal-default-rtdb.firebaseio.com';
 
-  constructor( private http: HttpClient ) {
+  constructor( private http: HttpClient ) {   }
 
-   }
+
+   crearUser( formData: RegisterForm ) {
+    
+    console.log("creando usuario")
+
+    return this.http.post(`${ this.url }/usuarios.json`, formData );
+              /*.pipe(
+                tap( (resp: any) => {
+                  this.guardarLocalStorage( resp.token, resp.menu );
+                })
+              )*/
+
+  }
+
+
+  guardarLocalStorage( token: string, menu: any ) {
+
+    localStorage.setItem('token', token );
+    localStorage.setItem('menu', JSON.stringify(menu) );
+
+  }
 
 
    crearUsuario( usuario: UsuarioModel ) {

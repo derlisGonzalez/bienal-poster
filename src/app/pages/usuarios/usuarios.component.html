@@ -14,33 +14,28 @@
 </div>
 
 <!--  -->
-<table *ngIf="!cargando && usuarios.length > 0" class="table mt-3 animated fadeIn faster animated fadeIn faster">
+<table *ngIf="!cargando && evaluadores.length > 0" class="table mt-3 animated fadeIn faster animated fadeIn faster">
     <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Carrera</th>
-            <th scope="col">Categoría</th>
             <th scope="col">Rol</th>
             <th scope="col">Tools</th>
         </tr>
     </thead>
     <tbody>
 
-        <tr *ngFor="let usuario of usuarios; let i = index">
+        <tr *ngFor="let evaluador of evaluadores; let i = index">
             <th scope="row">{{ i + 1 }}</th>
-            <td>{{ usuario.nombre }}</td>
-            <td>{{ usuario.carrera }}</td>
-            <td>{{ usuario.categoria }}</td>
-
-            <td>{{ usuario.rol }}</td>
+            <td>{{ evaluador.nombre }}</td>
+            <td>{{ evaluador.rol }}</td>
             <td class="text-right">
                 <!--  -->
-                <button class="btn btn-info mr-1" [routerLink]="['/usuario', usuario.uid ]">
+                <button class="btn btn-info mr-1" [routerLink]="['/usuario', evaluador.id ]">
                 <i class="fa fa-pen"></i>
                 </button>
                 <!--  -->
-                <button class="btn btn-danger" (click)="borrarUsuario( usuario, i ) ">
+                <button class="btn btn-danger" (click)="borrarEvaluador( evaluador, i ) ">
                 <i class="fa fa-trash"></i>
                 </button>
 
@@ -50,7 +45,7 @@
     </tbody>
 </table>
 <!--  -->
-<div *ngIf="!cargando && usuarios.length === 0" class="alert alert-warning text-center mt-3 animated fadeIn faster">
+<div *ngIf="!cargando && evaluadores.length === 0" class="alert alert-warning text-center mt-3 animated fadeIn faster">
     <h4 class="alert-heading">No hay registros</h4>
     <p>
         <i class="fa fa-exclamation fa-2x"></i>
