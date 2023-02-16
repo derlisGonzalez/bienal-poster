@@ -1,7 +1,9 @@
+import { UsuarioModel } from './../../models/usuario.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, NgForm } from '@angular/forms';
 import Swal from 'sweetalert2'
 
 //import { UsuarioService } from '../../services/usuario.service';
@@ -13,21 +15,67 @@ import Swal from 'sweetalert2'
 })
 export class RegisterComponent {
 
+  usuario: UsuarioModel;
+  recordarme = false;
+
   public formSubmitted = false;
 
   public registerForm = this.fb.group({
     nombre: ['der', Validators.required ],
     email: ['der@gmail.com', [ Validators.required, Validators.email ] ],
-    password: ['123', Validators.required ],
-    password2: ['123', Validators.required ],
+    password: ['123456', Validators.required ],
+    password2: ['123456', Validators.required ],
     terminos: [ true, Validators.required ],
   }, {
     validators: this.passwordsIguales('password', 'password2')
   });
 
   constructor( private fb: FormBuilder,
+               private auth: AuthService,
                private userService: UserService,
-               private router: Router ) { }
+               private router: Router ) {
+
+  }
+
+  ngOnInit() {
+    this.usuario = new UsuarioModel();
+  }
+
+  onSubmit( form: NgForm ) {
+
+    if ( form.invalid ) { return; }
+
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      text: 'Espere por favor...'
+    });
+    Swal.showLoading();
+
+    this.auth.nuevoUsuario( this.usuario )
+      .subscribe( resp => {
+
+        console.log(resp);
+        Swal.close();
+
+        if ( this.recordarme ) {
+          localStorage.setItem('email', this.usuario.email);
+        }
+
+        this.router.navigateByUrl('/inicio');
+
+      }, (err) => {
+        console.log(err.error.error.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al autenticar',
+          text: err.error.error.message
+        });
+      });
+  }
+  
+
+
 
   crearUsuario() {
     this.formSubmitted = true;

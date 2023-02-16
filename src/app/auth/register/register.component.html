@@ -9,60 +9,75 @@
             <br>
             <h3 class="box-title m-t-40 m-b-0">Regístrate ahora</h3>
             
+              <!-- [formGroup]="registerForm" -->
             <form class="form-horizontal form-material" 
-                    id="loginform" 
-                    autocomplete="off"
-                    [formGroup]="registerForm"
-                    (ngSubmit)="crearUsuario()">
+                    (ngSubmit)="onSubmit( f )"
+                    #f="ngForm">
 
 
                 <div class="form-group m-t-20">
+                    <span *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger animated fadeIn">El nombre es obligatorio</span>
                     <div class="col-xs-12">
                         <input class="form-control"
-                                type="text"
-                                placeholder="Nombre"
-                                formControlName="nombre">
+                                type="text" 
+                                name="nombre" 
+                                [(ngModel)]="usuario.nombre"
+                                minlength="2"
+                                required
+                                placeholder="Nombre y apellidos">
                     </div>
                 </div>
                 <div class="form-group ">
+                    <span *ngIf="f.submitted && f.controls['email'].errors"class="text-danger animated fadeIn">El correo es obligatorio</span>
                     <div class="col-xs-12">
                         <input class="form-control" 
-                                type="text" 
-                                placeholder="Email"
-                                formControlName="email">
+                                type="email" 
+                                name="email"
+                                [(ngModel)]="usuario.email"
+                                required
+                                email
+                                placeholder="Email">
                     </div>
                 </div>
                 <div class="form-group ">
+                    <span *ngIf="f.submitted && f.controls['password'].errors" class="text-danger animated fadeIn">Al menos 6 letras</span>
                     <div class="col-xs-12">
                         <input class="form-control" 
                                 type="password" 
-                                placeholder="Password"
-                                formControlName="password">
+                                name="password" 
+                                [(ngModel)]="usuario.password"
+                                minlength="6"
+                                required
+                                placeholder="Password">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
                         <input class="form-control" 
                                 type="password" 
-                                placeholder="Confirmar Password"
-                                formControlName="password2">
+                                name="password2" 
+                                [(ngModel)]="usuario.password2"
+                                minlength="6"
+                                required
+                                placeholder="Password 2">
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                     <div class="col-md-12">
                         <div class="checkbox checkbox-primary p-t-0">
 
-                            <input id="checkbox-signup" 
-                                    type="checkbox"
-                                    formControlName="terminos">
-
-                            <label for="checkbox-signup"> Acepto los <a href="#">Terminos</a></label>
+                            <input [(ngModel)]="recordarme"
+                                   class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                            <label class="label-checkbox100" for="ckb1">
+                                Recordar mi usuario
+                            </label>
+                            
                         </div>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col text-danger">
 
                         <p *ngIf="campoNoValido('nombre')">* El nombre es obligatorio</p>
@@ -71,7 +86,7 @@
                         <p *ngIf="aceptaTerminos()">* Debe de aceptar los términos de uso</p>
 
                     </div>
-                </div>
+                </div> -->
                 
                 <div class="form-group text-center m-t-20">
                     <div class="col-xs-12">

@@ -35,50 +35,50 @@ import { AuthGuard } from 'src/app/guard/auth.guard';
 
 const routes: Routes = [
   //{ path: 'areas', component: CarrerasComponent, canActivate: [AuthGuard] },
-  { path: 'areas', component: CarrerasComponent },
-  { path: 'area/:id', component: CarreraComponent },
+  { path: 'areas', component: CarrerasComponent, canActivate: [AuthGuard] },
+  { path: 'area/:id', component: CarreraComponent, canActivate: [AuthGuard] },
 
-  { path: 'categorias', component: CategoriasComponent },
-  { path: 'categoria/:id', component: CategoriaComponent },
+  { path: 'categorias', component: CategoriasComponent, canActivate: [AuthGuard] },
+  { path: 'categoria/:id', component: CategoriaComponent, canActivate: [AuthGuard] },
 
-  { path: 'criterios', component: CriteriosComponent },
-  { path: 'criterio/:id', component: CriterioComponent },
+  { path: 'criterios', component: CriteriosComponent, canActivate: [AuthGuard] },
+  { path: 'criterio/:id', component: CriterioComponent, canActivate: [AuthGuard] },
 
-  { path: 'disertantes', component: DisertantesComponent },
-  { path: 'disertante/:id', component: DisertanteComponent },
+  { path: 'disertantes', component: DisertantesComponent, canActivate: [AuthGuard] },
+  { path: 'disertante/:id', component: DisertanteComponent, canActivate: [AuthGuard] },
 
-  { path: 'evaluadores', component: EvaluadoresComponent },
-  { path: 'evaluador/:id', component: EvaluadorComponent },
+  { path: 'evaluadores', component: EvaluadoresComponent, canActivate: [AuthGuard] },
+  { path: 'evaluador/:id', component: EvaluadorComponent, canActivate: [AuthGuard] },
 
-  { path: 'proyectos', component: ProyectosComponent },
-  { path: 'proyecto/:id', component: ProyectoComponent },
+  { path: 'proyectos', component: ProyectosComponent, canActivate: [AuthGuard] },
+  { path: 'proyecto/:id', component: ProyectoComponent, canActivate: [AuthGuard] },
 
-  { path: 'calificaciones', component: CalificacionesComponent },
-  { path: 'calificacion/:id', component: CalificarComponent },
+  { path: 'calificaciones', component: CalificacionesComponent, canActivate: [AuthGuard] },
+  { path: 'calificacion/:id', component: CalificarComponent, canActivate: [AuthGuard] },
 
-  { path: 'calificar', component: ModalCalificarComponent },
-  { path: 'calificar/:id', component: ModalCalificarComponent },
+  { path: 'calificar', component: ModalCalificarComponent, canActivate: [AuthGuard] },
+  { path: 'calificar/:id', component: ModalCalificarComponent, canActivate: [AuthGuard] },
 
-  { path: 'usuarios', component: UsuariosComponent },
-  { path: 'usuario/:id', component: UsuarioComponent },
+  { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
+  { path: 'usuario/:id', component: UsuarioComponent, canActivate: [AuthGuard] },
 
-  { path: 'addusuarios', component: AddUsuarioComponent },
+  { path: 'addusuarios', component: AddUsuarioComponent, canActivate: [AuthGuard] },
 
-  { path: 'buscar/:termino', component: BuscadorComponent },
+  { path: 'buscar/:termino', component: BuscadorComponent, canActivate: [AuthGuard] },
 
   //REPORTES
-  { path: 'lista-proyectos', component: ReporteProyectoComponent },
-  { path: 'proyecto-pdf/:id', component: VisualizarProyectoComponent },
+  { path: 'lista-proyectos', component: ReporteProyectoComponent, canActivate: [AuthGuard] },
+  { path: 'proyecto-pdf/:id', component: VisualizarProyectoComponent, canActivate: [AuthGuard] },
 
-  { path: 'lista-carreras', component: ReporteCarrerasComponent },
-  { path: 'carrera-pdf/:id', component: VisualizarCarreraComponent },
+  { path: 'lista-carreras', component: ReporteCarrerasComponent, canActivate: [AuthGuard] },
+  { path: 'carrera-pdf/:id', component: VisualizarCarreraComponent, canActivate: [AuthGuard] },
 
-  { path: 'lista-criterios', component: ReporteCriteriosComponent },
-  //{ path: 'criterio-pdf/:id', component: VisualizarCarreraComponent },
+  { path: 'lista-criterios', component: ReporteCriteriosComponent, canActivate: [AuthGuard] },
+  //{ path: 'criterio-pdf/:id', component: VisualizarCarreraComponent, canActivate: [AuthGuard] },
 
-  { path: 'lista-categorias', component: ReporteCategoriasComponent },
+  { path: 'lista-categorias', component: ReporteCategoriasComponent, canActivate: [AuthGuard] },
 
-  { path: 'inicio', component: InicioComponent },
+  { path: 'inicio', component: InicioComponent, canActivate: [AuthGuard] },
 
   { path: '**', pathMatch: 'full', redirectTo: '/inicio' }
 ];

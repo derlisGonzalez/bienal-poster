@@ -1,6 +1,7 @@
+import { UsuarioModel } from 'src/app/models/usuario.model';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, NgForm } from '@angular/forms';
 import { EvaluadoresService } from '../../services/evaluadores.service';
 import { AuthService } from '../../services/auth.service';
 import { EvaluadorModel } from '../../models/evaluador.model';
@@ -17,6 +18,9 @@ export class LoginComponent implements OnInit {
 
   evaluador: EvaluadorModel = new EvaluadorModel();
 
+  usuario: UsuarioModel = new UsuarioModel();
+  recordarme = false;
+
   public formSubmitted = false;
   public auth2: any;
 
@@ -27,25 +31,66 @@ export class LoginComponent implements OnInit {
   });
 
 
-  constructor( private authService: AuthService,
+  constructor( private auth: AuthService,
                private router: Router,
                private fb: FormBuilder,
                //private usuarioService: UsuarioService,
                private ngZone: NgZone ) { }
 
   ngOnInit(): void {
-    //this.renderButton();
+    if ( localStorage.getItem('email') ) {
+      this.usuario.email = localStorage.getItem('email');
+      this.recordarme = true;
+    }
   }
 
-  hacerLogin(){
+
+  login( form: NgForm ) {
+
+    if (  form.invalid ) { return; }
+
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      text: 'Espere por favor...'
+    });
+    Swal.showLoading();
+
+
+    this.auth.login( this.usuario )
+      .subscribe( resp => {
+
+        console.log(resp);
+        Swal.close();
+
+        if ( this.recordarme ) {
+          localStorage.setItem('email', this.usuario.email);
+        }
+
+
+        this.router.navigateByUrl('/inicio');
+
+      }, (err) => {
+
+        console.log(err.error.error.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al autenticar',
+          text: err.error.error.message
+        });
+      });
+
+  }
+
+  /*hacerLogin(){
     console.log(this.evaluador);
     this.authService.fazerLogin(this.evaluador);
-  }
+  }*/
 
 
-  login() {
+  /*login( form: NgForm) {
 
-    /*this.usuarioService.login( this.loginForm.value )
+    this.usuarioService.login( this.loginForm.value )
       .subscribe( resp => {
 
         if ( this.loginForm.get('remember').value ){ 
@@ -60,9 +105,9 @@ export class LoginComponent implements OnInit {
       }, (err) => {
         // Si sucede un error
         Swal.fire('Error', err.error.msg, 'error' );
-      });*/
+      });
 
-  }
+  }*/
   
   renderButton() {
     gapi.signin2.render('my-signin2', {

@@ -6,6 +6,7 @@ export class UsuarioModel {
     public nombre: string;
     public email: string;
     public password?: string;
+    public password2?: string;
     //public img?: string;
     //public google?: boolean;
     //public role?: 'ADMIN_ROLE' | 'USER_ROLE';

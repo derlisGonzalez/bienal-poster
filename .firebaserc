@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-bienal": {
+      "hosting": {
+        "bienal-angular": [
+          "angular-bienal"
+        ]
+      }
+    }
+  }
+}

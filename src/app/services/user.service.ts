@@ -6,7 +6,7 @@ import { ProyectoModel } from '../models/proyecto.model';
 import { DisertanteModel } from '../models/disertante.model';
 import { UsuarioModel } from '../models/usuario.model';
 import { map, delay, tap } from 'rxjs/operators';
-
+//import { Auth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class UserService {
 
   private url = 'https://angular-bienal-default-rtdb.firebaseio.com';
 
-  constructor( private http: HttpClient ) {   }
+  constructor( private http: HttpClient) {   }
 
 
    crearUser( formData: RegisterForm ) {
