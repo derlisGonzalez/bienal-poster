@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { UsuarioModel } from './../../models/usuario.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
@@ -54,10 +55,11 @@ export class RegisterComponent {
 
     this.auth.nuevoUsuario( this.usuario )
       .subscribe( resp => {
-
-        console.log(resp);
+        
+        console.log(resp );
         Swal.close();
-
+     
+        //const uid = resp.locali;
         if ( this.recordarme ) {
           localStorage.setItem('email', this.usuario.email);
         }
@@ -72,6 +74,22 @@ export class RegisterComponent {
           text: err.error.error.message
         });
       });
+
+
+      this.usuario.role = 'evaluador';
+      this.auth.crearUser(this.usuario)
+      .subscribe( resp2 => { 
+        
+        //this.usuario = resp2;
+        //this.usuario.id = resp2.uid;
+        /*this.usuario.role = "evaluador";
+        this.usuario.email = resp2.email;
+        this.usuario.nombre = resp2.nombre;*/
+        console.log(resp2);
+      });
+      this.usuario.password = null;
+      this.usuario.password2 = null;
+
   }
   
 

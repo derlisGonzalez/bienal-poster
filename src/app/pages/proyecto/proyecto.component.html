@@ -29,20 +29,20 @@
 
 
             <div class="form-group">
-                <label>Titulo</label>
+                <label>Título</label>
                 <input class="form-control" type="text" placeholder="Titulo del Proyecto" [(ngModel)]="proyecto.titulo" formControlName="titulo">
             </div>
 
 
             <div class="form-group">
-                <label>Codigo</label>
+                <label>Código</label>
                 <input class="form-control" type="text" placeholder="Codigo del Proyecto" [(ngModel)]="proyecto.codigo"
                     formControlName="codigo">
             </div>
 
 
             <div class="form-group row">
-                <label class="col-2 col-form-label">Disertante</label>
+                <label class="col-2 col-form-label">Autor</label>
                 <div class="col-8">
                     <div class="input-group">
                         <select class="form-control" [(ngModel)]="proyecto.autor" formControlName="disertante">
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-2 col-form-label">Carrera</label>
+                <label class="col-2 col-form-label">Área Temática</label>
                 <div class="col-8" placeholder="Seleccione Carrera">
                     <select class="form-control" [(ngModel)]="carrera" formControlName="carrera">
                         <option *ngFor="let carrera of carreras" [ngValue]="carrera">

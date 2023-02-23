@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, delay } from 'rxjs/operators';
 
 
+
 import { EvaluadorModel } from 'src/app/models/evaluador.model';
 
 
@@ -13,8 +14,8 @@ import { EvaluadorModel } from 'src/app/models/evaluador.model';
 })
 export class AuthService {
 
-  private urlUser = 'https://identitytoolkit.googleapis.com/v1/accounts';
-  private apikey = 'AIzaSyAhw373ikLLXTpBIAL2Bz3Qy9WdbKA67J0';
+  //private urlUser = 'https://identitytoolkit.googleapis.com/v1/accounts';
+  //private apikey = 'AIzaSyAhw373ikLLXTpBIAL2Bz3Qy9WdbKA67J0';
   private create = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAhw373ikLLXTpBIAL2Bz3Qy9WdbKA67J0'
   private loginUser = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAhw373ikLLXTpBIAL2Bz3Qy9WdbKA67J0';
 
@@ -86,6 +87,20 @@ export class AuthService {
   }
 
 
+  crearUser( usuario: UsuarioModel ) {
+
+    return this.http.post(`${ this.url }/usuarios.json`, usuario)
+            .pipe(
+              map( (resp: any) => {
+                //usuario.uid = resp.id;
+                //usuario.role = 'evaluador';
+                return usuario;
+              })
+            );
+
+  }
+
+
   
   private guardarToken( idToken: string ) {
 
@@ -93,7 +108,9 @@ export class AuthService {
     localStorage.setItem('token', idToken);
 
     let hoy = new Date();
-    hoy.setSeconds( 3600 );
+    //hoy.setSeconds( 3600 );
+    //SE CIERRA SESION EN 6 HORAS
+    hoy.setSeconds( 21600 );
 
     localStorage.setItem('expira', hoy.getTime().toString() );
 
@@ -137,7 +154,7 @@ export class AuthService {
   METODOS ALTERNATIVOS
   */
 
-   	fazerLogin(usuario: EvaluadorModel){
+   	/*fazerLogin(usuario: EvaluadorModel){
 
 	    if (usuario.usuario === 'us' && 
 	      usuario.password === '123') {
@@ -153,17 +170,22 @@ export class AuthService {
 
 	      this.mostrarMenuEmitter.emit(false);
 	    }
-  	}
+  	}*/
 
-  	getUsuarios() {
-    return this.http.get(`${ this.url }/evaluadores.json`)
-    .pipe(
-      map( this.crearArreglo ),
-      delay(500)
-    );
-  }
+  
+  
+    /*
+    getUsuarios() {
+      return this.http.get(`${ this.url }/evaluadores.json`)
+      .pipe(
+        map( this.crearArreglo ),
+        delay(500)
+      );
+   }*/
 
 
+
+   /*
     private crearArreglo( evaluadoresObj: object ) {
 
     const evaluadores: EvaluadorModel[] = [];
@@ -184,11 +206,14 @@ export class AuthService {
 
     return evaluadores;
 
-  }
+  }*/
 
+  
+
+  /*
 	usuarioEstaAutenticado(){
 	  return this.usuarioAutenticado;
-	}
+	}*/
 
 
 

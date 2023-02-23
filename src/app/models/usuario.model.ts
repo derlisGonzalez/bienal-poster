@@ -9,7 +9,7 @@ export class UsuarioModel {
     public password2?: string;
     //public img?: string;
     //public google?: boolean;
-    //public role?: 'ADMIN_ROLE' | 'USER_ROLE';
+    public role?: string;
     public uid?: string
     constructor( ) {}
 

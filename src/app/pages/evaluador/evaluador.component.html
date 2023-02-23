@@ -46,7 +46,7 @@
             </div>
 
             <div class="form-group row">
-                <label class="col-2 col-form-label">Carreras</label>
+                <label class="col-2 col-form-label">Área Temática</label>
                 <div class="col-8" placeholder="Seleccione Carrera">
                     <select class="form-control" [disabled]="carreras.length === 0" [(ngModel)]="carrera" formControlName="carrera">
                     <option *ngFor="let carrera of carreras" [ngValue]="carrera">

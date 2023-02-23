@@ -1,115 +1,46 @@
-<!-- Topbar header - style you can find in pages.scss -->
-<!-- ============================================================== -->
 
-
-<!-- ============================================================== -->
-<!-- End Topbar header -->
-<!-- ============================================================== -->
-
-
-    <!-- ============================================================== -->
-    <!-- Topbar header - style you can find in pages.scss -->
-    <!-- ============================================================== -->
     <header class="topbar">
         <nav class="navbar top-navbar navbar-expand-md navbar-light">
-            <!-- ============================================================== -->
-            <!-- Logo -->
-            <!-- ============================================================== -->
+
             <div class="navbar-header">
                 <a class="navbar-brand" routerLink="/inicio">
-                    <!-- Logo icon --><b>
-                    <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                    <!-- Dark Logo icon -->
+                    <b>
                     <img src="../../../assets/images/logo.png" style="height: 40px;" alt="homepage" class="dark-logo" />
-                    <!-- Light Logo icon -->
                     <img src="../../../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
-                    </b>
-                    <!--End Logo icon -->
-                    <!-- Logo text --><span>
-                    <!-- dark Logo text -->
-
-                    <!-- <img src="./assets/images/logo-text.png" alt="homepage" class="dark-logo" /> -->
-
-
-                    <!-- Light Logo text -->    
-                    <img src="../../../assets/images/logo-light-text.png" class="light-logo" alt="homepage" /></span> </a>
+                        </b>
+                    <span>
+                        <img src="../../../assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
+                    </span>
+                </a>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Logo -->
-            <!-- ============================================================== -->
+
             <div class="navbar-collapse">
-                <!-- ============================================================== -->
-                <!-- toggle and nav items -->
-                <!-- ============================================================== -->
-                <!-- class="navbar-nav d-none d-md-flex custom-menus" -->
+
                 <ul class="navbar-nav mr-auto">
                     <!-- This is  -->
                     <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                     <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                     <li class="nav-item hidden-sm-down"></li>
                 </ul>
-                <!-- ============================================================== -->
-                <!-- User profile and search -->
-                <!-- ============================================================== -->
+                
                 <ul class="navbar-nav my-lg-0">
-                    <!-- ============================================================== -->
-                    <!-- Search -->
-                    <!-- ============================================================== -->
-                    
-
-                    <!-- ==============================================================
-                    #CODIGO PARA BUSCADOR EN EL HEADER
-                    <li class="nav-item hidden-xs-down search-box"> <a class="nav-link hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-search"></i></a>
-                        <form class="app-search" (submit)="buscar( txtTermino.value )">
-                            <input type="text" class="form-control" placeholder="Buscar proyecto, disertante o carrera" #txtTermino>
-                            <a class="srh-btn"><i class="ti-close"></i></a>
-                        </form>
-                        <form class="app-search form-inline">
-                            <input style="margin-right: 50px;" type="text" class="form-control" placeholder="Buscar proyecto" (keyup.enter)="buscarProyecto(buscarTexto.value)" #buscarTexto>
-                            <button (click)="buscarProyecto(buscarTexto.value)" class="btn btn-outline-primary my-2 my-sm-0" type="button">Buscar</button>
-                        </form>
-                    </li>
-                    ============================================================== -->
-                   
+                                       
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <!-- <img [src]="usuario.imagenUrl" alt="user" class="profile-pic" /> -->
-                            <img src="/assets/images/icon/staff.png" alt="user" class="profile-pic" />
+                        <a  class="nav-link dropdown-toggle waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-stream btn btn-primary"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right animated fadeIn fast">
-                            <ul class="dropdown-user">
-                                <!-- <li>
-                                    <div class="dw-user-box">
-                                        <div class="u-img"><img [src]="usuario.imagenUrl" alt="user"></div>
-                                        <div class="u-text">
-                                            <h4>{{ usuario.nombre }}</h4>
-                                            <p class="text-muted">
-                                                {{ usuario.email | slice:0:20 }}{{ (usuario.email.length > 20) ? '...': '' }}
-                                            </p>
-                                            <a routerLink="/#" class="btn btn-rounded btn-danger btn-sm">Cambiar contraseña</a>
-                                        </div>
-                                    </div>
-                                </li> 
-
-                                *ngIf="mostrarMenu"-->
+                            <ul class="dropdown">
                                 <li><a routerLink="/categorias"> Categorias</a></li>
                                 <li><a routerLink="/criterios"><i class="ti-user"></i> Criterios</a></li>
-                                <li><a routerLink="/areas"><i class="ti-wallet"></i> Areas</a></li>
-                                <li><a routerLink="/disertantes"><i class="ti-email"></i> Disertantes</a></li>
+                                <li><a routerLink="/areas"><i class="ti-wallet"></i> Areas Temáticas</a></li>
+                                <li><a routerLink="/disertantes"><i class="ti-email"></i> Autores</a></li>
                                 <li><a routerLink="/evaluadores"><i class="ti-email"></i> Evaluadores</a></li>
                                 <li><a routerLink="/proyectos"><i class="ti-settings"></i> Proyectos</a></li>
                                 <li><a routerLink="/calificaciones"><i class="ti-settings"></i> Calificaciones</a></li>
                                 <li><a routerLink="/usuarios"><i class="ti-settings"></i> Administradores</a></li>
-                                <li><a routerLink="/login"><i class="ti-settings"></i> Login</a></li>
-                                <li><a routerLink="/register"><i class="ti-settings"></i> Registrar</a></li>
-
-                                <li>
-                                    <!-- <a (click)="logout()" class="cursor">
-                                        <i class="fa fa-power-off"></i> Logout
-                                    </a> -->
-                                    <a routerLink="/inicio">Inicio</a>
-                                    
-                                </li>
+                                <li><a routerLink="/inicio">Inicio</a></li>
+                                <li> <i class="fa-solid fa-house"></i><a href="" (click)="salir()"> <strong> Cerrar Sesión</strong></a></li>
+                                                                
                             </ul>
                         </div>
                     </li>
@@ -117,6 +48,3 @@
             </div>
         </nav>
     </header>
-    <!-- ============================================================== -->
-    <!-- End Topbar header -->
-    <!-- ============================================================== -->
