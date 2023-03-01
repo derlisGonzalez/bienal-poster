@@ -18,7 +18,6 @@ import Swal from 'sweetalert2';
 })
 export class DisertanteComponent implements OnInit {
 
-  //FORMULARIO REACTIVO
   forma: FormGroup;
 
   public categorias: CategoriaModel[] = [];
