@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriasService } from '../../services/categorias.service';
@@ -14,9 +14,15 @@ import { CategoriaModel } from '../../models/categoria.model';
 })
 export class CategoriaComponent implements OnInit {
 
+  forma: FormGroup;
+
   categoria: CategoriaModel = new CategoriaModel();
 
-  constructor( private categoriasService: CategoriasService, private route: ActivatedRoute) { }
+  constructor( private fb: FormBuilder,
+                private categoriasService: CategoriasService,
+                private route: ActivatedRoute) { 
+                  this.crearFormulario();
+                 }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -33,11 +39,19 @@ export class CategoriaComponent implements OnInit {
   }
 
 
+  crearFormulario() {
+    this.forma = this.fb.group({
+      id: [''],
+      descripcion: ['', Validators.required],
+    });
+
+  }
 
 
-  guardar( form: NgForm ) {
 
-    if ( form.invalid ) {
+  guardar( ) {
+
+    if ( this.forma.invalid ) {
        
       Swal.fire({
         icon: 'error',
@@ -68,21 +82,35 @@ export class CategoriaComponent implements OnInit {
 
 
     peticion.subscribe( resp => {
-
       Swal.fire({
         title: this.categoria.descripcion,
         text: 'Se actualizó correctamente',
         icon: 'success'
       });
-
     });
 
-    console.log(form);
+    console.log(this.forma);
     console.log(this.categoria);
 
+
+    /*this.forma.reset({
+      id: ''    
+    });*/
+  
+    //this.vaciarCampo();
+    
     //location.reload();
 
 
   }
+
+
+  /*vaciarCampo() {
+    this.forma = this.fb.group({
+      id: [''],
+      descripcion: ['']
+    });
+
+  }*/
 
 }

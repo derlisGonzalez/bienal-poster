@@ -18,19 +18,34 @@
 
             <div class="form-group">
                 <label>Firebase ID</label>
-                <input type="text" class="form-control" placeholder="Firebase ID" [(ngModel)]="evaluador.id" [attr.disabled]="true" formControlName="id">
+                <input type="text"
+                        class="form-control"
+                        placeholder="Firebase ID"
+                        [(ngModel)]="evaluador.id"
+                        [attr.disabled]="true"
+                        formControlName="id">
                 <small class="form-text text-muted">Este campo es autogenerado</small>
             </div>
 
 
             <div class="form-group">
                 <label>Nombre</label>
-                <input id="nombre" type="text" class="form-control" placeholder="Nombre del Evaluador" [(ngModel)]="evaluador.nombre" formControlName="nombre">
+                <input id="nombre"
+                        type="text"
+                        class="form-control"
+                        placeholder="Nombre del Evaluador"
+                        [(ngModel)]="evaluador.nombre"
+                        formControlName="nombre">
             </div>
 
             <div class="form-group">
                 <label>Usuario</label>
-                <input type="text" id="usuario" class="form-control" placeholder="Usuario" [(ngModel)]="evaluador.usuario" formControlName="usuario">
+                <input type="text"
+                        id="usuario"
+                        class="form-control"
+                        placeholder="Usuario"
+                        [(ngModel)]="evaluador.usuario"
+                        formControlName="usuario">
             </div>
 
             <div class="form-group">
