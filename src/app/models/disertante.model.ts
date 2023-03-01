@@ -6,7 +6,7 @@ export class DisertanteModel {
     id: string;
     nombre?: string;
     institucion?: string;
-    carrera?: string;
+    area?: string;
     categoria?: string;
     documento?: string;
     password?: string;

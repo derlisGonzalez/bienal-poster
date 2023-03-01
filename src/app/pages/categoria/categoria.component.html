@@ -18,26 +18,35 @@
 <div class="row animated fadeIn faster">
     <div class="col">
         <!-- se llama al metodo guardar de heroe.componet.ts -->
-        <form (ngSubmit)="guardar( f )" #f="ngForm">
+        <form [formGroup]="forma" (ngSubmit)="guardar()">
 
             <div class="form-group">
                 <label>Firebase ID</label>
-                <input type="text" class="form-control" placeholder="Firebase ID" [(ngModel)]="categoria.id" name="id" disabled="disabled">
+                <input type="text"
+                        class="form-control"
+                        placeholder="Firebase ID"
+                        [(ngModel)]="categoria.id"
+                        formControlName="id"
+                        [attr.disabled]="true">
                 <small class="form-text text-muted">Este campo es autogenerado</small>
             </div>
 
 
             <div class="form-group">
-                <label>Descripcion</label>
-                <input type="text" class="form-control" placeholder="Descripcion de la Categoria" [(ngModel)]="categoria.descripcion" name="descripcion" required>
+                <label>Descripción</label>
+                <input type="text"
+                        class="form-control"
+                        placeholder="Descripcion de la Categoria"
+                        [(ngModel)]="categoria.descripcion"
+                        formControlName="descripcion">
             </div>
 
             <hr>
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary w-25">
-          <i class="fa fa-save"></i>
-          Guardar
-        </button>
+                    <i class="fa fa-save"></i>
+                    Guardar
+                </button>
             </div>
 
 

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DisertanteModel } from '../../models/disertante.model';
 import { DisertantesService } from '../../services/disertantes.service';
 import { ActivatedRoute } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { CategoriaModel } from '../../models/categoria.model';
 import { CategoriasService } from '../../services/categorias.service';
@@ -18,6 +18,8 @@ import Swal from 'sweetalert2';
 })
 export class DisertanteComponent implements OnInit {
 
+  forma: FormGroup;
+
   public categorias: CategoriaModel[] = [];
   public carreras: CarreraModel[] = [];
 
@@ -26,10 +28,15 @@ export class DisertanteComponent implements OnInit {
   ;
   disertante: DisertanteModel = new DisertanteModel();
 
-  constructor( private disertantesService: DisertantesService,
+  constructor( private fb: FormBuilder,
+               private disertantesService: DisertantesService,
                private categoriasService: CategoriasService,
                private carrerasService: CarrerasService,
-               private route: ActivatedRoute) { }
+               private route: ActivatedRoute) { 
+
+                this.crearFormulario();
+
+               }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -78,12 +85,24 @@ export class DisertanteComponent implements OnInit {
         })*/
   }
 
+  crearFormulario() {
+    this.forma = this.fb.group({
+      id: [''],
+      nombre: ['', Validators.required],
+      institucion: ['', Validators.required],
+      area: ['', [Validators.required]],
+      categoria: ['', [Validators.required]],
+
+    });
+
+  }
 
 
 
-  guardar( form: NgForm ) {
 
-    if ( form.invalid ) {
+  guardar(  ) {
+
+    if ( this.forma.invalid ) {
       
 
       Swal.fire({
@@ -124,7 +143,7 @@ export class DisertanteComponent implements OnInit {
 
     });
 
-    console.log(form);
+    console.log(this.forma);
     console.log(this.disertante);
 
   }
