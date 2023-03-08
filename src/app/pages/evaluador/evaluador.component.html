@@ -15,7 +15,6 @@
     <div class="col">
         <!-- se llama al metodo guardar de evaluador.componet.ts -->
         <form [formGroup]="forma" (ngSubmit)="guardar()">
-
             <div class="form-group">
                 <label>Firebase ID</label>
                 <input type="text"
@@ -38,32 +37,24 @@
                         formControlName="nombre">
             </div>
 
-            <div class="form-group">
-                <label>Usuario</label>
-                <input type="text"
-                        id="usuario"
-                        class="form-control"
-                        placeholder="Usuario"
-                        [(ngModel)]="evaluador.usuario"
-                        formControlName="usuario">
-            </div>
 
             <div class="form-group">
                 <label>Documento</label>
-                <input type="text" class="form-control" placeholder="Documento del Evaluador" [(ngModel)]="evaluador.documento" formControlName="documento">
+                <input type="text"
+                        class="form-control"
+                        placeholder="Documento del Evaluador"
+                        [(ngModel)]="evaluador.documento"
+                        formControlName="documento">
             </div>
 
             
 
-            <div class="form-group">
-                <label>Password</label>
-                <input type="text" class="form-control" placeholder="Password del Evaluador" [(ngModel)]="evaluador.password" formControlName="password">
-            </div>
 
             <div class="form-group row">
                 <label class="col-2 col-form-label">Área Temática</label>
                 <div class="col-8" placeholder="Seleccione Carrera">
-                    <select class="form-control" [disabled]="carreras.length === 0" [(ngModel)]="carrera" formControlName="carrera">
+                    <select class="form-control" [disabled]="carreras.length === 0"
+                            [(ngModel)]="carrera" formControlName="carrera">
                     <option *ngFor="let carrera of carreras" [ngValue]="carrera">
                             <!-- [value]="carrera.id"> -->
                       {{ carrera.descripcion }}

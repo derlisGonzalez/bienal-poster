@@ -44,6 +44,8 @@ import { BuscadorComponent } from './components/buscador/buscador.component';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guard/auth.guard';
+import { CriterioAceptacionComponent } from './pages/criterio-aceptacion/criterio-aceptacion.component';
+import { CriteriosAceptacionComponent } from './pages/criterios-aceptacion/criterios-aceptacion.component';
 
 
 
@@ -85,6 +87,8 @@ import { AuthGuard } from './guard/auth.guard';
     ReporteCategoriasComponent,
     AddUsuarioComponent,
     BuscadorComponent,
+    CriterioAceptacionComponent,
+    CriteriosAceptacionComponent,
   ],
   imports: [
     BrowserModule,

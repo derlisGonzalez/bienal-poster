@@ -8,11 +8,9 @@
         <div *ngFor="let proyecto of proyectos; let i = index" class="card">
 
             <div class="card-body">
+                <h3 class="card-title"><strong>Autor: {{ proyecto.autor }}</strong></h3>
                 <h4 class="card-title">{{ proyecto.titulo }}</h4>
-                <h3 class="card-title">Autor: {{ proyecto.autor }}</h3>
-               
-                <h5 >Puntaje adquirido: {{ proyecto.totalPuntaje }}</h5>
-                
+                <h5 >Puntaje adquirido: <strong>{{ proyecto.totalPuntaje }}</strong></h5>
                 <div *ngIf="proyecto.estado === false">
                     <p class="btn btn-primary btn-block">Finalizado..</p>
                 </div>

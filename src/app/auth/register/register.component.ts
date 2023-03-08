@@ -56,7 +56,9 @@ export class RegisterComponent {
     this.auth.nuevoUsuario( this.usuario )
       .subscribe( resp => {
         
-        console.log(resp );
+        console.log(resp);
+        
+  
         Swal.close();
      
         //const uid = resp.locali;
@@ -76,7 +78,7 @@ export class RegisterComponent {
       });
 
 
-      this.usuario.role = 'evaluador';
+      this.usuario.role = 'visitante';
       this.auth.crearUser(this.usuario)
       .subscribe( resp2 => { 
         
@@ -87,8 +89,7 @@ export class RegisterComponent {
         this.usuario.nombre = resp2.nombre;*/
         console.log(resp2);
       });
-      this.usuario.password = null;
-      this.usuario.password2 = null;
+
 
   }
   

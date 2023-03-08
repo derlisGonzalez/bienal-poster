@@ -25,6 +25,8 @@ export class CalificarComponent implements OnInit {
   evaluador: EvaluadorModel;
   public criterios: CriterioModel[] = [];
 
+  lenght = 0;
+
 
   //public carreras: CarreraModel[] = [];
   public criterioSeleccionado: CriterioModel;
@@ -34,7 +36,11 @@ export class CalificarComponent implements OnInit {
   constructor( private proyectosService: ProyectosService,
                private criteriosService: CriteriosService,
                private evaluadoresService: EvaluadoresService,
-               private route: ActivatedRoute) { }
+               private route: ActivatedRoute) { 
+
+                this.criterioLength();
+
+               }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -146,6 +152,7 @@ export class CalificarComponent implements OnInit {
   this.puntos.forEach( function(punto){
     suma    += Number(punto.puntajeAsignado);
   })
+  
 
   console.log("Suma: ", suma);
 
@@ -250,9 +257,20 @@ export class CalificarComponent implements OnInit {
   
  }*/
 
-  guardar( form: NgForm ) {
 
-    if ( this.puntos.length < 15 ) {
+ criterioLength(){
+  this.criteriosService.getCriterios()
+    .subscribe( resp => {
+      this.criterios = resp;
+      console.log(this.criterios.length);
+      this.lenght = this.criterios.length;
+    });
+ }
+
+  guardar( form: NgForm ) {
+    
+    //CAMBIAR VALOR DE ACUERDO A LA CANTIDAD DE CRITERIOS
+    if ( this.puntos.length < this.lenght ) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',

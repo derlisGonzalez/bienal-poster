@@ -23,6 +23,7 @@ export class CriteriosComponent implements OnInit {
         console.log(resp);
         this.criterios = resp;
         this.cargando = false;
+        //console.log(this.criterios.length);
       });
   }
 

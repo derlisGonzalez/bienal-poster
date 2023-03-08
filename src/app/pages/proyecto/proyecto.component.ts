@@ -1,3 +1,5 @@
+import { CategoriasService } from 'src/app/services/categorias.service';
+import { CategoriaModel } from 'src/app/models/categoria.model';
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { DisertanteModel } from '../../models/disertante.model';
 import { ProyectoModel } from '../../models/proyecto.model';
@@ -23,6 +25,7 @@ import Swal from 'sweetalert2';
 export class ProyectoComponent implements OnInit {
 
   forma: FormGroup;
+  public categorias: CategoriaModel[] = [];
   public criterios: CriterioModel[] = [];
   public evaluadores: EvaluadorModel[] = [];
   public evaluador: EvaluadorModel = new EvaluadorModel()
@@ -37,6 +40,7 @@ export class ProyectoComponent implements OnInit {
   proyecto: ProyectoModel = new ProyectoModel();
 
   constructor(private fb: FormBuilder,
+    private categoriasService: CategoriasService,
     private proyectosService: ProyectosService,
     private criteriosService: CriteriosService,
     private evaluadoresService: EvaluadoresService,
@@ -81,6 +85,19 @@ export class ProyectoComponent implements OnInit {
           id: ''
         })
         console.log(this.carreras)
+      });
+
+
+      this.categoriasService.getCategorias()
+      .subscribe( categorias => {
+        this.categorias = categorias;
+  
+        this.categorias.unshift({
+          descripcion: '[ Seleccione Categoria]',
+          id: ''
+        })
+  
+        // console.log( this.paises );
       });
 
     //PARA ASIGNAR EVALUADORES A PROYECTO
@@ -164,6 +181,7 @@ export class ProyectoComponent implements OnInit {
     this.forma = this.fb.group({
       id: [''],
       titulo: ['', Validators.required],
+      categoria: ['', Validators.required],
       codigo: ['', [Validators.required, Validators.minLength(2)]],
       disertante: [''],
       carrera: [''],

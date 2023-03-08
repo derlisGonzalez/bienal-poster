@@ -24,8 +24,7 @@ export class DisertanteComponent implements OnInit {
   public carreras: CarreraModel[] = [];
 
   public categoriaSeleccionada: CategoriaModel;
-  public carreraSeleccionada: CarreraModel
-  ;
+  public carreraSeleccionada: CarreraModel;
   disertante: DisertanteModel = new DisertanteModel();
 
   constructor( private fb: FormBuilder,

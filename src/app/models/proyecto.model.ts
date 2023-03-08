@@ -9,6 +9,7 @@ export class ProyectoModel {
     cuerpo?: string;
     autor?: string;
     autor2?: string;
+    categoria?: string;
     estado?: boolean = true;
     totalPuntaje?: number = 0;
     promedio?: number = 0;

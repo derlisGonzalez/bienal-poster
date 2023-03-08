@@ -10,12 +10,12 @@ export class EvaluadorModel {
     carrera?: CarreraModel;
     criterios?: CriterioModel[]=[];
     documento?: string;
-    password?: string;
-    rol?: string;
-    usuario?: string;
+    //password?: string;
+    //rol?: string;
+    //usuario?: string;
     subtotal?: number;
     estado: boolean  = true;
-    uid?: string;
+    //uid?: string;
 
 
 

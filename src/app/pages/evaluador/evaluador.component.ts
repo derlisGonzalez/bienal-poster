@@ -92,9 +92,9 @@ export class EvaluadorComponent implements OnInit {
       carrera: ['', [Validators.required]],
       //criterios: ['', [Validators.required, Validators.minLength(2)]],
       documento: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      //password: ['', [Validators.required]],
       //rol: ['evaluador'],
-      usuario: ['', [Validators.required]],
+      //usuario: ['', [Validators.required]],
       subtotal: [''],
       //cuerpo: ['', [Validators.required, Validators.minLength(50)]],
       //totalPuntaje: [''],
@@ -137,7 +137,7 @@ export class EvaluadorComponent implements OnInit {
       return;
     }
 
-    this.evaluador.rol = "evaluador";
+    //this.evaluador.rol = "evaluador";
 
     Swal.fire({
       title: 'Espere',

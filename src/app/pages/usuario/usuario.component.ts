@@ -154,7 +154,7 @@ export class UsuarioComponent implements OnInit {
           return;
         }
     
-        this.evaluador.rol = "administrador";
+        //this.evaluador.rol = "administrador";
 
         Swal.fire({
           title: 'Espere',

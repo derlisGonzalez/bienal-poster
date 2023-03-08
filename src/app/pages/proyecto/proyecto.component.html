@@ -22,22 +22,33 @@
 
             <div class="form-group">
                 <label>ID</label>
-                <input class="form-control" type="text" placeholder="ID" [(ngModel)]="proyecto.id"
-                    [attr.disabled]="true" formControlName="id">
+                <input class="form-control"
+                       type="text"
+                       placeholder="ID"
+                       [(ngModel)]="proyecto.id"
+                       [attr.disabled]="true"
+                       formControlName="id">
                 <small class="form-text text-muted">Este campo es autogenerado</small>
             </div>
 
 
             <div class="form-group">
                 <label>Título</label>
-                <input class="form-control" type="text" placeholder="Titulo del Proyecto" [(ngModel)]="proyecto.titulo" formControlName="titulo">
+                <input class="form-control"
+                       type="text"
+                       placeholder="Titulo del Proyecto"
+                       [(ngModel)]="proyecto.titulo"
+                       formControlName="titulo">
             </div>
 
 
             <div class="form-group">
                 <label>Código</label>
-                <input class="form-control" type="text" placeholder="Codigo del Proyecto" [(ngModel)]="proyecto.codigo"
-                    formControlName="codigo">
+                <input class="form-control"
+                       type="text"
+                       placeholder="Codigo del Proyecto"
+                       [(ngModel)]="proyecto.codigo"
+                       formControlName="codigo">
             </div>
 
 
@@ -54,6 +65,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label class="col-2 col-form-label">Área Temática</label>
                 <div class="col-8" placeholder="Seleccione Carrera">
@@ -63,6 +75,25 @@
                             {{ carrera.descripcion }}
                         </option>
                     </select>
+
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-2 col-form-label">Categoría</label>
+                <div class="col-8" placeholder="Seleccione Categoria">
+
+                    <select class="form-control"
+                            placeholder="Seleccione Categoria"
+                            [disabled]="categorias.length === 0"
+                            [(ngModel)]="proyecto.categoria"
+                            formControlName="categoria">
+                        <option *ngFor="let categoria of categorias"
+                                [value]="categoria.descripcion">
+                            <!-- [value]="categoria.id"> -->
+                            {{ categoria.descripcion }}
+                        </option>
+                  </select>
 
                 </div>
             </div>

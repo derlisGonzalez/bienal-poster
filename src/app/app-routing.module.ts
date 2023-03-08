@@ -1,3 +1,5 @@
+import { CriteriosAceptacionComponent } from './pages/criterios-aceptacion/criterios-aceptacion.component';
+import { CriterioAceptacionComponent } from './pages/criterio-aceptacion/criterio-aceptacion.component';
 import { AddUsuarioComponent } from './pages/add-usuario/add-usuario.component';
 import { ReporteCategoriasComponent } from './reportes/reporte-categorias/reporte-categorias.component';
 import { ReporteCriteriosComponent } from './reportes/reporte-criterios/reporte-criterios.component';
@@ -44,8 +46,11 @@ const routes: Routes = [
   { path: 'criterios', component: CriteriosComponent, canActivate: [AuthGuard] },
   { path: 'criterio/:id', component: CriterioComponent, canActivate: [AuthGuard] },
 
-  { path: 'disertantes', component: DisertantesComponent, canActivate: [AuthGuard] },
-  { path: 'disertante/:id', component: DisertanteComponent, canActivate: [AuthGuard] },
+  { path: 'criterios-acep', component: CriteriosAceptacionComponent, canActivate: [AuthGuard] },
+  { path: 'criterio-acep/:id', component: CriterioAceptacionComponent, canActivate: [AuthGuard] },
+
+  { path: 'autores', component: DisertantesComponent, canActivate: [AuthGuard] },
+  { path: 'autor/:id', component: DisertanteComponent, canActivate: [AuthGuard] },
 
   { path: 'evaluadores', component: EvaluadoresComponent, canActivate: [AuthGuard] },
   { path: 'evaluador/:id', component: EvaluadorComponent, canActivate: [AuthGuard] },

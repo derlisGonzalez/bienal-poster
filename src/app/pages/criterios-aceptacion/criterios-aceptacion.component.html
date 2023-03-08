@@ -1,12 +1,12 @@
 <app-header></app-header><br>
 <h1>
-    Listado de Autores</h1>
+    Listado de Criterios</h1>
 <hr>
 
 
 <div class="row">
     <div class="col text-right">
-        <button routerLink="/autor/nuevo" class="btn btn-primary">
+        <button routerLink="/criterio-acep/nuevo" class="btn btn-primary">
       <i class="fa fa-plus"></i>
       Agregar
     </button>
@@ -14,30 +14,29 @@
 </div>
 
 <!--  -->
-<table *ngIf="!cargando && disertantes.length > 0" class="table mt-3 animated fadeIn faster animated fadeIn faster">
+<table *ngIf="!cargando && criteriosAcep.length > 0" class="table mt-3 animated fadeIn faster animated fadeIn faster">
     <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Categoria</th>
-            <th scope="col">Area</th>
-            <th scope="col">Tools</th>
+            <th scope="col">Descripción</th>
+            <!-- <th scope="col">Poder</th>
+            <th scope="col">Vivo</th> -->
+            <th class="text-right" scope="col">Tools</th>
         </tr>
     </thead>
     <tbody>
 
-        <tr *ngFor="let disertante of disertantes; let i = index">
+        <tr *ngFor="let criterioAcep of criteriosAcep; let i = index">
             <th scope="row">{{ i + 1 }}</th>
-            <td>{{ disertante.nombre }}</td>
-            <td>{{ disertante.categoria }}</td>
-            <td>{{ disertante.carrera }}</td>
+            <td>{{ criterioAcep.descripcion }}</td>
+
             <td class="text-right">
                 <!--  -->
-                <button class="btn btn-info mr-1" [routerLink]="['/autor', disertante.id ]">
+                <button class="btn btn-info mr-1" [routerLink]="['/criterio-acep', criterioAcep.id ]">
                 <i class="fa fa-pen"></i>
                 </button>
                 <!--  -->
-                <button class="btn btn-danger" (click)="borrarDisertante( disertante, i ) ">
+                <button class="btn btn-danger" (click)="borrarCriterio( criterioAcep, i ) ">
                 <i class="fa fa-trash"></i>
                 </button>
 
@@ -47,7 +46,7 @@
     </tbody>
 </table>
 <!--  -->
-<div *ngIf="!cargando && disertantes.length === 0" class="alert alert-warning text-center mt-3 animated fadeIn faster">
+<div *ngIf="!cargando && criteriosAcep.length === 0" class="alert alert-warning text-center mt-3 animated fadeIn faster">
     <h4 class="alert-heading">No hay registros</h4>
     <p>
         <i class="fa fa-exclamation fa-2x"></i>
@@ -63,6 +62,3 @@
         Espere por favor
     </p>
 </div>
-
-
-
