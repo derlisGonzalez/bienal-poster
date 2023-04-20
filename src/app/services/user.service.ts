@@ -57,6 +57,18 @@ export class UserService {
 
   }
 
+  getUser( uid: string ) {
+    return this.http.get(`${ this.url }/usuarios/${ uid }.json`)
+            .pipe(
+              map( (resp: any) => {
+                //usuario.uid = resp.name;
+                //return usuario;
+                console.log(resp);
+              })
+            );
+
+  }
+
 
   actualizarUsuario( usuario: UsuarioModel ){
 

@@ -10,10 +10,15 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
+  userActivo = localStorage.getItem('email');
+  roleUser = localStorage.getItem('role');
+
   constructor( private router:Router,
                 private auth:AuthService ) { }
 
   ngOnInit(): void {
+    console.log("Usuario logueado: "+localStorage.getItem('email'));
+
   }
 
     buscarProyecto( termino:string ){

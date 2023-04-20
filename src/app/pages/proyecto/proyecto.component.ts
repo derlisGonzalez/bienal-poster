@@ -6,7 +6,7 @@ import { ProyectoModel } from '../../models/proyecto.model';
 import { ProyectosService } from '../../services/proyectos.service';
 import { DisertantesService } from '../../services/disertantes.service';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { CriteriosService } from 'src/app/services/criterios.service';
 import { CriterioModel } from 'src/app/models/criterio.model';
@@ -32,6 +32,7 @@ export class ProyectoComponent implements OnInit {
   public evaluador1: EvaluadorModel = new EvaluadorModel()
   public evaluador2: EvaluadorModel = new EvaluadorModel()
   public evaluador3: EvaluadorModel = new EvaluadorModel()
+  public evaluadoresProye: EvaluadorModel = new EvaluadorModel()
   public disertantes: DisertanteModel[] = [];
   public carreras: CarreraModel[] = [];
   public carrera: CarreraModel = new CarreraModel;
@@ -81,7 +82,7 @@ export class ProyectoComponent implements OnInit {
       .subscribe(carreras => {
         this.carreras = carreras;
         this.carreras.unshift({
-          descripcion: '[ Seleccione Carrera]',
+          descripcion: '[ Seleccione Area]',
           id: ''
         })
         console.log(this.carreras)
@@ -123,30 +124,35 @@ export class ProyectoComponent implements OnInit {
         console.log(this.criterios);
       });
 
-    // console.log( this.paises );
-
-    /*this.disertantesService.get('hospital').valueChanges
-        .subscribe( categoriaId => {
-          this.categoriaSeleccionadah = this.categorias.find( h => h.id === categoriaId );
-        })*/
 
     this.forma.controls["carrera"].valueChanges.subscribe((c: CarreraModel) => {
       console.log(c)
       this.carrera = c
       this.evaluadores = c.evaluadores
     })
-      this.forma.controls["evaluador1"].valueChanges.subscribe((e: EvaluadorModel) => {
-        this.proyecto.evaluador1 = this.getEvaluador(e)
-      })
-
-    /*this.forma.controls["evaluador2"].valueChanges.subscribe((e: EvaluadorModel) => {
+    
+    this.forma.controls["evaluador1"].valueChanges.subscribe((e: EvaluadorModel) => {
+      this.proyecto.evaluador1 = this.getEvaluador(e)
+    })
+    this.forma.controls["evaluador2"].valueChanges.subscribe((e: EvaluadorModel) => {
       this.proyecto.evaluador2 = this.getEvaluador(e)
     })
-    this.forma.controls["evaluador3"].valueChanges.subscribe((e: EvaluadorModel) => {
+    /*this.forma.controls["evaluador3"].valueChanges.subscribe((e: EvaluadorModel) => {
       this.proyecto.evaluador3 = this.getEvaluador(e)
     })*/
 
+    /*this.forma.controls["evaluador2"].valueChanges.subscribe((e: EvaluadorModel) => {
+      this.proyecto.evaluador2 = this.getEvaluador(e)
+    })*/
 
+  }
+
+
+
+
+
+  get evaluadoresProyecto() {
+    return this.forma.get('evaluadoresProyecto') as FormArray;
   }
 
   /*mostrarListado(){
@@ -167,6 +173,13 @@ export class ProyectoComponent implements OnInit {
     return e
   }
 
+  getAutor(autor: DisertanteModel): DisertanteModel {
+    let e = Object.assign({}, autor)
+    //e.area = this.criterios
+    //this.setValorDefault(e)
+    return e
+  }
+
   setValorDefault(evaluador: EvaluadorModel) {
     evaluador.criterios.forEach(criterio => {
       criterio.puntajeAsignado = 0
@@ -183,14 +196,16 @@ export class ProyectoComponent implements OnInit {
       titulo: ['', Validators.required],
       categoria: ['', Validators.required],
       codigo: ['', [Validators.required, Validators.minLength(2)]],
-      disertante: [''],
+      autor: ['', Validators.required],
       carrera: [''],
-      evaluadores: [''],
-      evaluador1: [''],
-      //evaluador2: [''],
-      //evaluador3: [''],
+      //evaluadoresProyecto: this.fb.array([]),
+      evaluadoresPro: this.fb.group({
+        evaluador2: ['' ],
+        evaluador3: ['' ],
+      }),
+      evaluador1: ['', Validators.required],
+      evaluador2: [''],
       cuerpo: ['', [Validators.required, Validators.minLength(50)]],
-      totalPuntaje: [''],
       //email  : ['', [ Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')] ],
       //usuario : ['', , this.validadores.existeUsuario ],
       //pass1   : ['', Validators.required ],
@@ -222,6 +237,16 @@ export class ProyectoComponent implements OnInit {
       manufacturerName: ['', Validators.required]
     })
   }
+
+
+  agregarEvaluador() {
+    this.evaluadoresProyecto.push(  this.fb.control('')  );
+  }
+  
+  borrarEvaluador(i: number) {
+    this.evaluadoresProyecto.removeAt(i);
+  }
+
 
   guardar() {
 

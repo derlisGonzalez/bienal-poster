@@ -2,7 +2,7 @@ import { EvaluadoresService } from './../../services/evaluadores.service';
 import { EvaluadorModel } from './../../models/evaluador.model';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CriterioModel } from 'src/app/models/criterio.model';
 import { ProyectoModel } from 'src/app/models/proyecto.model';
@@ -24,7 +24,6 @@ export class CalificarComponent implements OnInit {
   puntos: CriterioModel[] = [];
   evaluador: EvaluadorModel;
   public criterios: CriterioModel[] = [];
-
   lenght = 0;
 
 
@@ -36,7 +35,8 @@ export class CalificarComponent implements OnInit {
   constructor( private proyectosService: ProyectosService,
                private criteriosService: CriteriosService,
                private evaluadoresService: EvaluadoresService,
-               private route: ActivatedRoute) { 
+               private route: ActivatedRoute,
+               private router: Router) { 
 
                 this.criterioLength();
 
@@ -157,14 +157,15 @@ export class CalificarComponent implements OnInit {
   console.log("Suma: ", suma);
 
   //this.proyecto.evaluador1.subtotal = suma;
-  this.proyecto.totalPuntaje = suma;
+  this.proyecto.totalPuntaje += suma;
+  this.proyecto.estado = false;
   //this.proyecto.evaluador1.estado = false;
-  //if (this.proyecto.evaluador1.estado == false && this.proyecto.evaluador2.estado == false && this.proyecto.evaluador3.estado == false) {
-    //let subtotal = (this.proyecto.totalPuntaje / 3);
-    //let sub = subtotal.toFixed(2);
-    //this.proyecto.promedio = Number(sub);
+  /*if (this.proyecto.evaluador1.estado == false && this.proyecto.evaluador2.estado == false) {
+    let subtotal = (this.proyecto.totalPuntaje / 2);
+    let sub = subtotal.toFixed(2);
+    this.proyecto.promedio = Number(sub);
     this.proyecto.estado = false;
-  //}
+  }*/
   
 
   //console.log(this.proyecto.evaluador1.subtotal);
@@ -185,7 +186,8 @@ export class CalificarComponent implements OnInit {
   
  }
 
- /*subTotal2() {
+
+ subTotal2() {
   let suma = 0;
   this.puntos.forEach( function(punto){
     suma    += Number(punto.puntajeAsignado);
@@ -196,12 +198,12 @@ export class CalificarComponent implements OnInit {
   this.proyecto.evaluador2.subtotal = suma;
   this.proyecto.totalPuntaje += suma;
   this.proyecto.evaluador2.estado = false;
-  if (this.proyecto.evaluador1.estado == false && this.proyecto.evaluador2.estado == false && this.proyecto.evaluador3.estado == false) {
-    let subtotal = (this.proyecto.totalPuntaje / 3);
+  /*if (this.proyecto.evaluador1.estado == false && this.proyecto.evaluador2.estado == false) {
+    let subtotal = (this.proyecto.totalPuntaje / 2);
     let sub = subtotal.toFixed(2);
     this.proyecto.promedio = Number(sub);
     this.proyecto.estado = false;
-  }
+  }*/
   console.log(this.proyecto.evaluador2.subtotal);
 
   //const suma = this.puntos.map(item => Number(item.puntajeAsignado)).reduce((prev, curr) => prev + curr, 0);
@@ -209,16 +211,16 @@ export class CalificarComponent implements OnInit {
 
   //console.log(value.id);
 
-  //for (let index = 0; index < this.puntos.length; index++) {
+  /*for (let index = 0; index < this.puntos.length; index++) {
     suma += Number(value);
 
     //this.puntos["id"]
-  //}
+  }*/
 
   //console.log("La suma es : ", suma);  
 
   
- }*/
+ }
 
 
  /*subTotal3() {
@@ -262,7 +264,7 @@ export class CalificarComponent implements OnInit {
   this.criteriosService.getCriterios()
     .subscribe( resp => {
       this.criterios = resp;
-      console.log(this.criterios.length);
+      console.log("Cantidad de criterios: ", this.criterios.length);
       this.lenght = this.criterios.length;
     });
  }
@@ -271,14 +273,14 @@ export class CalificarComponent implements OnInit {
     
     //CAMBIAR VALOR DE ACUERDO A LA CANTIDAD DE CRITERIOS
     if ( this.puntos.length < this.lenght ) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Calificación incompleta'
-        //footer: '<a href="">Why do I have this issue?</a>'
-      })
-      console.log('Formulario no válido');
-      return;
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Calificación incompleta'
+      //footer: '<a href="">Why do I have this issue?</a>'
+    })
+    console.log('Formulario no válido');
+    return;
 
     }
 
@@ -313,6 +315,7 @@ export class CalificarComponent implements OnInit {
 
     console.log(form);
     console.log(this.proyecto);
+    this.router.navigateByUrl('/calificaciones');
 
   }
 

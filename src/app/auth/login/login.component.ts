@@ -2,7 +2,6 @@ import { UsuarioModel } from 'src/app/models/usuario.model';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, NgForm } from '@angular/forms';
-import { EvaluadoresService } from '../../services/evaluadores.service';
 import { AuthService } from '../../services/auth.service';
 import { EvaluadorModel } from '../../models/evaluador.model';
 import Swal from 'sweetalert2';
@@ -17,6 +16,7 @@ declare const gapi:any;
 export class LoginComponent implements OnInit {
 
   evaluador: EvaluadorModel = new EvaluadorModel();
+  evaluadores: EvaluadorModel[] = [];
 
   usuario: UsuarioModel = new UsuarioModel();
   recordarme = false;
@@ -38,10 +38,10 @@ export class LoginComponent implements OnInit {
                private ngZone: NgZone ) { }
 
   ngOnInit(): void {
-    if ( localStorage.getItem('email') ) {
+    /*if ( localStorage.getItem('email') ) {
       this.usuario.email = localStorage.getItem('email');
       this.recordarme = true;
-    }
+    }*/
   }
 
 
@@ -63,9 +63,37 @@ export class LoginComponent implements OnInit {
         console.log(resp);
         Swal.close();
 
-        if ( this.recordarme ) {
+        /*if ( this.recordarme ) {
           localStorage.setItem('email', this.usuario.email);
-        }
+        }*/
+
+        this.auth.getEvaluadores()
+        .subscribe( respEval => {
+          // resp.forEach( function(punto){
+          //   suma    += Number(punto.puntajeAsignado);
+          // })
+          console.log(respEval.forEach);
+  
+          this.evaluadores = respEval;
+          console.log(Object.values(this.evaluadores));
+          console.log(Object.values(this.evaluadores));
+          //console.log(JSON.stringify({ respEval }));
+          //let data = JSON.stringify({ respEval });
+          //console.log(data);
+         
+        });
+
+
+        const uid = resp['localId'];
+        //if (uid == this.auth.getEvaluadorLogueado()) {
+          this.auth.getEvaluadorLogueado(uid)
+          .subscribe(respuesta => {
+            console.log("DATOS DEL USUARIO LOGUEADO... "+ respuesta);
+            //this.evaluador = resp;
+            //delete this.evaluador.carrera.evaluadores
+            //this.evaluador.id = id;
+          });
+        //}
 
 
         this.router.navigateByUrl('/inicio');

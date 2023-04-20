@@ -1,6 +1,6 @@
-<app-header></app-header><br>
-<h1>
-    Proyecto <small>Formulario</small> </h1>
+<app-header></app-header>
+<br>
+<h1>Formulario de proyecto</h1>
 <hr>
 
 
@@ -51,21 +51,6 @@
                        formControlName="codigo">
             </div>
 
-
-            <div class="form-group row">
-                <label class="col-2 col-form-label">Autor</label>
-                <div class="col-8">
-                    <div class="input-group">
-                        <select class="form-control" [(ngModel)]="proyecto.autor" formControlName="disertante">
-                            <option *ngFor="let autor of disertantes" [value]="autor.nombre">
-                                <!-- [value]="carrera.id"> -->
-                                {{ autor.nombre }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
             <div class="form-group row">
                 <label class="col-2 col-form-label">Área Temática</label>
                 <div class="col-8" placeholder="Seleccione Carrera">
@@ -76,6 +61,23 @@
                         </option>
                     </select>
 
+                </div>
+            </div>
+
+
+            <div class="form-group row">
+                <label class="col-2 col-form-label">Autor principal</label>
+                <div class="col-8">
+                    <div class="input-group">
+                        <select class="form-control"
+                                [(ngModel)]="proyecto.autor"
+                                formControlName="autor">
+                            <option *ngFor="let autor of disertantes" [value]="autor.nombre">
+                                <!-- [value]="carrera.id"> -->
+                                {{ autor.nombre }}
+                            </option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -116,7 +118,9 @@
                 <label class="col-2 col-form-label">Evaluador 1</label>
                 <div class="col-8">
                     <div class="input-group">
-                        <select class="form-control" [(ngModel)]="evaluador1" formControlName="evaluador1">
+                        <select class="form-control"
+                                [(ngModel)]="evaluador1"
+                                formControlName="evaluador1">
                             <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
                                 {{ evaluador.nombre }}
                             </option>
@@ -124,6 +128,63 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group row">
+                <label class="col-2 col-form-label">Evaluador 2</label>
+                <div class="col-8">
+                    <div class="input-group">
+                        <select class="form-control"
+                                [(ngModel)]="evaluador2"
+                                formControlName="evaluador2">
+                                <option [attr.disabled]="true">Evaluador 2 es opcional</option>
+                                <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
+                                    {{ evaluador.nombre }}
+                                </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- <div class="form-group row"[(ngModel)]="evaluadoresProye" formGroupName="evaluadoresPro">
+                <div class="form-row col">
+            
+                    <div class="col">
+            
+                        <div>
+                            <label class="col-6 col-form-label">Evaluador 2</label>
+                            <div class="col-8">
+                                <div class="input-group">
+                                    <select class="form-control" [(ngModel)]="proyecto.evaluadoresPro" formControlName="evaluadoresPro.evaluador2">
+                                        <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
+                                            {{ evaluador.nombre }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+            
+                    </div>
+            
+                    <div class="col">
+            
+                        <div>
+                            <label class="col-6 col-form-label">Evaluador 3</label>
+                            <div class="col-8">
+                                <div class="input-group">
+                                    <select class="form-control" [(ngModel)]="proyecto.evaluadoresPro" formControlName="evaluadoresPro.evaluador3">
+                                        <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
+                                            {{ evaluador.nombre }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+            
+                    </div>
+            
+                </div>
+            </div> -->
 
 
             <!-- <div class="form-group row">
@@ -151,8 +212,7 @@
                         </select>
                     </div>
                 </div>
-            </div>
- -->
+            </div> -->
 
             <div class="form-group">
                 <label>Cuerpo</label>
@@ -200,6 +260,55 @@
 
 
 
+            <!-- AGREGAR Y ELIMINAR EVALUADOR EJEMPLO -->
+            <!-- <div class="row">
+                <div class="col">
+            
+                  <table class="table">
+                    <thead class="thead-dark">
+                      <tr>
+                        <th>ID</th>
+                        <th>Evaluador</th>
+                        <th>Borrar</th>
+                      </tr>
+                    </thead>
+                    <tbody formArrayName="evaluadoresProyecto">
+                      <tr class *ngFor="let control of evaluadoresProyecto.controls; let i = index">
+                        <td> {{ i + 1 }} </td>
+                        <td>
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Evaluador</label>
+                                <div class="col-8">
+                                    <div class="input-group">
+                                        <select class="form-control" [(ngModel)]="evaluadores" [formControlName]="i">
+                                            <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
+                                                {{ evaluador.nombre }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                          <button class="btn btn-danger"
+                                  (click)="borrarEvaluador(i)">
+                            Borrar
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  
+                  <button class="btn btn-primary mt-3 mb-5 btn-block"
+                          type="button"
+                          (click)="agregarEvaluador()">
+                    + Agregar
+                  </button>
+            
+                </div>
+            </div> -->
+
+
             <hr>
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary w-25">
@@ -221,21 +330,17 @@
 
         <hr>
         <pre>
-        Estado del formulario: {{ forma.valid }}
-        <br>
-        Status: {{ forma.status }}
+            Estado del formulario: {{ forma.valid }}
+            <br>
+            Status: {{ forma.status }}
         </pre>
 
-        <pre>
-
-        {{ forma.value | json }}
-
-        </pre>
+        <!-- <pre>
+            {{ forma.value | json }}
+        </pre> -->
 
         <pre>
-
             {{ proyecto | json }}
-    
         </pre>
 
     </div>

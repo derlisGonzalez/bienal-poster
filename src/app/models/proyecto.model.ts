@@ -16,6 +16,8 @@ export class ProyectoModel {
     evaluador1?: EvaluadorModel;
     evaluador2?: EvaluadorModel;
     evaluador3?: EvaluadorModel;
+    evaluadoresProyecto?: EvaluadorModel [];
+    evaluadoresPro?: EvaluadorModel [];
 
     //lista de evaluadores
     //se agraga uno o mas evaluadores

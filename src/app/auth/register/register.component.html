@@ -6,44 +6,79 @@
             <h3 class="box-title m-t-40 m-b-0">Regístrate ahora</h3>
             
               <!-- [formGroup]="registerForm" -->
-            <form class="form-horizontal form-material" 
-                    (ngSubmit)="onSubmit( f )"
-                    #f="ngForm">
+            <form autocomplete="off" class="form-horizontal form-material"
+                    [formGroup]="forma"
+                    (ngSubmit)="onSubmit()">
 
 
                 <div class="form-group m-t-20">
-                    <span *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger animated fadeIn">El nombre es obligatorio</span>
+                    <!-- <span *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger animated fadeIn">El nombre es obligatorio</span> -->
                     <div class="col-xs-12">
                         <input class="form-control"
                                 type="text" 
-                                name="nombre" 
-                                [(ngModel)]="usuario.nombre"
-                                minlength="2"
-                                required
+                                formControlName="nombre"
+                                [class.is-invalid]="nombreNoValido"
+                                [(ngModel)]="evaluador.nombre"
                                 placeholder="Nombre y apellido">
+                                <small *ngIf="nombreNoValido" class="text-danger">
+                                    Ingrese 5 letras
+                                </small>
                     </div>
                 </div>
                 <div class="form-group ">
-                    <span *ngIf="f.submitted && f.controls['email'].errors"class="text-danger animated fadeIn">El correo es obligatorio</span>
+                    <!-- <span *ngIf="f.submitted && f.controls['email'].errors"class="text-danger animated fadeIn">El correo es obligatorio</span> -->
                     <div class="col-xs-12">
                         <input class="form-control" 
                                 type="email" 
-                                name="email"
-                                [(ngModel)]="usuario.email"
-                                required
-                                email
-                                placeholder="Email">
+                                formControlName="email"
+                                [(ngModel)]="evaluador.email"
+                                
+                                placeholder="Email"
+                                [class.is-invalid]="correoNoValido">
+                                <small *ngIf="correoNoValido" class="text-danger">
+                                    Ingrese el correo
+                            </small>
                     </div>
                 </div>
+
                 <div class="form-group ">
-                    <span *ngIf="f.submitted && f.controls['password'].errors" class="text-danger animated fadeIn">Al menos 6 letras</span>
+                    <div class="col-xs-12">
+                        <input class="form-control" 
+                                type="text" 
+                                formControlName="documento"
+                                [(ngModel)]="evaluador.documento"
+                                
+                                placeholder="Numero de documento"
+                                [class.is-invalid]="documentoNoValido">
+                                <small *ngIf="documentoNoValido" class="text-danger">
+                                    Documento no válido
+                            </small>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-8 col-form-label">Área Temática</label>
+                    <div class="col-12" placeholder="Seleccione Area">
+                        <select class="form-control" [disabled]="carreras.length === 0"
+                                [(ngModel)]="carrera" formControlName="carrera">
+                        <option *ngFor="let carrera of carreras" [ngValue]="carrera">
+                                <!-- [value]="carrera.id"> -->
+                          {{ carrera.descripcion }}
+                        </option>
+                      </select>
+    
+                    </div>
+                </div>
+
+                <div class="form-group ">
+                    <!-- <span *ngIf="f.submitted && f.controls['password'].errors" class="text-danger animated fadeIn">Al menos 6 letras</span> -->
                     <div class="col-xs-12">
                         <input class="form-control" 
                                 type="password" 
-                                name="password" 
-                                [(ngModel)]="usuario.password"
+                                formControlName="password" 
+                                [(ngModel)]="evaluador.password"
                                 minlength="6"
-                                required
+                                [class.is-invalid]="pass1NoValido"
                                 placeholder="Contraseña">
                     </div>
                 </div>
@@ -51,10 +86,9 @@
                     <div class="col-xs-12">
                         <input class="form-control" 
                                 type="password" 
-                                name="password2" 
-                                [(ngModel)]="usuario.password2"
-                                minlength="6"
-                                required
+                                formControlName="password2" 
+                                [(ngModel)]="evaluador.password2"
+                                [class.is-invalid]="pass2NoValido"
                                 placeholder="Repetir Contraseña">
                     </div>
                 </div>
@@ -110,7 +144,9 @@
             </form>
         </div>
     </div>
-<!-- </section> -->
-<!-- ============================================================== -->
-<!-- End Wrapper -->
-<!-- ============================================================== -->
+
+    <pre>
+
+        {{ evaluador | json }}
+
+    </pre>

@@ -1,11 +1,13 @@
+<app-header></app-header><br>
+
 <div class="container">
-    <app-header></app-header><br>
 
     <div class="card-columns">
 
         <div *ngFor="let proyecto of proyectos; let i = index" class="card">
 
-            <div *ngIf="proyecto.estado === true" class="card-body">
+            <!-- <div *ngIf="proyecto.estado === true" class="card-body"> -->
+            <div *ngIf="proyecto.estado === true && proyecto.evaluador1.email == userActivo" class="card-body">
                 <h1 class="card-title">{{ proyecto.autor }}</h1>
                 <h5 class="card-title">{{ proyecto.titulo }}</h5>
                 <!-- <p class="card-text">{{ proyecto.id }}</p> -->

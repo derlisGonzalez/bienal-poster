@@ -27,6 +27,38 @@ export class EvaluadoresService {
 
   }
 
+  /*nuevoUsuario( usuario: UsuarioModel ) {
+    const authData = {
+      ...usuario,
+      returnSecureToken: true
+    };
+    return this.http.post( this.create, authData)
+    .pipe(
+      map( resp => {
+        console.log( "entro en el mapa ")
+        this.guardarToken( resp['idToken'] );
+        console.log( "UID del usuario logueado: "+ resp['localId']);
+        console.log( "Email: "+ resp['email']);
+        
+        return resp;
+      })
+    );
+  }*/
+
+  crearEval( evaluador: EvaluadorModel ) {
+
+    return this.http.post(`${ this.url }/evaluadores.json`, evaluador)
+            .pipe(
+              map( (resp: any) => {
+                //evaluador.uid = resp['localId'];
+                //evaluador.email = resp['email'];
+                //evaluador.role = 'evaluador';
+                return evaluador;
+              })
+            );
+
+  }
+
 
   actualizarEvaluador( evaluador: EvaluadorModel ){
 
@@ -49,6 +81,12 @@ export class EvaluadoresService {
   getEvaluador( id: string ) {
 
     return this.http.get(`${ this.url }/evaluadores/${ id }.json`);
+
+  }
+
+  getEvaluadorLogueado( uid: string ) {
+
+    return this.http.get(`${ this.url }/evaluadores/${ uid }.json`);
 
   }
 

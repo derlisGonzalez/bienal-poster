@@ -21,6 +21,7 @@ export class EvaluadorComponent implements OnInit {
   forma: FormGroup;
 
   public carreras: CarreraModel[] = [];
+  
   public carrera: CarreraModel = new CarreraModel;
   public criterios: CriterioModel[] = [];
   evaluador: EvaluadorModel = new EvaluadorModel();
@@ -37,6 +38,7 @@ export class EvaluadorComponent implements OnInit {
 
   ngOnInit() {
     
+    //CUANDO SE TIENE QUE ACTUALIZAR UN EVALUADOR
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== 'nuevo') {
       this.evaluadoresService.getEvaluador(id)
@@ -102,23 +104,7 @@ export class EvaluadorComponent implements OnInit {
       //usuario : ['', , this.validadores.existeUsuario ],
       //pass1   : ['', Validators.required ],
       //pass2   : ['', Validators.required ],
-      /* criterios: this.fb.group({
- 
-         el_expositor_seadecua_al_tiempo_estipulado: this.fb.group({
-           p1: [0, Validators.required ],
-           p2: [0, Validators.required ],
-           p3: [0, Validators.required ],
-         }),
-         
-       }),
-       criterioss: this.fb.array([
- 
-         this.initCriterios()
-        
-       ]),*/
       //pasatiempos: this.fb.array([])
-    }, {
-      //validators: this.validadores.passwordsIguales('pass1','pass2')
     });
 
   }

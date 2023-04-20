@@ -14,15 +14,13 @@
                 </a>
             </div>
 
+            
             <div class="navbar-collapse">
 
                 <ul class="navbar-nav mr-auto">
-                    <!-- This is  -->
-                    <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                    <li class="nav-item"> <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                    <li class="nav-item hidden-sm-down"></li>
+                    
                 </ul>
-                
+                <label class="text-info"> {{ userActivo }}</label>
                 <ul class="navbar-nav my-lg-0">
                                        
                     <li class="nav-item dropdown">
@@ -30,14 +28,15 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right animated fadeIn fast">
                             <ul class="dropdown">
-                                <li><a routerLink="/categorias"> Categorias</a></li>
-                                <li><a routerLink="/criterios"><i class="ti-user"></i> Criterios</a></li>
-                                <li><a routerLink="/areas"><i class="ti-wallet"></i> Areas Temáticas</a></li>
-                                <li><a routerLink="/autores"><i class="ti-email"></i> Autores</a></li>
-                                <li><a routerLink="/evaluadores"><i class="ti-email"></i> Evaluadores</a></li>
-                                <li><a routerLink="/proyectos"><i class="ti-settings"></i> Proyectos</a></li>
+
+                                <li *ngIf="roleUser != 'evaluador'"><a routerLink="/categorias"> Categorias</a></li>
+                                <li *ngIf="roleUser != 'evaluador'"><a routerLink="/criterios"><i class="ti-user"></i> Criterios</a></li>
+                                <li *ngIf="roleUser != 'evaluador'"><a routerLink="/areas"><i class="ti-wallet"></i> Areas Temáticas</a></li>
+                                <li *ngIf="roleUser != 'evaluador'"><a routerLink="/autores"><i class="ti-email"></i> Autores</a></li>
+                                <li *ngIf="roleUser != 'evaluador'"><a routerLink="/evaluadores"><i class="ti-email"></i> Evaluadores</a></li>
+                                <li *ngIf="roleUser != 'evaluador'"><a routerLink="/proyectos"><i class="ti-settings"></i> Proyectos</a></li>
                                 <li><a routerLink="/calificaciones"><i class="ti-settings"></i> Calificaciones</a></li>
-                                <li><a routerLink="/usuarios"><i class="ti-settings"></i> Administradores</a></li>
+                                <li *ngIf="roleUser != 'evaluador'"><a routerLink="/usuarios"><i class="ti-settings"></i> Administradores</a></li>
                                 <li><a routerLink="/inicio">Inicio</a></li>
                                 <li> <i class="fa-solid fa-house"></i><a href="" (click)="salir()"> <strong> Cerrar Sesión</strong></a></li>
                                                                 

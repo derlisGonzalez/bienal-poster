@@ -13,6 +13,8 @@ export class CalificacionesComponent implements OnInit {
   proyectos: ProyectoModel[] = [];
   cargando = false;
 
+  userActivo = localStorage.getItem('email');
+
   constructor( private proyectosService: ProyectosService,
                private router:Router ) { }
 

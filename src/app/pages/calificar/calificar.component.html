@@ -24,7 +24,7 @@
     <h2>
         Codigo: <small>{{ proyecto.codigo }}</small>
     </h2>
-    <hr>
+   
 </div>
 
 
@@ -36,10 +36,9 @@
 
             <div class="text-left">
                 <h2 class="text-center">Criterios de evaluación</h2>
-                <hr>
 
                 <!-- EVALUADOR 1 -->
-                <div class="text-center font-weight-bold">
+                <div *ngIf="proyecto.evaluador1.estado == true" class="text-center font-weight-bold">
                     <p>Evaluador {{ proyecto.evaluador1.nombre}}</p>                    
                 </div>
                 <hr>
@@ -50,8 +49,10 @@
                 -->
 
                 <div *ngFor="let criterio of proyecto.evaluador1.criterios">
-                    <div class="form group">
-                        <label [(ngModel)]="proyecto.criterio" name="criterios" required>{{ criterio.descripcion }}{{criterio.puntajeAsignado}}</label>
+                    <div *ngIf="proyecto.evaluador1.estado == true" class="form group">
+                        <label [(ngModel)]="proyecto.criterio" name="criterios" required>
+                            {{ criterio.descripcion }}{{criterio.puntajeAsignado}}
+                        </label>
                         <br>
                         <div class=" text-right">
                             <div class="form-check form-check-inline">
@@ -89,20 +90,22 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
+                    <hr *ngIf="proyecto.evaluador1.estado == true">
                 </div>
 
                 <!-- EVALUADOR 2 -->
-                <!-- <div class="text-center font-weight-bold">
+                <!-- <div *ngIf="proyecto.evaluador1.estado == false" class="text-center font-weight-bold">
                     <p>Evaluador {{ proyecto.evaluador2.nombre}}</p>
-                </div>
-                <hr> -->
+                </div> -->
+                <!-- <hr> -->
                 <!--SE OCULTARA LA ETIQUETA HTML 
                 SI EL EVALUADOR LOGEADO NO COINCIDE 
                 CON EL EVALUADOR CORRESPONDIENTE AL PROYECTO -->
                 <!-- <div *ngFor="let criterio of proyecto.evaluador2.criterios">
-                    <div class="form group">
-                        <label [(ngModel)]="proyecto.criterio" name="criterios" required>{{ criterio.descripcion }}{{criterio.puntajeAsignado}}</label>
+                    <div *ngIf="proyecto.evaluador1.estado == false" class="form group">
+                        <label [(ngModel)]="proyecto.criterio" name="criterios" required>
+                            {{ criterio.descripcion }}{{criterio.puntajeAsignado}}
+                        </label>
                         <div class="text-right">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input"
@@ -140,7 +143,7 @@
                             </div>
                         </div>
                     </div>
-                    <hr>
+                    <hr *ngIf="proyecto.evaluador1.estado == false">
                 </div> -->
 
 
@@ -202,11 +205,11 @@
 
           
             <div class="form-group text-center">
-                 <button (click)="subTotal1()" class="btn btn-primary"type="submit" class="btn btn-primary w-25">
+                 <button *ngIf="proyecto.evaluador1.estado == true" (click)="subTotal1()" class="btn btn-primary"type="submit" class="btn btn-primary w-25">
                     <i class="fa fa-save"></i>
                     Guardar
                 </button>
-                <!-- <button (click)="subTotal2()" class="btn btn-primary"type="submit" class="btn btn-primary w-25">
+                <!-- <button *ngIf="proyecto.evaluador1.estado == false" (click)="subTotal2()" class="btn btn-primary"type="submit" class="btn btn-primary w-25">
                     <i class="fa fa-save"></i>
                     Guardar
                 </button> -->

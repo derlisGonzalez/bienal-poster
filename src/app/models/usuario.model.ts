@@ -8,10 +8,8 @@ export class UsuarioModel {
     public password?: string;
     public password2?: string;
     //public img?: string;
-    //public google?: boolean;
+    public estado?: boolean;
     public role?: string;
     public uid?: string
     constructor( ) {}
-
-
 }
