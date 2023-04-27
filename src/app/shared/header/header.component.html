@@ -29,14 +29,14 @@
                         <div class="dropdown-menu dropdown-menu-right animated fadeIn fast">
                             <ul class="dropdown">
 
-                                <li *ngIf="roleUser != 'evaluador'"><a routerLink="/categorias"> Categorias</a></li>
-                                <li *ngIf="roleUser != 'evaluador'"><a routerLink="/criterios"><i class="ti-user"></i> Criterios</a></li>
-                                <li *ngIf="roleUser != 'evaluador'"><a routerLink="/areas"><i class="ti-wallet"></i> Areas Temáticas</a></li>
-                                <li *ngIf="roleUser != 'evaluador'"><a routerLink="/autores"><i class="ti-email"></i> Autores</a></li>
-                                <li *ngIf="roleUser != 'evaluador'"><a routerLink="/evaluadores"><i class="ti-email"></i> Evaluadores</a></li>
-                                <li *ngIf="roleUser != 'evaluador'"><a routerLink="/proyectos"><i class="ti-settings"></i> Proyectos</a></li>
-                                <li><a routerLink="/calificaciones"><i class="ti-settings"></i> Calificaciones</a></li>
-                                <li *ngIf="roleUser != 'evaluador'"><a routerLink="/usuarios"><i class="ti-settings"></i> Administradores</a></li>
+                                <li *ngIf="roleUser == 'admin'"><a routerLink="/categorias"> Categorias</a></li>
+                                <li *ngIf="roleUser == 'admin'"><a routerLink="/criterios"><i class="ti-user"></i> Criterios</a></li>
+                                <li *ngIf="roleUser == 'admin'"><a routerLink="/areas"><i class="ti-wallet"></i> Areas Temáticas</a></li>
+                                <li *ngIf="roleUser == 'admin'"><a routerLink="/autores"><i class="ti-email"></i> Autores</a></li>
+                                <li *ngIf="roleUser == 'admin'"><a routerLink="/evaluadores"><i class="ti-email"></i> Evaluadores</a></li>
+                                <li *ngIf="roleUser == 'admin'"><a routerLink="/proyectos"><i class="ti-settings"></i> Proyectos</a></li>
+                                <li *ngIf="roleUser == 'evaluador'"><a routerLink="/calificaciones"><i class="ti-settings"></i> Calificaciones</a></li>
+                                <li *ngIf="roleUser == 'admin'"><a routerLink="/usuarios"><i class="ti-settings"></i> Administradores</a></li>
                                 <li><a routerLink="/inicio">Inicio</a></li>
                                 <li> <i class="fa-solid fa-house"></i><a href="" (click)="salir()"> <strong> Cerrar Sesión</strong></a></li>
                                                                 

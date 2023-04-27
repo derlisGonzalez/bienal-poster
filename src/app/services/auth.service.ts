@@ -54,7 +54,7 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
-    //localStorage.removeItem('nombre');
+    localStorage.removeItem('role');
   }
 
 
@@ -98,7 +98,7 @@ export class AuthService {
       map( resp => {
         this.guardarToken( resp['idToken'] );
         localStorage.setItem( 'email', resp['email']);
-        localStorage.setItem( 'role', 'evaluador');
+        //localStorage.setItem( 'role', 'evaluador');
         //this.userService.getUser(resp['localId']);
 
         console.log( "UID del usuario logueado: "+ resp['localId']);

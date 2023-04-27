@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
     this.auth.login( this.usuario )
       .subscribe( resp => {
 
-        console.log(resp.valueOf());
+        console.log(resp);
         Swal.close();
 
         /*if ( this.recordarme ) {
@@ -72,11 +72,24 @@ export class LoginComponent implements OnInit {
           // resp.forEach( function(punto){
           //   suma    += Number(punto.puntajeAsignado);
           // })
-          console.log(respEval.forEach);
+          console.log(respEval);
   
           this.evaluadores = respEval;
-          console.log(Object.values(this.evaluadores));
-          console.log(Object.values(this.evaluadores));
+          //console.log(this.evaluadores[45].filter(correo));
+
+          const indice = this.evaluadores.findIndex((elemento, indice) => {
+          if (elemento.email === localStorage.getItem('email')) {
+            //console.log(indice);
+            console.log(this.evaluadores[indice]);
+            const data = this.evaluadores[indice];
+
+            console.log(data.role);
+
+            localStorage.setItem('role', data.role);
+
+          }
+
+        });
           //console.log(JSON.stringify({ respEval }));
           //let data = JSON.stringify({ respEval });
           //console.log(data);
