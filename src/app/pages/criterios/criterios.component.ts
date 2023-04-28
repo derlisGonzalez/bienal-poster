@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { CriterioModel } from '../../models/criterio.model';
 import { CriteriosService } from '../../services/criterios.service';
+import { EvaluadorModel } from 'src/app/models/evaluador.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-criterios',
@@ -10,10 +12,46 @@ import { CriteriosService } from '../../services/criterios.service';
 })
 export class CriteriosComponent implements OnInit {
 
+  roleUser:string;
+  evaluadores: EvaluadorModel[] = [];
+
   criterios: CriterioModel[] = [];
   cargando = false;
 
-  constructor( private criteriosService: CriteriosService ) { }
+  constructor( private criteriosService: CriteriosService,
+                private auth: AuthService ) {
+
+    this.auth.getEvaluadores()
+    .subscribe( respEval => {
+      // resp.forEach( function(punto){
+      //   suma    += Number(punto.puntajeAsignado);
+      // })
+      //console.log(respEval);
+
+      this.evaluadores = respEval;
+      //console.log(this.evaluadores[45].filter(correo));
+
+      const indice = this.evaluadores.findIndex((elemento, indice) => {
+      if (elemento.email === localStorage.getItem('email')) {
+        //console.log(indice);
+        //console.log(this.evaluadores[indice]);
+        const data = this.evaluadores[indice];
+
+        console.log(data.role);
+
+        localStorage.setItem('role', data.role);
+
+        this.roleUser = data.role;
+
+      }
+
+    });
+      //console.log(JSON.stringify({ respEval }));
+      //let data = JSON.stringify({ respEval });
+      //console.log(data);
+     
+    });
+   }
 
   ngOnInit()  {
 

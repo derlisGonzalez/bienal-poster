@@ -18,6 +18,7 @@ import { CarrerasService } from 'src/app/services/carreras.service';
 import { CarreraModel } from 'src/app/models/carrera.model';
 
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -26,6 +27,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./usuario.component.css']
 })
 export class UsuarioComponent implements OnInit {
+
+  roleUser:string;
+  //evaluadores: EvaluadorModel[] = [];
 
   forma: FormGroup;
   public criterios: CriterioModel[] = [];
@@ -45,10 +49,42 @@ export class UsuarioComponent implements OnInit {
       private carrerasService: CarrerasService,
       private categoriasService: CategoriasService,
       private usersService: UserService,
-      private route: ActivatedRoute) { 
+      private route: ActivatedRoute,
+      private auth: AuthService) { 
 
        this.crearFormulario();
        //this.criteriosService.getCriterios();
+
+       this.auth.getEvaluadores()
+        .subscribe( respEval => {
+          // resp.forEach( function(punto){
+          //   suma    += Number(punto.puntajeAsignado);
+          // })
+          //console.log(respEval);
+    
+          this.evaluadores = respEval;
+          //console.log(this.evaluadores[45].filter(correo));
+    
+          const indice = this.evaluadores.findIndex((elemento, indice) => {
+          if (elemento.email === localStorage.getItem('email')) {
+            //console.log(indice);
+            //console.log(this.evaluadores[indice]);
+            const data = this.evaluadores[indice];
+    
+            console.log(data.role);
+    
+            localStorage.setItem('role', data.role);
+    
+            this.roleUser = data.role;
+    
+          }
+    
+        });
+          //console.log(JSON.stringify({ respEval }));
+          //let data = JSON.stringify({ respEval });
+          //console.log(data);
+          
+        });
 
       }
 

@@ -1,57 +1,79 @@
 <app-header></app-header><br>
-<h1>
-    Categoria <small>Descripción Categoria</small> </h1>
-<hr>
 
 
-<div class="row text-right">
-    <div class="col">
-        <button class="btn btn-danger" routerLink="/categorias">
-      <i class="fa fa-arrow-left"></i>
-      Regresar
-    </button>
+<div class="container" *ngIf="roleUser == 'admin'">
+
+    <h1>
+        Categoria <small>Descripción Categoria</small> </h1>
+    <hr>
+    
+    
+    <div class="row text-right">
+        <div class="col">
+            <button class="btn btn-danger" routerLink="/categorias">
+          <i class="fa fa-arrow-left"></i>
+          Regresar
+        </button>
+        </div>
     </div>
+    
+    
+    
+    <div class="row animated fadeIn faster">
+        <div class="col">
+            <!-- se llama al metodo guardar de heroe.componet.ts -->
+            <form [formGroup]="forma" (ngSubmit)="guardar()">
+    
+                <div class="form-group">
+                    <label>Firebase ID</label>
+                    <input type="text"
+                            class="form-control"
+                            placeholder="Firebase ID"
+                            [(ngModel)]="categoria.id"
+                            formControlName="id"
+                            [attr.disabled]="true">
+                    <small class="form-text text-muted">Este campo es autogenerado</small>
+                </div>
+    
+    
+                <div class="form-group">
+                    <label>Descripción</label>
+                    <input type="text"
+                            class="form-control"
+                            placeholder="Descripcion de la Categoria"
+                            [(ngModel)]="categoria.descripcion"
+                            formControlName="descripcion">
+                </div>
+    
+                <hr>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary w-25">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                    </button>
+                </div>
+    
+    
+            </form>
+    
+    
+        </div>
+    </div>
+
 </div>
 
 
+<div class="row alert alert-warning mt-3 animated fadeIn faster" *ngIf="roleUser == 'evaluador'">
 
-<div class="row animated fadeIn faster">
-    <div class="col">
-        <!-- se llama al metodo guardar de heroe.componet.ts -->
-        <form [formGroup]="forma" (ngSubmit)="guardar()">
+    <div class="col-12 text-center">
+        <h1>Usuario no autorizado!!</h1>
+        <br>
+    </div>
 
-            <div class="form-group">
-                <label>Firebase ID</label>
-                <input type="text"
-                        class="form-control"
-                        placeholder="Firebase ID"
-                        [(ngModel)]="categoria.id"
-                        formControlName="id"
-                        [attr.disabled]="true">
-                <small class="form-text text-muted">Este campo es autogenerado</small>
-            </div>
-
-
-            <div class="form-group">
-                <label>Descripción</label>
-                <input type="text"
-                        class="form-control"
-                        placeholder="Descripcion de la Categoria"
-                        [(ngModel)]="categoria.descripcion"
-                        formControlName="descripcion">
-            </div>
-
-            <hr>
-            <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary w-25">
-                    <i class="fa fa-save"></i>
-                    Guardar
-                </button>
-            </div>
-
-
-        </form>
-
-
+    <div class="col-12 text-center">
+        <button routerLink="/inicio" class="btn btn-danger">
+      <i class="fa fa-arrow-left"></i>
+      Inicio
+    </button>
     </div>
 </div>

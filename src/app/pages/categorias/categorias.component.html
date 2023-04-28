@@ -1,64 +1,85 @@
 <app-header></app-header><br>
-<h1>
-    Listado de Categorias</h1>
-<hr>
 
 
-<div class="row">
-    <div class="col text-right">
-        <button routerLink="/categoria/nuevo" class="btn btn-primary">
-      <i class="fa fa-plus"></i>
-      Agregar
+<div class="container" *ngIf="roleUser == 'admin'">
+
+    <h1>
+        Listado de Categorias</h1>
+    <hr>
+    
+    
+    <div class="row">
+        <div class="col text-right">
+            <button routerLink="/categoria/nuevo" class="btn btn-primary">
+          <i class="fa fa-plus"></i>
+          Agregar
+        </button>
+        </div>
+    </div>
+    
+    <!--  -->
+    <table *ngIf="!cargando && categorias.length > 0" class="table mt-3 animated fadeIn faster animated fadeIn faster">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Descripción</th>
+                <!-- <th scope="col">Poder</th>
+                <th scope="col">Vivo</th> -->
+                <th scope="col">Tools</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <tr *ngFor="let categoria of categorias; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ categoria.descripcion }}</td>
+    
+                <td class="text-right">
+                    <!--  -->
+                    <button class="btn btn-info mr-1" [routerLink]="['/categoria', categoria.id ]">
+                    <i class="fa fa-pen"></i>
+                    </button>
+                    <!--  -->
+                    <button class="btn btn-danger" (click)="borrarCategoria( categoria, i ) ">
+                    <i class="fa fa-trash"></i>
+                    </button>
+    
+    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <!--  -->
+    <div *ngIf="!cargando && categorias.length === 0" class="alert alert-warning text-center mt-3 animated fadeIn faster">
+        <h4 class="alert-heading">No hay registros</h4>
+        <p>
+            <i class="fa fa-exclamation fa-2x"></i>
+        </p>
+    </div>
+    <!--  -->
+    <div *ngIf="cargando" class="alert alert-info text-center mt-3 animated fadeIn faster">
+        <h4 class="alert-heading">Cargando</h4>
+        <p>
+            <i class="fa fa-sync-alt fa-spin fa-2x"></i>
+        </p>
+        <p class="mb-0">
+            Espere por favor
+        </p>
+    </div>
+    
+</div>
+
+<div class="row alert alert-warning mt-3 animated fadeIn faster" *ngIf="roleUser == 'evaluador'">
+
+    <div class="col-12 text-center">
+        <h1>Usuario no autorizado!!</h1>
+        <br>
+    </div>
+
+    <div class="col-12 text-center">
+        <button routerLink="/inicio" class="btn btn-danger">
+      <i class="fa fa-arrow-left"></i>
+      Inicio
     </button>
     </div>
-</div>
-
-<!--  -->
-<table *ngIf="!cargando && categorias.length > 0" class="table mt-3 animated fadeIn faster animated fadeIn faster">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Descripción</th>
-            <!-- <th scope="col">Poder</th>
-            <th scope="col">Vivo</th> -->
-            <th scope="col">Tools</th>
-        </tr>
-    </thead>
-    <tbody>
-
-        <tr *ngFor="let categoria of categorias; let i = index">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>{{ categoria.descripcion }}</td>
-
-            <td class="text-right">
-                <!--  -->
-                <button class="btn btn-info mr-1" [routerLink]="['/categoria', categoria.id ]">
-                <i class="fa fa-pen"></i>
-                </button>
-                <!--  -->
-                <button class="btn btn-danger" (click)="borrarCategoria( categoria, i ) ">
-                <i class="fa fa-trash"></i>
-                </button>
-
-
-            </td>
-        </tr>
-    </tbody>
-</table>
-<!--  -->
-<div *ngIf="!cargando && categorias.length === 0" class="alert alert-warning text-center mt-3 animated fadeIn faster">
-    <h4 class="alert-heading">No hay registros</h4>
-    <p>
-        <i class="fa fa-exclamation fa-2x"></i>
-    </p>
-</div>
-<!--  -->
-<div *ngIf="cargando" class="alert alert-info text-center mt-3 animated fadeIn faster">
-    <h4 class="alert-heading">Cargando</h4>
-    <p>
-        <i class="fa fa-sync-alt fa-spin fa-2x"></i>
-    </p>
-    <p class="mb-0">
-        Espere por favor
-    </p>
 </div>

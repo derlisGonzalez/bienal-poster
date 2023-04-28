@@ -5,6 +5,7 @@ import { EvaluadorModel } from '../../models/evaluador.model';
 import { EvaluadoresService } from '../../services/evaluadores.service';
 
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -13,13 +14,48 @@ import Swal from 'sweetalert2';
   styleUrls: ['./usuarios.component.css']
 })
 export class UsuariosComponent implements OnInit {
+  roleUser:string;
+  //evaluadores: EvaluadorModel[] = [];
 
   evaluadores: EvaluadorModel[] = [];
   cargando = false;
 
   evaluador: EvaluadorModel = new EvaluadorModel();
 
-  constructor( private evaluadoresService: EvaluadoresService ) { }
+  constructor( private evaluadoresService: EvaluadoresService,
+    private auth: AuthService ) { 
+
+    this.auth.getEvaluadores()
+      .subscribe( respEval => {
+        // resp.forEach( function(punto){
+        //   suma    += Number(punto.puntajeAsignado);
+        // })
+        //console.log(respEval);
+  
+        this.evaluadores = respEval;
+        //console.log(this.evaluadores[45].filter(correo));
+  
+        const indice = this.evaluadores.findIndex((elemento, indice) => {
+        if (elemento.email === localStorage.getItem('email')) {
+          //console.log(indice);
+          //console.log(this.evaluadores[indice]);
+          const data = this.evaluadores[indice];
+  
+          console.log(data.role);
+  
+          localStorage.setItem('role', data.role);
+  
+          this.roleUser = data.role;
+  
+        }
+  
+      });
+        //console.log(JSON.stringify({ respEval }));
+        //let data = JSON.stringify({ respEval });
+        //console.log(data);
+        
+      });
+  }
 
   ngOnInit()  {
 

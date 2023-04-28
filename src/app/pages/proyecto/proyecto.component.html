@@ -1,286 +1,162 @@
 <app-header></app-header>
 <br>
-<h1>Formulario de proyecto</h1>
-<hr>
+<div class="container" *ngIf="roleUser == 'admin'">
+    <h1>Formulario de proyecto</h1>
+    <hr>
 
 
-<div class="row text-right">
-    <div class="col">
-        <button class="btn btn-danger" routerLink="/proyectos">
-            <i class="fa fa-arrow-left"></i>
-            Regresar
-        </button>
+    <div class="row text-right">
+        <div class="col">
+            <button class="btn btn-danger" routerLink="/proyectos">
+                <i class="fa fa-arrow-left"></i>
+                Regresar
+            </button>
+        </div>
     </div>
-</div>
 
 
 
-<div class="row animated fadeIn faster">
-    <div class="col">
-        <!-- se llama al metodo guardar de proyecto.componet.ts -->
-        <form [formGroup]="forma" (ngSubmit)="guardar()">
+    <div class="row animated fadeIn faster">
+        <div class="col">
+            <!-- se llama al metodo guardar de proyecto.componet.ts -->
+            <form [formGroup]="forma" (ngSubmit)="guardar()">
 
-            <div class="form-group">
-                <label>ID</label>
-                <input class="form-control"
-                       type="text"
-                       placeholder="ID"
-                       [(ngModel)]="proyecto.id"
-                       [attr.disabled]="true"
-                       formControlName="id">
-                <small class="form-text text-muted">Este campo es autogenerado</small>
-            </div>
-
-
-            <div class="form-group">
-                <label>Título</label>
-                <input class="form-control"
-                       type="text"
-                       placeholder="Titulo del Proyecto"
-                       [(ngModel)]="proyecto.titulo"
-                       formControlName="titulo">
-            </div>
+                <div class="form-group">
+                    <label>ID</label>
+                    <input class="form-control"
+                        type="text"
+                        placeholder="ID"
+                        [(ngModel)]="proyecto.id"
+                        [attr.disabled]="true"
+                        formControlName="id">
+                    <small class="form-text text-muted">Este campo es autogenerado</small>
+                </div>
 
 
-            <div class="form-group">
-                <label>Código</label>
-                <input class="form-control"
-                       type="text"
-                       placeholder="Codigo del Proyecto"
-                       [(ngModel)]="proyecto.codigo"
-                       formControlName="codigo">
-            </div>
+                <div class="form-group">
+                    <label>Título</label>
+                    <input class="form-control"
+                        type="text"
+                        placeholder="Titulo del Proyecto"
+                        [(ngModel)]="proyecto.titulo"
+                        formControlName="titulo">
+                </div>
 
-            <div class="form-group row">
-                <label class="col-2 col-form-label">Área Temática</label>
-                <div class="col-8" placeholder="Seleccione Carrera">
-                    <select class="form-control" [(ngModel)]="carrera" formControlName="carrera">
-                        <option *ngFor="let carrera of carreras" [ngValue]="carrera">
-                            <!-- [value]="carrera.id"> -->
-                            {{ carrera.descripcion }}
+
+                <div class="form-group">
+                    <label>Código</label>
+                    <input class="form-control"
+                        type="text"
+                        placeholder="Codigo del Proyecto"
+                        [(ngModel)]="proyecto.codigo"
+                        formControlName="codigo">
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Área Temática</label>
+                    <div class="col-8" placeholder="Seleccione Carrera">
+                        <select class="form-control" [(ngModel)]="carrera" formControlName="carrera">
+                            <option *ngFor="let carrera of carreras" [ngValue]="carrera">
+                                <!-- [value]="carrera.id"> -->
+                                {{ carrera.descripcion }}
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Autor principal</label>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <select class="form-control"
+                                    [(ngModel)]="proyecto.autor"
+                                    formControlName="autor">
+                                <option *ngFor="let autor of disertantes" [value]="autor.nombre">
+                                    <!-- [value]="carrera.id"> -->
+                                    {{ autor.nombre }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Categoría</label>
+                    <div class="col-8" placeholder="Seleccione Categoria">
+
+                        <select class="form-control"
+                                placeholder="Seleccione Categoria"
+                                [disabled]="categorias.length === 0"
+                                [(ngModel)]="proyecto.categoria"
+                                formControlName="categoria">
+                            <option *ngFor="let categoria of categorias"
+                                    [value]="categoria.descripcion">
+                                <!-- [value]="categoria.id"> -->
+                                {{ categoria.descripcion }}
+                            </option>
+                    </select>
+
+                    </div>
+                </div>
+
+                <!-- <div class="form-group row">
+                    <label class="col-2 col-form-label">Evaluadores</label>
+                    <div class="col-8" placeholder="Seleccione Carrera">
+                        <select class="form-control" [(ngModel)]="evaluador" formControlName="evaluadores">
+                        <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
+                                
+                        {{ evaluador.nombre }}
                         </option>
                     </select>
 
-                </div>
-            </div>
-
-
-            <div class="form-group row">
-                <label class="col-2 col-form-label">Autor principal</label>
-                <div class="col-8">
-                    <div class="input-group">
-                        <select class="form-control"
-                                [(ngModel)]="proyecto.autor"
-                                formControlName="autor">
-                            <option *ngFor="let autor of disertantes" [value]="autor.nombre">
-                                <!-- [value]="carrera.id"> -->
-                                {{ autor.nombre }}
-                            </option>
-                        </select>
                     </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-2 col-form-label">Categoría</label>
-                <div class="col-8" placeholder="Seleccione Categoria">
-
-                    <select class="form-control"
-                            placeholder="Seleccione Categoria"
-                            [disabled]="categorias.length === 0"
-                            [(ngModel)]="proyecto.categoria"
-                            formControlName="categoria">
-                        <option *ngFor="let categoria of categorias"
-                                [value]="categoria.descripcion">
-                            <!-- [value]="categoria.id"> -->
-                            {{ categoria.descripcion }}
-                        </option>
-                  </select>
-
-                </div>
-            </div>
-
-            <!-- <div class="form-group row">
-                <label class="col-2 col-form-label">Evaluadores</label>
-                <div class="col-8" placeholder="Seleccione Carrera">
-                    <select class="form-control" [(ngModel)]="evaluador" formControlName="evaluadores">
-                    <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
-                            
-                      {{ evaluador.nombre }}
-                    </option>
-                  </select>
-
-                </div>
-            </div>-->
+                </div>-->
 
 
-            <div class="form-group row">
-                <label class="col-2 col-form-label">Evaluador 1</label>
-                <div class="col-8">
-                    <div class="input-group">
-                        <select class="form-control"
-                                [(ngModel)]="evaluador1"
-                                formControlName="evaluador1">
-                            <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
-                                {{ evaluador.nombre }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-2 col-form-label">Evaluador 2</label>
-                <div class="col-8">
-                    <div class="input-group">
-                        <select class="form-control"
-                                [(ngModel)]="evaluador2"
-                                formControlName="evaluador2">
-                                <option [attr.disabled]="true">Evaluador 2 es opcional</option>
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Evaluador 1</label>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <select class="form-control"
+                                    [(ngModel)]="evaluador1"
+                                    formControlName="evaluador1">
                                 <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
                                     {{ evaluador.nombre }}
                                 </option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- <div class="form-group row"[(ngModel)]="evaluadoresProye" formGroupName="evaluadoresPro">
-                <div class="form-row col">
-            
-                    <div class="col">
-            
-                        <div>
-                            <label class="col-6 col-form-label">Evaluador 2</label>
-                            <div class="col-8">
-                                <div class="input-group">
-                                    <select class="form-control" [(ngModel)]="proyecto.evaluadoresPro" formControlName="evaluadoresPro.evaluador2">
-                                        <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
-                                            {{ evaluador.nombre }}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
+                            </select>
                         </div>
-            
                     </div>
-            
-                    <div class="col">
-            
-                        <div>
-                            <label class="col-6 col-form-label">Evaluador 3</label>
-                            <div class="col-8">
-                                <div class="input-group">
-                                    <select class="form-control" [(ngModel)]="proyecto.evaluadoresPro" formControlName="evaluadoresPro.evaluador3">
-                                        <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
-                                            {{ evaluador.nombre }}
-                                        </option>
-                                    </select>
-                                </div>
-                            </div>
+                </div>
+
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Evaluador 2</label>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <select class="form-control"
+                                    [(ngModel)]="evaluador2"
+                                    formControlName="evaluador2">
+                                    <option [attr.disabled]="true">Evaluador 2 es opcional</option>
+                                    <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
+                                        {{ evaluador.nombre }}
+                                    </option>
+                            </select>
                         </div>
-            
-                    </div>
-            
-                </div>
-            </div> -->
-
-
-            <!-- <div class="form-group row">
-                <label class="col-2 col-form-label">Evaluador 2</label>
-                <div class="col-8">
-                    <div class="input-group">
-                        <select class="form-control" [(ngModel)]="evaluador2" formControlName="evaluador2">
-                            <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
-                                {{ evaluador.nombre }}
-                            </option>
-                        </select>
                     </div>
                 </div>
-            </div> -->
 
 
-            <!-- <div class="form-group row">
-                <label class="col-2 col-form-label">Evaluador 3</label>
-                <div class="col-8">
-                    <div class="input-group">
-                        <select class="form-control" [(ngModel)]="evaluador3" formControlName="evaluador3">
-                            <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
-                                {{ evaluador.nombre }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-            </div> -->
-
-            <div class="form-group">
-                <label>Cuerpo</label>
-                <textarea class="form-control" type="text" placeholder="Cuerpo del Proyecto"
-                    [(ngModel)]="proyecto.cuerpo" formControlName="cuerpo"></textarea>
-            </div>
-
-
-
-
-
-            <!-- 
-            <div class="form-group row">
-                <label class="col-2 col-form-label">Categoria</label>
-                <div class="col-8" placeholder="Seleccione Categoria">
-
-                    <select class="form-control" placeholder="Seleccione Categoria" [disabled]="categorias.length === 0" [(ngModel)]="disertante.categoria" name="categoria" required>
-                    <option *ngFor="let categoria of categorias"
-                            [value]="categoria.descripcion">
-                            {{ categoria.descripcion }}
-                    </option>
-                  </select>
-
-                </div>
-            </div> -->
-
-
-
-
-
-            <!-- <div class="form-group row">
-                <label for="exampleInputEmail3" class="col-sm-3 control-label">Categoria</label>
-                <div class="col-sm-9">
-                    <div class="input-group">
-                        <select class="form-control" formControlName="categoria">
-                            <option value="">Seleccione Categoria</option>
-                            <option *ngFor="let categoria of categorias"
-                                [value]="categoria._id">
-                                {{ categoria.descripcion }}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-            </div> -->
-
-
-
-            <!-- AGREGAR Y ELIMINAR EVALUADOR EJEMPLO -->
-            <!-- <div class="row">
-                <div class="col">
-            
-                  <table class="table">
-                    <thead class="thead-dark">
-                      <tr>
-                        <th>ID</th>
-                        <th>Evaluador</th>
-                        <th>Borrar</th>
-                      </tr>
-                    </thead>
-                    <tbody formArrayName="evaluadoresProyecto">
-                      <tr class *ngFor="let control of evaluadoresProyecto.controls; let i = index">
-                        <td> {{ i + 1 }} </td>
-                        <td>
-                            <div class="form-group row">
-                                <label class="col-4 col-form-label">Evaluador</label>
+                <!-- <div class="form-group row"[(ngModel)]="evaluadoresProye" formGroupName="evaluadoresPro">
+                    <div class="form-row col">
+                
+                        <div class="col">
+                
+                            <div>
+                                <label class="col-6 col-form-label">Evaluador 2</label>
                                 <div class="col-8">
                                     <div class="input-group">
-                                        <select class="form-control" [(ngModel)]="evaluadores" [formControlName]="i">
+                                        <select class="form-control" [(ngModel)]="proyecto.evaluadoresPro" formControlName="evaluadoresPro.evaluador2">
                                             <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
                                                 {{ evaluador.nombre }}
                                             </option>
@@ -288,60 +164,202 @@
                                     </div>
                                 </div>
                             </div>
-                        </td>
-                        <td>
-                          <button class="btn btn-danger"
-                                  (click)="borrarEvaluador(i)">
-                            Borrar
-                          </button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  
-                  <button class="btn btn-primary mt-3 mb-5 btn-block"
-                          type="button"
-                          (click)="agregarEvaluador()">
-                    + Agregar
-                  </button>
-            
+                
+                        </div>
+                
+                        <div class="col">
+                
+                            <div>
+                                <label class="col-6 col-form-label">Evaluador 3</label>
+                                <div class="col-8">
+                                    <div class="input-group">
+                                        <select class="form-control" [(ngModel)]="proyecto.evaluadoresPro" formControlName="evaluadoresPro.evaluador3">
+                                            <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
+                                                {{ evaluador.nombre }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                
+                        </div>
+                
+                    </div>
+                </div> -->
+
+
+                <!-- <div class="form-group row">
+                    <label class="col-2 col-form-label">Evaluador 2</label>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <select class="form-control" [(ngModel)]="evaluador2" formControlName="evaluador2">
+                                <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
+                                    {{ evaluador.nombre }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+
+
+                <!-- <div class="form-group row">
+                    <label class="col-2 col-form-label">Evaluador 3</label>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <select class="form-control" [(ngModel)]="evaluador3" formControlName="evaluador3">
+                                <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
+                                    {{ evaluador.nombre }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="form-group">
+                    <label>Cuerpo</label>
+                    <textarea class="form-control" type="text" placeholder="Cuerpo del Proyecto"
+                        [(ngModel)]="proyecto.cuerpo" formControlName="cuerpo"></textarea>
                 </div>
+
+
+
+
+
+                <!-- 
+                <div class="form-group row">
+                    <label class="col-2 col-form-label">Categoria</label>
+                    <div class="col-8" placeholder="Seleccione Categoria">
+
+                        <select class="form-control" placeholder="Seleccione Categoria" [disabled]="categorias.length === 0" [(ngModel)]="disertante.categoria" name="categoria" required>
+                        <option *ngFor="let categoria of categorias"
+                                [value]="categoria.descripcion">
+                                {{ categoria.descripcion }}
+                        </option>
+                    </select>
+
+                    </div>
+                </div> -->
+
+
+
+
+
+                <!-- <div class="form-group row">
+                    <label for="exampleInputEmail3" class="col-sm-3 control-label">Categoria</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <select class="form-control" formControlName="categoria">
+                                <option value="">Seleccione Categoria</option>
+                                <option *ngFor="let categoria of categorias"
+                                    [value]="categoria._id">
+                                    {{ categoria.descripcion }}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div> -->
+
+
+
+                <!-- AGREGAR Y ELIMINAR EVALUADOR EJEMPLO -->
+                <!-- <div class="row">
+                    <div class="col">
+                
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Evaluador</th>
+                            <th>Borrar</th>
+                        </tr>
+                        </thead>
+                        <tbody formArrayName="evaluadoresProyecto">
+                        <tr class *ngFor="let control of evaluadoresProyecto.controls; let i = index">
+                            <td> {{ i + 1 }} </td>
+                            <td>
+                                <div class="form-group row">
+                                    <label class="col-4 col-form-label">Evaluador</label>
+                                    <div class="col-8">
+                                        <div class="input-group">
+                                            <select class="form-control" [(ngModel)]="evaluadores" [formControlName]="i">
+                                                <option *ngFor="let evaluador of evaluadores" [ngValue]="evaluador">
+                                                    {{ evaluador.nombre }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                            <button class="btn btn-danger"
+                                    (click)="borrarEvaluador(i)">
+                                Borrar
+                            </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    
+                    <button class="btn btn-primary mt-3 mb-5 btn-block"
+                            type="button"
+                            (click)="agregarEvaluador()">
+                        + Agregar
+                    </button>
+                
+                    </div>
+                </div> -->
+
+
+                <hr>
+                <div class="form-group text-center">
+                    <button type="submit" class="btn btn-primary w-25">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                    </button>
+                </div>
+
+
+            </form>
+
+            <!-- <div class="form-group">
+                <label *ngFor="let criterio of proyecto.criterios" class="form-control"
+                    type="text">
+                    {{criterio.descripcion}}
+                    </label>
+                
             </div> -->
 
-
             <hr>
-            <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary w-25">
-                    <i class="fa fa-save"></i>
-                    Guardar
-                </button>
-            </div>
+            <pre>
+                Estado del formulario: {{ forma.valid }}
+                <br>
+                Status: {{ forma.status }}
+            </pre>
 
+            <!-- <pre>
+                {{ forma.value | json }}
+            </pre> -->
 
-        </form>
+            <pre>
+                {{ proyecto | json }}
+            </pre>
 
-        <!-- <div class="form-group">
-            <label *ngFor="let criterio of proyecto.criterios" class="form-control"
-                   type="text">
-                   {{criterio.descripcion}}
-                </label>
-            
-        </div> -->
+        </div>
+    </div>
 
-        <hr>
-        <pre>
-            Estado del formulario: {{ forma.valid }}
-            <br>
-            Status: {{ forma.status }}
-        </pre>
+</div>
 
-        <!-- <pre>
-            {{ forma.value | json }}
-        </pre> -->
+<div class="row alert alert-warning mt-3 animated fadeIn faster" *ngIf="roleUser == 'evaluador'">
 
-        <pre>
-            {{ proyecto | json }}
-        </pre>
+    <div class="col-12 text-center">
+        <h1>Usuario no autorizado!!</h1>
+        <br>
+    </div>
 
+    <div class="col-12 text-center">
+        <button routerLink="/inicio" class="btn btn-danger">
+      <i class="fa fa-arrow-left"></i>
+      Inicio
+    </button>
     </div>
 </div>
