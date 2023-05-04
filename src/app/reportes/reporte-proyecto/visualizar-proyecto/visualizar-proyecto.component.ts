@@ -10,6 +10,12 @@ import { CriteriosService } from 'src/app/services/criterios.service';
 import { DisertantesService } from 'src/app/services/disertantes.service';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 
+
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { style } from '@angular/animations';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 @Component({
   selector: 'app-visualizar-proyecto',
   templateUrl: './visualizar-proyecto.component.html',
@@ -123,6 +129,68 @@ export class VisualizarProyectoComponent implements OnInit {
         .subscribe( categoriaId => {
           this.categoriaSeleccionadah = this.categorias.find( h => h.id === categoriaId );
         })*/
+  }
+
+
+  pdfMetodo(){
+    const pdfDefinition: any = {
+      content: [
+        {
+          text: 'Informe de Proyecto: ',
+          style: 'encabezado'
+        },
+        {
+          text: 'Titulo: '+ this.proyecto.titulo,
+          style: 'titulo'
+        },
+        {
+          text: 'Autor: '+ this.proyecto.autor,
+          style: 'autor'
+        },
+        {
+          text: 'Evaluador: '+ this.proyecto.evaluador1.nombre,
+          style: 'evaluador'
+        },
+        {
+          text: 'Categoría: '+ this.proyecto.categoria,
+          style: 'categoria'
+        },
+        {
+          text: 'Codigo: '+ this.proyecto.codigo,
+          style: 'codigo'
+        },
+        {
+          text: 'Resumen: '+ this.proyecto.cuerpo,
+          style: 'resumen'
+        },
+        {
+          text: 'Puntaje: '+ this.proyecto.totalPuntaje,
+          style: 'total'
+        }
+        
+      ],
+      styles: {
+        titulo: {
+          fontSize: 18,
+          bold: true
+        },
+        autor: {
+          fontSize: 15,
+          bold: true
+        },
+        encabezado: {
+          fontSize: 20,
+          bold: true,
+          textAlign: 'center'
+        },
+        total: {
+          fontSize: 30,
+          bold: true,
+          textAlign: 'center'
+        }
+      }
+    }
+    pdfMake.createPdf( pdfDefinition).open();
   }
 
 

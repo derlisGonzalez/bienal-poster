@@ -24,42 +24,42 @@ export class CategoriaComponent implements OnInit {
   categoria: CategoriaModel = new CategoriaModel();
 
   constructor( private fb: FormBuilder,
-                private categoriasService: CategoriasService,
-                private route: ActivatedRoute,
-                private auth: AuthService) { 
+    private categoriasService: CategoriasService,
+    private route: ActivatedRoute,
+    private auth: AuthService) { 
 
-                  this.auth.getEvaluadores()
-                  .subscribe( respEval => {
-                    // resp.forEach( function(punto){
-                    //   suma    += Number(punto.puntajeAsignado);
-                    // })
-                    //console.log(respEval);
-              
-                    this.evaluadores = respEval;
-                    //console.log(this.evaluadores[45].filter(correo));
-              
-                    const indice = this.evaluadores.findIndex((elemento, indice) => {
-                    if (elemento.email === localStorage.getItem('email')) {
-                      //console.log(indice);
-                      //console.log(this.evaluadores[indice]);
-                      const data = this.evaluadores[indice];
-              
-                      console.log(data.role);
-              
-                      localStorage.setItem('role', data.role);
-              
-                      this.roleUser = data.role;
-              
-                    }
-              
-                  });
-                    //console.log(JSON.stringify({ respEval }));
-                    //let data = JSON.stringify({ respEval });
-                    //console.log(data);
-                   
-                  });
-                  this.crearFormulario();
-                 }
+      this.auth.getEvaluadores()
+      .subscribe( respEval => {
+        // resp.forEach( function(punto){
+        //   suma    += Number(punto.puntajeAsignado);
+        // })
+        //console.log(respEval);
+
+        this.evaluadores = respEval;
+        //console.log(this.evaluadores[45].filter(correo));
+
+        const indice = this.evaluadores.findIndex((elemento, indice) => {
+        if (elemento.email === localStorage.getItem('email')) {
+          //console.log(indice);
+          //console.log(this.evaluadores[indice]);
+          const data = this.evaluadores[indice];
+
+          console.log(data.role);
+
+          localStorage.setItem('role', data.role);
+
+          this.roleUser = data.role;
+
+        }
+
+      });
+        //console.log(JSON.stringify({ respEval }));
+        //let data = JSON.stringify({ respEval });
+        //console.log(data);
+        
+      });
+      this.crearFormulario();
+    }
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -130,9 +130,7 @@ export class CategoriaComponent implements OnInit {
     console.log(this.categoria);
 
 
-    /*this.forma.reset({
-      id: ''    
-    });*/
+    this.forma.reset({  });
   
     //this.vaciarCampo();
     

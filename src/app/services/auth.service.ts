@@ -154,6 +154,27 @@ export class AuthService {
     );
   }
 
+
+  nuevoAdmin( evaluador: EvaluadorModel ) {
+    const authData = {
+      ...evaluador,
+      returnSecureToken: true
+    };
+    return this.http.post( this.create, authData)
+    .pipe(
+      map( resp => {
+        console.log( "entro en el mapa ")
+        //this.guardarToken( resp['idToken'] );
+        //localStorage.setItem( 'email', resp['email']);
+        //localStorage.setItem( 'nombre', resp['nombre']);
+        //console.log( "UID del usuario logueado: "+ resp['localId']);
+        //console.log( "Email: "+ resp['email']);
+        
+        return resp;
+      })
+    );
+  }
+
   getUsuarios() {
     return this.http.get(this.getUser)
     .pipe(

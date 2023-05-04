@@ -10,6 +10,7 @@ import { CriteriosService } from 'src/app/services/criterios.service';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 
 import Swal from 'sweetalert2';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-calificar',
@@ -19,6 +20,9 @@ import Swal from 'sweetalert2';
 
 
 export class CalificarComponent implements OnInit {
+
+  roleUser:string;
+  evaluadores: EvaluadorModel[] = [];
 
   puntosTem: CriterioModel[] = [];
   puntos: CriterioModel[] = [];
@@ -36,9 +40,41 @@ export class CalificarComponent implements OnInit {
                private criteriosService: CriteriosService,
                private evaluadoresService: EvaluadoresService,
                private route: ActivatedRoute,
-               private router: Router) { 
+               private router: Router,
+               private auth: AuthService) { 
 
                 this.criterioLength();
+
+                this.auth.getEvaluadores()
+                .subscribe( respEval => {
+                  // resp.forEach( function(punto){
+                  //   suma    += Number(punto.puntajeAsignado);
+                  // })
+                  //console.log(respEval);
+            
+                  this.evaluadores = respEval;
+                  //console.log(this.evaluadores[45].filter(correo));
+            
+                  const indice = this.evaluadores.findIndex((elemento, indice) => {
+                  if (elemento.email === localStorage.getItem('email')) {
+                    //console.log(indice);
+                    //console.log(this.evaluadores[indice]);
+                    const data = this.evaluadores[indice];
+            
+                    console.log(data.role);
+            
+                    localStorage.setItem('role', data.role);
+            
+                    this.roleUser = data.role;
+            
+                  }
+            
+                });
+                  //console.log(JSON.stringify({ respEval }));
+                  //let data = JSON.stringify({ respEval });
+                  //console.log(data);
+                 
+                });
 
                }
 

@@ -1,6 +1,8 @@
 <app-header></app-header><br>
 
-<!-- <div class="row">
+<div class="container" *ngIf="roleUser == 'evaluador'">
+
+    <!-- <div class="row">
     <div class="col  text-left">
         <h2>Registro de evaluadores</h2>
     </div>
@@ -235,5 +237,19 @@
         
 
 
+    </div>
+</div>
+</div>
+
+<div class="row alert alert-warning mt-3 animated fadeIn faster" *ngIf="roleUser == 'admin'">
+    <div class="col-12 text-center">
+        <h1>Usuario no autorizado!!</h1>
+        <br>
+    </div>
+    <div class="col-12 text-center">
+        <button routerLink="/inicio" class="btn btn-danger">
+      <i class="fa fa-arrow-left"></i>
+      Inicio
+    </button>
     </div>
 </div>

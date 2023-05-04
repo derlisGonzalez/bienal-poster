@@ -1,3 +1,4 @@
+import { EvaluadoresService } from './../../services/evaluadores.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +11,6 @@ import { UsuarioModel } from 'src/app/models/usuario.model';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import { CriteriosService } from 'src/app/services/criterios.service';
 import { DisertantesService } from 'src/app/services/disertantes.service';
-import { EvaluadoresService } from 'src/app/services/evaluadores.service';
 import { ProyectosService } from 'src/app/services/proyectos.service';
 import { UserService } from 'src/app/services/user.service';
 import { Observable } from 'rxjs';
@@ -50,7 +50,8 @@ export class UsuarioComponent implements OnInit {
       private categoriasService: CategoriasService,
       private usersService: UserService,
       private route: ActivatedRoute,
-      private auth: AuthService) { 
+      private auth: AuthService,
+      private evaluadorService: EvaluadoresService) { 
 
        this.crearFormulario();
        //this.criteriosService.getCriterios();
@@ -154,23 +155,134 @@ export class UsuarioComponent implements OnInit {
 
       crearFormulario() {
         this.forma = this.fb.group({
-          id  : ['' ],
-          nombre  : ['', Validators.required ],
-          //documento: ['', [Validators.required, Validators.minLength(10) ] ],
-          password  : ['', Validators.required],
-          usuario  : ['', Validators.required ],
-          //carrera  : ['' ],
-          //rol  : ['' ],
-          //cuerpo  : ['', [ Validators.required, Validators.minLength(50) ]  ],
-          //email  : ['', [ Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')] ],
-          //usuario : ['', , this.validadores.existeUsuario ],
-          //pass1   : ['', Validators.required ],
-          //pass2   : ['', Validators.required ],
-        
-          //pasatiempos: this.fb.array([])
-        },{
-          //validators: this.validadores.passwordsIguales('pass1','pass2')
+          nombre: ['', Validators.required ],
+          email: ['', [ Validators.required, Validators.email ] ],
+          password: ['', Validators.required ],
+          password2: ['', Validators.required ],
+          //documento: ['', Validators.required ],
+          //carrera: ['', ],
+          //terminos: [ true, Validators.required ],
+          //role: [ true, Validators.required ],
+        }, {
+          validators: this.passwordsIguales('password', 'password2')
         });
+    
+      }
+
+
+      passwordsIguales(pass1Name: string, pass2Name: string ) {
+        return ( formGroup: FormGroup ) => {
+    
+          const pass1Control = formGroup.get(pass1Name);
+          const pass2Control = formGroup.get(pass2Name);
+    
+          if ( pass1Control.value === pass2Control.value ) {
+            pass2Control.setErrors(null)
+          } else {
+            pass2Control.setErrors({ noEsIgual: true })
+          }
+    
+        }
+      }
+
+
+
+      onSubmit( ) {
+        if ( this.forma.invalid ) { return; }
+        Swal.fire({
+          allowOutsideClick: false,
+          icon: 'info',
+          text: 'Espere por favor...'
+        });
+        Swal.showLoading();
+
+        this.auth.nuevoAdmin( this.evaluador )
+          .subscribe( resp => {
+            
+            console.log(resp);
+            console.log("Local id del usuario activo: "+resp['localId']);
+     
+            //this.usuario.uid = resp['localId'];
+    
+            //let uid = resp['localId'];
+    
+            
+            //this.usuario.role = 'visitante';
+            /*this.auth.crearUser(this.usuario)
+            .subscribe( resp2 => { 
+              this.usuario.uid = resp['localId'];
+              this.usuario.role = 'visitante';
+              //this.evaluador.uid = uid;
+              //this.usuario = resp2;
+              //this.usuario.id = resp2.uid;
+              this.usuario.role = "evaluador";
+              this.usuario.email = resp2.email;
+              this.usuario.nombre = resp2.nombre;
+              console.log(resp2);
+            });*/
+    
+            this.evaluador.uid = resp['localId'];
+            //this.evaluador.id = resp['localId'];
+           // this.evaluador.carrera = this.carrera;
+            this.evaluador.role = "admin";
+            this.evaluadorService.crearEvaluador(this.evaluador)
+            .subscribe( resp3 => { 
+              //this.actualizarCarrera(this.carrera, this.evaluador);
+              //this.evaluador.id = resp['localId'];
+              //console.log(resp3)
+              /*Swal.fire({
+                title: this.evaluador.nombre,
+                text: 'Se actualizó correctamente',
+                icon: 'success'
+              });*/
+              
+              //this.evaluador.role = 'visitante';
+              //this.evaluador.email = resp['email'];
+              //this.evaluador.nombre = resp['nombre'];
+              //this.evaluador.habilitado = resp['nombre'];
+              console.log(resp3);
+            });
+            
+    
+    
+    
+            Swal.close();
+         
+            //const uid = resp.locali;
+            /*if ( this.recordarme ) {
+              localStorage.setItem('email', this.usuario.email);
+            }*/
+    
+            //this.router.navigateByUrl('/inicio');
+    
+          }, (err) => {
+            console.log(err.error.error.message);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error al autenticar',
+              text: err.error.error.message
+            });
+          });
+    
+          
+    
+          //this.usuario.role = 'visitante';
+          /*this.auth.crearUser(this.usuario)
+          .subscribe( resp2 => { 
+            
+            this.usuario = resp2;
+            this.usuario.id = resp2.uid;
+            this.usuario.role = "evaluador";
+            this.usuario.email = resp2.email;
+            this.usuario.nombre = resp2.nombre;
+            console.log(resp2);
+          });*/
+    
+
+          //this.forma.reset({ });
+
+          //location.reload();
+      
     
       }
     

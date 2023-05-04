@@ -37,6 +37,8 @@
                                 <li *ngIf="roleUser == 'admin'"><a routerLink="/proyectos"><i class="ti-settings"></i> Proyectos</a></li>
                                 <li *ngIf="roleUser == 'evaluador'"><a routerLink="/calificaciones"><i class="ti-settings"></i> Calificaciones</a></li>
                                 <li *ngIf="roleUser == 'admin'"><a routerLink="/usuarios"><i class="ti-settings"></i> Administradores</a></li>
+                                <li *ngIf="roleUser == 'admin'"><a routerLink="/lista-proyectos"><i class="ti-settings"></i> Reporte de proyectos</a></li>
+
                                 <li><a routerLink="/inicio">Inicio</a></li>
                                 <li> <i class="fa-solid fa-house"></i><a href="" (click)="salir()"> <strong> Cerrar Sesión</strong></a></li>
                                                                 
