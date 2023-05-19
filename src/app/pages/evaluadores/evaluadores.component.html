@@ -2,9 +2,7 @@
 
 <div class="container" *ngIf="roleUser == 'admin'">
 
-    <h1>
-        Listado de Evaluadores</h1>
-    <hr>
+    <h1><strong>Lista de evaluadores</strong></h1><hr>
     
     
     <div class="row">
@@ -22,9 +20,8 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nombre</th>
-                <!-- <th scope="col">Poder</th>
-                <th scope="col">Vivo</th> -->
-                <th scope="col">Tools</th>
+                <th scope="col">Email</th>
+                <th class="text-right" scope="col">Opciones</th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +29,7 @@
             <tr *ngFor="let evaluador of evaluadores; let i = index">
                 <th scope="row">{{ i + 1 }}</th>
                 <td>{{ evaluador.nombre }}</td>
+                <td>{{ evaluador.email }}</td>
     
                 <td class="text-right">
                     <!--  -->

@@ -3,7 +3,7 @@
 
 <div class="container" *ngIf="roleUser == 'admin'">
 
-    <h1>Fromulario de área</h1>
+    <h1><strong>Registro de área</strong></h1>
     <hr>
     
     
@@ -42,15 +42,15 @@
             <form (ngSubmit)="guardar( f )" #f="ngForm">
     
                 <div class="form-group">
-                    <label>Firebase ID</label>
-                    <input type="text" class="form-control" placeholder="Firebase ID" [(ngModel)]="carrera.id" name="id" disabled="disabled">
+                    <label>ID</label>
+                    <input type="text" class="form-control" placeholder="ID" [(ngModel)]="carrera.id" name="id" disabled="disabled">
                     <small class="form-text text-muted">Este campo es autogenerado</small>
                 </div>
     
     
                 <div class="form-group">
-                    <label>Descripcion</label>
-                    <input type="text" class="form-control" placeholder="Descripcion de la Carrera" [(ngModel)]="carrera.descripcion" name="descripcion" required>
+                    <label>Descripción</label>
+                    <input type="text" class="form-control" placeholder="Descripción de la carrera" [(ngModel)]="carrera.descripcion" name="descripcion" required>
                 </div>
     
                 <hr>

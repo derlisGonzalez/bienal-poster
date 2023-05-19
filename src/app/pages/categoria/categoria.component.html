@@ -3,8 +3,7 @@
 
 <div class="container" *ngIf="roleUser == 'admin'">
 
-    <h1>
-        Categoria <small>Descripción Categoria</small> </h1>
+    <h1><strong>Registro de categoría</strong></h1>
     <hr>
     
     
@@ -25,10 +24,10 @@
             <form [formGroup]="forma" (ngSubmit)="guardar()">
     
                 <div class="form-group">
-                    <label>Firebase ID</label>
+                    <label>ID</label>
                     <input type="text"
                             class="form-control"
-                            placeholder="Firebase ID"
+                            placeholder="ID"
                             [(ngModel)]="categoria.id"
                             formControlName="id"
                             [attr.disabled]="true">
@@ -40,7 +39,7 @@
                     <label>Descripción</label>
                     <input type="text"
                             class="form-control"
-                            placeholder="Descripcion de la Categoria"
+                            placeholder="Descripción de la categoría"
                             [(ngModel)]="categoria.descripcion"
                             formControlName="descripcion">
                 </div>

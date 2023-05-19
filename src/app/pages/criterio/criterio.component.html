@@ -2,8 +2,7 @@
 
 
 <div class="container" *ngIf="roleUser == 'admin'">
-    <h1>
-        Criterios <small>Descripción Criterios</small> </h1>
+    <h1><strong>Registro de criterios</strong></h1>
     <hr>
     
     
@@ -24,15 +23,15 @@
             <form (ngSubmit)="guardar( f )" #f="ngForm">
     
                 <div class="form-group">
-                    <label>Firebase ID</label>
-                    <input type="text" class="form-control" placeholder="Firebase ID" [(ngModel)]="criterio.id" name="id" disabled="disabled">
+                    <label>ID</label>
+                    <input type="text" class="form-control" placeholder="ID" [(ngModel)]="criterio.id" name="id" disabled="disabled">
                     <small class="form-text text-muted">Este campo es autogenerado</small>
                 </div>
     
     
                 <div class="form-group">
                     <label>Descripción</label>
-                    <input type="text" class="form-control" placeholder="Descripción del Criterios" [(ngModel)]="criterio.descripcion" name="descripcion" required>
+                    <input type="text" class="form-control" placeholder="Descripción del criterios" [(ngModel)]="criterio.descripcion" name="descripcion" required>
                 </div>
     
                 <hr>

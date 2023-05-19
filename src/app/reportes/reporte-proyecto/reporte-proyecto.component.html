@@ -1,7 +1,10 @@
+<div class="d-grid gap-2 col-6 mx-auto" >
+    <button id="div-totop" class="btn col col-lg-4 btn-danger btn-block ml-4 cmn-divfloat" (click)="pdfMetodo()">Crear PDF</button>
+</div>
+
 <h1 class="text-center">
     Listado de Proyectos</h1>
 <hr>
-
 
 <!-- <div class="row">
     <div class="col text-right">
@@ -47,7 +50,8 @@
         </tr>
     </tbody>
 </table>
-<!--  -->
+
+
 <div *ngIf="!cargando && proyectos.length === 0" class="alert alert-warning text-center mt-3 animated fadeIn faster">
     <h4 class="alert-heading">No hay registros</h4>
     <p>

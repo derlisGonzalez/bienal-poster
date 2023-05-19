@@ -25,10 +25,6 @@ export class VisualizarProyectoComponent implements OnInit {
 
   proyectos: ProyectoModel[] = [];
 
-  cargando = false;
-  forma: FormGroup;
-
-
   public criterios: CriterioModel[] = [];
   public disertantes: DisertanteModel[] = [];
   //public carreras: CarreraModel[] = [];
@@ -41,33 +37,21 @@ export class VisualizarProyectoComponent implements OnInit {
     private disertantesService: DisertantesService,
     private route: ActivatedRoute) {
 
-    this.crearFormulario();
   }
 
   ngOnInit() {
-    console.log(this.proyectosService.getProyectos());
     //this.proyectos = resp[Object.keys(resp)[index]].category;
-    this.cargando = true;
 
     this.proyectosService.getProyectos()
       .subscribe(resp => {
         console.log(resp);
         //this.proyectos = resp[Object.keys(resp)[this.proyecto.totalPuntaje]].totalPuntaje;
         this.proyectos = resp;
-        this.cargando = false;
       });
 
-
-     
-
-
-    let valorTotal = this.proyecto.totalPuntaje;
-    const id = this.route.snapshot.paramMap.get('id');
-
-
+      const id = this.route.snapshot.paramMap.get('id');
     //console.log(this.criterios.values);
     if (id !== 'nuevo') {
-
       this.proyectosService.getProyecto(id)
         .subscribe((resp: ProyectoModel) => {
           this.proyecto = resp;
@@ -76,59 +60,6 @@ export class VisualizarProyectoComponent implements OnInit {
 
     }
 
-    //this.cargarCategorias();
-
-
-
-    this.disertantesService.getDisertantes()
-      .subscribe(disertantes => {
-        this.disertantes = disertantes;
-
-        this.disertantes.unshift({
-          nombre: '[ Seleccione Disertante]',
-          id: ''
-        })
-
-        // console.log( this.paises );
-      });
-
-    this.criteriosService.getCriterios()
-      .subscribe(criterios => {
-        if (!this.proyecto.id) {
-         // this.proyecto.criterios = criterios
-         // this.setValorDefault(this.proyecto)
-        }
-        //this.setValorDefault(this.proyecto) // crear un valor default para puntajeAsignado
-        // puede ser opcional porque
-        //se puede guardar sin el valor y cargar unicamente en la hora de 
-        //calificar ya que el modelo de la base de datos es flexible
-
-
-        /*this.criterios.unshift({
-          descripcion: '',
-          id: ''
-        })*/
-
-        console.log(this.criterios);
-      });
-
-
-    /*this.carrerasService.getCarreras()
-    .subscribe( carreras => {
-      this.carreras = carreras;
- 
-      this.carreras.unshift({
-        descripcion: '[ Seleccione Carrera]',
-        id: ''
-      })
-     });*/
-
-    // console.log( this.paises );
-
-    /*this.disertantesService.get('hospital').valueChanges
-        .subscribe( categoriaId => {
-          this.categoriaSeleccionadah = this.categorias.find( h => h.id === categoriaId );
-        })*/
   }
 
 
@@ -136,10 +67,24 @@ export class VisualizarProyectoComponent implements OnInit {
     const pdfDefinition: any = {
       content: [
         {
-          text: 'Informe de Proyecto: ',
-          style: 'encabezado'
+          //image: '/assets/images/logo-unican.png',
+          text: 'Informe de Proyecto\n\n',
+          style: 'encabezado',
+          alignment: 'center'
         },
         {
+          text: [
+            {text: 'Título: ', fontSize: 15, bold: true}, {text: this.proyecto.titulo, fontSize: 15},"\n",
+            {text: 'Autor: ', fontSize: 15, bold: true},{text: this.proyecto.autor, fontSize: 15},"\n",
+            {text: 'Evaluador: ', fontSize: 15, bold: true}, {text: this.proyecto.evaluador1.nombre, fontSize: 15},"\n", 
+            {text: 'Categoría: ', fontSize: 15, bold: true},{text: this.proyecto.categoria, fontSize: 15},"\n",
+            {text: 'Código: ', fontSize: 15, bold: true}, {text: this.proyecto.codigo, fontSize: 15},"\n", 
+            {text: 'Resumen: ', fontSize: 15, bold: true},{text: this.proyecto.cuerpo, fontSize: 15},"\n",
+            //{text: 'Título: ', fontSize: 15, bold: true}, {text: this.proyecto.titulo, fontSize: 15},"\n", 
+            //{text: 'Autor: ', fontSize: 15, bold: true},{text: this.proyecto.autor, fontSize: 15},"\n",
+          ]
+        },
+        /*{
           text: 'Titulo: '+ this.proyecto.titulo,
           style: 'titulo'
         },
@@ -162,10 +107,26 @@ export class VisualizarProyectoComponent implements OnInit {
         {
           text: 'Resumen: '+ this.proyecto.cuerpo,
           style: 'resumen'
+        },*/
+        { text: '\nCriterios: ' ,
+          style: 'criterios',
+          fontSize: 15,
+          bold: true },
+        
+        {
+
+          //alignment: 'justify',
+          ul: [ 
+            
+            this.proyecto.evaluador1.criterios.map((item) => '* '+item.descripcion + ' ('+item.puntajeAsignado+')')
+
+          ]
+
         },
         {
-          text: 'Puntaje: '+ this.proyecto.totalPuntaje,
-          style: 'total'
+          text: '\nPuntaje total: '+ this.proyecto.totalPuntaje,
+          style: 'total',
+          alignment: 'center',
         }
         
       ],
@@ -181,160 +142,16 @@ export class VisualizarProyectoComponent implements OnInit {
         encabezado: {
           fontSize: 20,
           bold: true,
-          textAlign: 'center'
+          
         },
         total: {
           fontSize: 30,
           bold: true,
-          textAlign: 'center'
+          
         }
       }
     }
     pdfMake.createPdf( pdfDefinition).open();
   }
-
-
-  /*setValorDefault(proyecto: ProyectoModel) {
-    proyecto.criterios.forEach(criterio => {
-      criterio.puntajeAsignado = 0
-    });
-  }*/
-
-  setValorTotal(proyecto: ProyectoModel) {
-
-  }
-
-  crearFormulario() {
-    this.forma = this.fb.group({
-      id: ['', Validators.required],
-      titulo: ['', Validators.required],
-      codigo: ['', [Validators.required, Validators.minLength(5)]],
-      disertante: [''],
-      cuerpo: ['', [Validators.required, Validators.minLength(50)]],
-      //email  : ['', [ Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')] ],
-      //usuario : ['', , this.validadores.existeUsuario ],
-      //pass1   : ['', Validators.required ],
-      //pass2   : ['', Validators.required ],
-      /* criterios: this.fb.group({
- 
-         el_expositor_seadecua_al_tiempo_estipulado: this.fb.group({
-           p1: [0, Validators.required ],
-           p2: [0, Validators.required ],
-           p3: [0, Validators.required ],
-         }),
-         
- 
-       }),
-       criterioss: this.fb.array([
-         
-        
-         
-         this.initCriterios()
-         
-       ]),*/
-      //pasatiempos: this.fb.array([])
-    }, {
-      //validators: this.validadores.passwordsIguales('pass1','pass2')
-    });
-
-  }
-
-  initCriterios() {
-    return this.fb.group({
-      name: ['', Validators.required],
-      manufacturerName: ['', Validators.required]
-    })
-  }
-
-
-  guardar() {
-
-    /*Swal.fire({
-      title: 'Espere',
-      text: 'Guardando información',
-      type: 'info',
-      allowOutsideClick: false
-    });*/
-
-    //Swal.showLoading();
-
-    let peticion: Observable<any>;
-
-    if (this.proyecto.id) {
-      peticion = this.proyectosService.actualizarProyecto(this.proyecto);
-    } else {
-      peticion = this.proyectosService.crearProyecto(this.proyecto);
-    }
-
-
-    peticion.subscribe(resp => {
-
-      /*Swal.fire({
-        title: this.carrera.descripcion,
-        text: 'Se actualizó correctamente',
-        type: 'success'
-      });*/
-
-    });
-
-    console.log();
-    console.log(this.proyecto);
-    console.log(this.forma);
-
-  }
-
-
-
-
-  // guardar( form: NgForm ) {
-
-  //   if ( form.invalid ) {
-  //     console.log('Formulario no válido');
-  //     return;
-  //   }
-
-  //   /*Swal.fire({
-  //     title: 'Espere',
-  //     text: 'Guardando información',
-  //     type: 'info',
-  //     allowOutsideClick: false
-  //   });*/
-
-  //   //Swal.showLoading();
-
-  //   let peticion: Observable<any>;
-
-  //   if ( this.proyecto.id ) {
-  //     peticion = this.proyectosService.actualizarProyecto( this.proyecto );
-  //   } else {
-  //     peticion = this.proyectosService.crearProyecto(this.proyecto );
-  //   }
-
-
-  //   peticion.subscribe( resp => {
-
-  //   /*Swal.fire({
-  //     title: this.carrera.descripcion,
-  //     text: 'Se actualizó correctamente',
-  //     type: 'success'
-  //   });*/
-
-  //   });
-
-  //   console.log(form);
-  //   console.log(this.proyecto);
-  //   console.log(this.forma);
-
-  // }
-
-
-  /*cargarDisertantes() {
- 
-    this.disertantesService.getDisertantes()
-      .subscribe( (disertantes: DisertanteModel[]) => {
-        this.disertantes = disertantes;
-      })
- 
-  }*/
 
 }
