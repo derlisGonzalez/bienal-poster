@@ -1,7 +1,7 @@
 <app-header></app-header>
 <br>
 <div class="container" *ngIf="roleUser == 'admin'">
-    <h1>Formulario de proyecto</h1>
+    <h1><strong>Registro de proyecto</strong></h1>
     <hr>
 
 
@@ -37,7 +37,7 @@
                     <label>Título</label>
                     <input class="form-control"
                         type="text"
-                        placeholder="Titulo del Proyecto"
+                        placeholder="Título del proyecto"
                         [(ngModel)]="proyecto.titulo"
                         formControlName="titulo">
                 </div>
@@ -47,14 +47,14 @@
                     <label>Código</label>
                     <input class="form-control"
                         type="text"
-                        placeholder="Codigo del Proyecto"
+                        placeholder="Código del Proyecto"
                         [(ngModel)]="proyecto.codigo"
                         formControlName="codigo">
                 </div>
 
                 <div class="form-group row">
                     <label class="col-2 col-form-label">Área Temática</label>
-                    <div class="col-8" placeholder="Seleccione Carrera">
+                    <div class="col-8">
                         <select class="form-control" [(ngModel)]="carrera" formControlName="carrera">
                             <option *ngFor="let carrera of carreras" [ngValue]="carrera">
                                 <!-- [value]="carrera.id"> -->
@@ -87,7 +87,6 @@
                     <div class="col-8" placeholder="Seleccione Categoria">
 
                         <select class="form-control"
-                                placeholder="Seleccione Categoria"
                                 [disabled]="categorias.length === 0"
                                 [(ngModel)]="proyecto.categoria"
                                 formControlName="categoria">
@@ -116,7 +115,7 @@
 
 
                 <div class="form-group row">
-                    <label class="col-2 col-form-label">Evaluador 1</label>
+                    <label class="col-2 col-form-label">Evaluador</label>
                     <div class="col-8">
                         <div class="input-group">
                             <select class="form-control"
@@ -130,7 +129,7 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                     <label class="col-2 col-form-label">Evaluador 2</label>
                     <div class="col-8">
                         <div class="input-group">
@@ -144,7 +143,7 @@
                             </select>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
                 <!-- <div class="form-group row"[(ngModel)]="evaluadoresProye" formGroupName="evaluadoresPro">
@@ -217,7 +216,7 @@
 
                 <div class="form-group">
                     <label>Cuerpo</label>
-                    <textarea class="form-control" type="text" placeholder="Cuerpo del Proyecto"
+                    <textarea class="form-control" type="text" placeholder="Cuerpo del proyecto"
                         [(ngModel)]="proyecto.cuerpo" formControlName="cuerpo"></textarea>
                 </div>
 
@@ -329,33 +328,16 @@
                 
             </div> -->
 
-            <hr>
-            <pre>
-                Estado del formulario: {{ forma.valid }}
-                <br>
-                Status: {{ forma.status }}
-            </pre>
-
-            <!-- <pre>
-                {{ forma.value | json }}
-            </pre> -->
-
-            <pre>
-                {{ proyecto | json }}
-            </pre>
-
         </div>
     </div>
 
 </div>
 
 <div class="row alert alert-warning mt-3 animated fadeIn faster" *ngIf="roleUser == 'evaluador'">
-
     <div class="col-12 text-center">
         <h1>Usuario no autorizado!!</h1>
         <br>
     </div>
-
     <div class="col-12 text-center">
         <button routerLink="/inicio" class="btn btn-danger">
       <i class="fa fa-arrow-left"></i>

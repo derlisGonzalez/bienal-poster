@@ -7,6 +7,8 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 import { style } from '@angular/animations';
 import { CriterioModel } from 'src/app/models/criterio.model';
 import { DisertanteModel } from 'src/app/models/disertante.model';
+import { CategoriaModel } from 'src/app/models/categoria.model';
+import { CategoriasService } from 'src/app/services/categorias.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
@@ -18,6 +20,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class ReporteProyectoComponent implements OnInit {
 
+  public categorias: CategoriaModel[] = [];
   public criterios: CriterioModel[] = [];
   public disertantes: DisertanteModel[] = [];
   //public carreras: CarreraModel[] = [];
@@ -27,13 +30,21 @@ export class ReporteProyectoComponent implements OnInit {
   proyectos: ProyectoModel[] = [];
   cargando = false;
 
-  constructor( private proyectosService: ProyectosService ) { 
+  constructor( private proyectosService: ProyectosService,
+                private categoriasService: CategoriasService ) { 
 
   
   }
 
   ngOnInit() {
 
+    this.categoriasService.getCategorias()
+    .subscribe( categorias => {
+      this.categorias = categorias;
+
+      // console.log( this.paises );
+    });
+    
     this.cargando = true;
     this.proyectosService.getProyectos()
       .subscribe( resp => {
@@ -42,34 +53,20 @@ export class ReporteProyectoComponent implements OnInit {
         this.cargando = false;
       });
 
-      
-
       this.btnFloat();
-  }
 
-  btnFloat() {
-    //a partir de que punto del scroll vertical de la ventana mostrará el botón
-    //const ishow = 0
-    const $divtop = document.getElementById("div-totop")
-    window.addEventListener("load", function() {
-      $divtop.style.display = "inherit"
-        /*if(document.documentElement.scrollTop > ishow){
-            $divtop.style.display = "inherit"
-        }
-        else {
-            $divtop.style.display = "none"
-        }*/
-    })
-}
+  }
 
   pdfMetodo(){
     const pdfDefinition: any = {
+
+      
       content: [
         {
           //image: '/assets/images/logo-unican.png',
-          text: 'Listado de Proyectos\n\n',
-          style: 'encabezado',
-          alignment: 'center'
+          //text: 'Listado de Proyectos\n\n',
+          //style: 'encabezado',
+          //alignment: 'center'
         },
         /*{
           text: [
@@ -115,25 +112,40 @@ export class ReporteProyectoComponent implements OnInit {
 
           //alignment: 'justify',
           ul: [ 
-            
 
-            this.proyectos.map((item) => '* Titulo: '+item.titulo+
-            '\n-Autor: '+item.autor+
-            '\n-Puntaje: '+item.totalPuntaje+
-            '\nResumen: '+item.cuerpo+'\n'+
-            '___________________________________________________________________________________________'+
-            '\n')
-
-          ]
-
+            this.proyectos.map((item) => 'TÍTULO: '+item.titulo+
+            '\nAUTOR: '+item.autor+
+            '\nPUNTAJE: '+item.totalPuntaje+
+            '\nRESUMEN: '+item.cuerpo+'\n'+
+            '\n\n'),
+          ],
+          
+          //pageBreak: 'before'
         },
+
+        
         /*{
           text: '\nPuntaje total: '+ this.proyecto.totalPuntaje,
           style: 'total',
           alignment: 'center',
         }*/
         
+        
       ],
+
+      footer: function(currentPage, pageCount) {
+        return '\n.                 Página ' + currentPage.toString() + ' de ' + pageCount;
+      },
+
+      header: function(currentPage, pageCount, pageSize) {
+        // you can apply any logic and return any valid pdfmake element
+    
+        return [
+          { text: 'Informe de proyectos', alignment: (currentPage % 2) ? 'center' : 'center', fontSize: 18, bold: true },
+          { canvas: [ { type: 'rect', x: 170, y: 32, w: pageSize.width - 170, h: 40 } ] }
+        ]
+      },
+      
       styles: {
         titulo: {
           fontSize: 18,
@@ -152,6 +164,9 @@ export class ReporteProyectoComponent implements OnInit {
           fontSize: 30,
           bold: true,
           
+        },
+        footer: {
+          alignment: 'center'
         }
       }
     }
@@ -177,4 +192,19 @@ export class ReporteProyectoComponent implements OnInit {
     });
   }*/
 
+
+  btnFloat() {
+    //a partir de que punto del scroll vertical de la ventana mostrará el botón
+    //const ishow = 0
+    const $divtop = document.getElementById("div-totop")
+    window.addEventListener("load", function() {
+      $divtop.style.display = "inherit"
+        /*if(document.documentElement.scrollTop > ishow){
+            $divtop.style.display = "inherit"
+        }
+        else {
+            $divtop.style.display = "none"
+        }*/
+    })
+  }
 }

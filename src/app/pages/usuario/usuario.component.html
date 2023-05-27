@@ -2,7 +2,7 @@
 
 <div class="container" *ngIf="roleUser == 'admin'">
 
-    <h1 class="text-center">Formulario de usuario administrador</h1>
+    <h1><strong>Registro de administrador</strong></h1>
     <hr>
 
 
@@ -17,8 +17,6 @@
     
     <br>
 
-
-
     <div class="row animated fadeIn faster">
         <div class="col">
             <!-- se llama al metodo guardar de proyecto.componet.ts -->
@@ -26,7 +24,6 @@
         <form autocomplete="off" class="form-horizontal form-material"
             [formGroup]="forma"
             (ngSubmit)="onSubmit()">
-
 
             <div class="form-group m-t-20">
                 <!-- <span *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger animated fadeIn">El nombre es obligatorio</span> -->
@@ -166,24 +163,7 @@
             </div> -->
 
             <hr>
-            <pre>
-            <!-- Estado del formulario: {{ forma.valid }}
-            <br>
-            Status: {{ forma.status }} -->
-            </pre>
-
-            <pre>
-
-            <!-- {{ forma.value | json }} -->
-
-            </pre>
-
-            <pre>
-
-                <!-- {{ proyecto | json }} -->
-        
-            </pre>
-
+            
         </div>
     </div>
 

@@ -1,9 +1,9 @@
-.cmn-divfloat {
+/*.cmn-divfloat {
     position: fixed !important;
     bottom: 45px;
-    right: 15px;
     display: none;
-}
+}*/
+
 .cmn-btncircle {
     width: 40px !important;
     height: 40px !important;

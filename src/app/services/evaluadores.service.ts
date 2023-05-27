@@ -129,9 +129,9 @@ export class EvaluadoresService {
       const evaluador: EvaluadorModel = evaluadoresObj[key];
       evaluador.id = key;
 
-      //if (evaluador.rol === "administrador") {
+      if (evaluador.role === "admin") {
         evaluadores.push( evaluador );
-      //}
+      }
       
     });
 
@@ -154,9 +154,9 @@ export class EvaluadoresService {
       evaluador.id = key;
 
 
-      //if (evaluador.rol === "evaluador") {
+      if (evaluador.role === "evaluador") {
         evaluadores.push( evaluador );
-      //}
+      }
 
       
       

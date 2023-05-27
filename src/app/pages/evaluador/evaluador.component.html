@@ -5,7 +5,7 @@
     
 <div class="row">
     <div class="col  text-left">
-        <h2>Registro de evaluadores</h2>
+        <h1><strong>Registro de evaluadores</strong></h1>
     </div>
     <div class="col text-right">
         <button class="btn btn-danger" routerLink="/evaluadores"><i class="fa fa-arrow-left"></i>Regresar</button>
@@ -19,10 +19,10 @@
         <!-- se llama al metodo guardar de evaluador.componet.ts -->
         <form [formGroup]="forma" (ngSubmit)="guardar()">
             <div class="form-group">
-                <label>Firebase ID</label>
+                <label>ID</label>
                 <input type="text"
                         class="form-control"
-                        placeholder="Firebase ID"
+                        placeholder="ID"
                         [(ngModel)]="evaluador.id"
                         [attr.disabled]="true"
                         formControlName="id">
@@ -35,7 +35,7 @@
                 <input id="nombre"
                         type="text"
                         class="form-control"
-                        placeholder="Nombre del Evaluador"
+                        placeholder="Nombre del evaluador"
                         [(ngModel)]="evaluador.nombre"
                         formControlName="nombre">
             </div>
@@ -45,7 +45,7 @@
                 <label>Documento</label>
                 <input type="text"
                         class="form-control"
-                        placeholder="Documento del Evaluador"
+                        placeholder="Documento del evaluador"
                         [(ngModel)]="evaluador.documento"
                         formControlName="documento">
             </div>
@@ -77,11 +77,11 @@
 
         </form>
 
-        <pre>
+        <!-- <pre>
 
             {{ evaluador | json }}
     
-        </pre>
+        </pre> -->
 
     </div>
 </div>

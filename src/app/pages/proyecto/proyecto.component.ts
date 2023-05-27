@@ -109,7 +109,7 @@ export class ProyectoComponent implements OnInit {
       .subscribe(disertantes => {
         this.disertantes = disertantes;
         this.disertantes.unshift({
-          nombre: '[ Seleccione Disertante]',
+          nombre: '[ Seleccione Autor]',
           id: ''
         })
       });
@@ -118,19 +118,18 @@ export class ProyectoComponent implements OnInit {
       .subscribe(carreras => {
         this.carreras = carreras;
         this.carreras.unshift({
-          descripcion: '[ Seleccione Area]',
+          descripcion: '[ Seleccione Área]',
           id: ''
         })
-        console.log(this.carreras)
+        //console.log(this.carreras)
       });
 
 
       this.categoriasService.getCategorias()
       .subscribe( categorias => {
         this.categorias = categorias;
-  
         this.categorias.unshift({
-          descripcion: '[ Seleccione Categoria]',
+          descripcion: '[ Seleccione Categoría]',
           id: ''
         })
   
