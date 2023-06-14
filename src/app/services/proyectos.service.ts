@@ -135,7 +135,11 @@ export class ProyectosService {
       proyecto.id = key;
 
 
-      proyectos.push( proyecto );
+      /*proyectos.sort((a, b) => {
+        return a.totalPuntaje - b.totalPuntaje;
+      });*/
+
+      proyectos.unshift(proyecto);
     });
 
 

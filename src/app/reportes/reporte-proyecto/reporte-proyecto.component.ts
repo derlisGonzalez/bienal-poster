@@ -9,9 +9,9 @@ import { CriterioModel } from 'src/app/models/criterio.model';
 import { DisertanteModel } from 'src/app/models/disertante.model';
 import { CategoriaModel } from 'src/app/models/categoria.model';
 import { CategoriasService } from 'src/app/services/categorias.service';
+import { CarreraModel } from 'src/app/models/carrera.model';
+import { CarrerasService } from 'src/app/services/carreras.service';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
-
 
 @Component({
   selector: 'app-reporte-proyecto',
@@ -23,17 +23,20 @@ export class ReporteProyectoComponent implements OnInit {
   public categorias: CategoriaModel[] = [];
   public criterios: CriterioModel[] = [];
   public disertantes: DisertanteModel[] = [];
-  //public carreras: CarreraModel[] = [];
+  public carreras: CarreraModel[] = [];
   public disertanteSeleccionado: DisertanteModel;
   //public carreraSeleccionada: CarreraModel;
   proyecto: ProyectoModel = new ProyectoModel();
   proyectos: ProyectoModel[] = [];
+  proyectos2: ProyectoModel[] = [];
   cargando = false;
 
   constructor( private proyectosService: ProyectosService,
-                private categoriasService: CategoriasService ) { 
+                private categoriasService: CategoriasService,
+                private carrerasService: CarrerasService ) { 
 
-  
+                  
+
   }
 
   ngOnInit() {
@@ -44,24 +47,60 @@ export class ReporteProyectoComponent implements OnInit {
 
       // console.log( this.paises );
     });
+
+
+    this.carrerasService.getCarreras()
+    .subscribe( carreras => {
+      this.carreras = carreras;
+
+      // console.log( this.paises );
+    });
     
     this.cargando = true;
     this.proyectosService.getProyectos()
       .subscribe( resp => {
         console.log(resp);
         this.proyectos = resp;
+
+
+        //PARA IMPRIMIR DE MAYOR A MENOR DE ACUERDO AL PUNTAJE
+        this.proyectos.sort((a, b) => b.totalPuntaje - a.totalPuntaje);
+        
         this.cargando = false;
+        
       });
 
       this.btnFloat();
 
   }
 
+  
+
   pdfMetodo(){
+      
+    //let areaSeleccionada = document.getElementById("areaSeleccionada");
+    //console.log(areaSeleccionada);
+    //alert(selected);
+
+    this.proyectosService.getProyectos()
+    .subscribe( respuesta => {
+
+
+      this.proyectos = respuesta;
+      /*
+      ---------------------------------------------------------
+      SE TIENE QUE VALIDAR CON EL AREA Y CATEGORIA SELECCIONADA
+      ---------------------------------------------------------
+      */
+      this.proyectos2 = this.proyectos.filter(item => item.categoria === "GRADUADO" && item.area === 'Ciencias ambientales');
+
+    });
+
     const pdfDefinition: any = {
 
-      
       content: [
+
+        
         {
           //image: '/assets/images/logo-unican.png',
           //text: 'Listado de Proyectos\n\n',
@@ -107,23 +146,66 @@ export class ReporteProyectoComponent implements OnInit {
           fontSize: 15,
           bold: true 
           },*/
-        
-        {
+
+          /*{text: 'zebra style', margin: [0, 20, 0, 8]},
+          {
+            style: 'tableExample',
+            table: {
+              body: [
+                ['Sample value 1', 'Sample value 2', 'Sample value 3'],
+                ['Sample value 1', 'Sample value 2', 'Sample value 3'],
+                ['Sample value 1', 'Sample value 2', 'Sample value 3'],
+                ['Sample value 1', 'Sample value 2', 'Sample value 3'],
+                ['Sample value 1', 'Sample value 2', 'Sample value 3'],
+              ]
+            },
+            layout: {
+              fillColor: function (rowIndex, node, columnIndex) {
+                return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
+              }
+            }
+          },*/
+
+
+          /*
+          {text: 'Tabla', style: 'subheader'},
+          {
+            style: 'tableExample',
+            table: {
+              headerRows: 1,
+              // dontBreakRows: true,
+              // keepWithHeaderRows: 1,
+              body: [
+                [{text: 'Título', style: 'tableHeader'}, {text: 'Autor', style: 'tableHeader'}, {text: 'Puntaje', style: 'tableHeader'}],
+                [this.proyectos.map((item) => item.titulo), this.proyectos.map((item) => item.autor), this.proyectos.map((item) => item.totalPuntaje)],
+   
+              ]
+            },
+            layout: {
+              fillColor: function (rowIndex, node, columnIndex) {
+                return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
+              }
+            }
+          },*/
+
+
+          {
 
           //alignment: 'justify',
           ul: [ 
 
-            this.proyectos.map((item) => 'TÍTULO: '+item.titulo+
-            '\nAUTOR: '+item.autor+
-            '\nPUNTAJE: '+item.totalPuntaje+
-            '\nRESUMEN: '+item.cuerpo+'\n'+
-            '\n\n'),
+            this.proyectos2.map((item) => 'TÍTULO: '+item.titulo+
+                                         '\nAUTOR: '+item.autor+
+                                         '\nCATEGORÍA: '+item.categoria+
+                                         '\nÁREA: '+item.area+
+                                         '\nPUNTAJE: '+item.totalPuntaje+
+                                         '\nRESUMEN: '+item.cuerpo+'\n'+'\n\n'),
+            'alajsldlasjdlkajs',
           ],
           
           //pageBreak: 'before'
-        },
+        }
 
-        
         /*{
           text: '\nPuntaje total: '+ this.proyecto.totalPuntaje,
           style: 'total',
@@ -139,7 +221,6 @@ export class ReporteProyectoComponent implements OnInit {
 
       header: function(currentPage, pageCount, pageSize) {
         // you can apply any logic and return any valid pdfmake element
-    
         return [
           { text: 'Informe de proyectos', alignment: (currentPage % 2) ? 'center' : 'center', fontSize: 18, bold: true },
           { canvas: [ { type: 'rect', x: 170, y: 32, w: pageSize.width - 170, h: 40 } ] }
@@ -191,7 +272,6 @@ export class ReporteProyectoComponent implements OnInit {
 
     });
   }*/
-
 
   btnFloat() {
     //a partir de que punto del scroll vertical de la ventana mostrará el botón

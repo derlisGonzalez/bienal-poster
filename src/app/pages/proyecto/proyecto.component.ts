@@ -28,6 +28,7 @@ export class ProyectoComponent implements OnInit {
   roleUser:string;
   //evaluadores: EvaluadorModel[] = [];
 
+  areaTematica:any;
   forma: FormGroup;
   public categorias: CategoriaModel[] = [];
   public criterios: CriterioModel[] = [];
@@ -41,6 +42,7 @@ export class ProyectoComponent implements OnInit {
   public carreras: CarreraModel[] = [];
   public carrera: CarreraModel = new CarreraModel;
   public disertanteSeleccionado: DisertanteModel;
+  public disertante: DisertanteModel;
   //public carreraSeleccionada: CarreraModel;
   proyecto: ProyectoModel = new ProyectoModel();
 
@@ -103,16 +105,7 @@ export class ProyectoComponent implements OnInit {
         });
     }
 
-    //this.cargarCategorias();
-    //PARA ASIGNAR DISERTANTES  AL PROYECTO
-    this.disertantesService.getDisertantes()
-      .subscribe(disertantes => {
-        this.disertantes = disertantes;
-        this.disertantes.unshift({
-          nombre: '[ Seleccione Autor]',
-          id: ''
-        })
-      });
+
 
     this.carrerasService.getCarreras()
       .subscribe(carreras => {
@@ -123,6 +116,30 @@ export class ProyectoComponent implements OnInit {
         })
         //console.log(this.carreras)
       });
+
+
+      
+      this.forma.controls["carrera"].valueChanges.subscribe((area: CarreraModel) => {
+        console.log(area.descripcion);
+        this.areaTematica = area.descripcion;
+        
+      });
+      //PARA ASIGNAR DISERTANTES  AL PROYECTO
+      //if (this.areaTematica == this.disertante.area) {
+       // console.log(this.disertante.area)
+        this.disertantesService.getDisertantes()
+        .subscribe(disertantes => {
+          this.disertantes = disertantes;
+          this.disertantes.unshift({
+            nombre: '[ Seleccione Autor]',
+            id: ''
+          })
+        });
+
+      //}
+
+      
+
 
 
       this.categoriasService.getCategorias()
@@ -232,7 +249,8 @@ export class ProyectoComponent implements OnInit {
       categoria: ['', Validators.required],
       codigo: ['', [Validators.required, Validators.minLength(2)]],
       autor: ['', Validators.required],
-      carrera: [''],
+      carrera: ['', Validators.required],
+      area: [''],
       //evaluadoresProyecto: this.fb.array([]),
       evaluadoresPro: this.fb.group({
         evaluador2: ['' ],
@@ -306,6 +324,8 @@ export class ProyectoComponent implements OnInit {
 
     let peticion: Observable<any>;
 
+    
+    this.proyecto.area = this.areaTematica;
     if (this.proyecto.id) {
       peticion = this.proyectosService.actualizarProyecto(this.proyecto);
     } else {

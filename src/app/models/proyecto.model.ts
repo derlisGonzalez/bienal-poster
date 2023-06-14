@@ -10,6 +10,7 @@ export class ProyectoModel {
     autor?: string;
     autor2?: string;
     categoria?: string;
+    area?: string;
     estado?: boolean = true;
     totalPuntaje?: number = 0;
     promedio?: number = 0;
