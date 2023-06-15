@@ -30,6 +30,7 @@ export class ProyectoComponent implements OnInit {
 
   areaTematica:any;
   forma: FormGroup;
+  
   public categorias: CategoriaModel[] = [];
   public criterios: CriterioModel[] = [];
   public evaluadores: EvaluadorModel[] = [];

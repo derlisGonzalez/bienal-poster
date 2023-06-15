@@ -11,6 +11,7 @@ import { CategoriaModel } from 'src/app/models/categoria.model';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import { CarreraModel } from 'src/app/models/carrera.model';
 import { CarrerasService } from 'src/app/services/carreras.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -20,6 +21,9 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class ReporteProyectoComponent implements OnInit {
 
+  forma: FormGroup;
+  
+  
   public categorias: CategoriaModel[] = [];
   public criterios: CriterioModel[] = [];
   public disertantes: DisertanteModel[] = [];
@@ -31,15 +35,26 @@ export class ReporteProyectoComponent implements OnInit {
   proyectos2: ProyectoModel[] = [];
   cargando = false;
 
-  constructor( private proyectosService: ProyectosService,
+
+  areaSeleccionada: string;
+  public carrera: string;
+  categoriaSeleccionada: string;
+  public categoria: string;
+
+  constructor(  private fb: FormBuilder,
+                private proyectosService: ProyectosService,
                 private categoriasService: CategoriasService,
                 private carrerasService: CarrerasService ) { 
 
+                  //this.crearFormulario();
                   
 
   }
 
   ngOnInit() {
+
+
+
 
     this.categoriasService.getCategorias()
     .subscribe( categorias => {
@@ -70,12 +85,43 @@ export class ReporteProyectoComponent implements OnInit {
         
       });
 
+
+
+      /*this.forma.controls["carrera"].valueChanges.subscribe((c: CarreraModel) => {
+        console.log(c)
+        //this.carrera = c
+        //this.evaluadores = c.evaluadores
+      });
+
+      this.forma.controls["criterio"].valueChanges.subscribe((c: CriterioModel) => {
+        console.log(c)
+        //this.carrera = c
+        //this.evaluadores = c.evaluadores
+      });*/
+
       this.btnFloat();
 
+      this.capturar();
   }
+
+  /*crearFormulario() {
+    this.forma = this.fb.group({
+      carrera: [''],
+      categoria: ['']
+    });
+
+  }*/
 
   
 
+  capturar() {
+    // Pasamos el valor seleccionado a la variable verSeleccion
+    //this.categoria = this.opcionSeleccionado;
+    this.carrera = this.areaSeleccionada;
+    this.categoria = this.categoriaSeleccionada;
+    console.log(this.carrera);
+    console.log(this.categoria);
+}
   pdfMetodo(){
       
     //let areaSeleccionada = document.getElementById("areaSeleccionada");
@@ -92,15 +138,18 @@ export class ReporteProyectoComponent implements OnInit {
       SE TIENE QUE VALIDAR CON EL AREA Y CATEGORIA SELECCIONADA
       ---------------------------------------------------------
       */
-      this.proyectos2 = this.proyectos.filter(item => item.categoria === "GRADUADO" && item.area === 'Ciencias ambientales');
+      this.proyectos2 = this.proyectos.filter(item => (item.categoria === this.categoria && item.area === this.carrera) || (item.categoria !== this.categoria && item.area !==  this.carrera));
 
+      //PARA IMPRIMIR DE MAYOR A MENOR DE ACUERDO AL PUNTAJE
+      this.proyectos2.sort((a, b) => b.totalPuntaje - a.totalPuntaje);
     });
+
+
 
     const pdfDefinition: any = {
 
       content: [
 
-        
         {
           //image: '/assets/images/logo-unican.png',
           //text: 'Listado de Proyectos\n\n',
@@ -192,8 +241,8 @@ export class ReporteProyectoComponent implements OnInit {
           {
 
           //alignment: 'justify',
-          ul: [ 
-
+          ul:
+          [ 
             this.proyectos2.map((item) => 'TÍTULO: '+item.titulo+
                                          '\nAUTOR: '+item.autor+
                                          '\nCATEGORÍA: '+item.categoria+

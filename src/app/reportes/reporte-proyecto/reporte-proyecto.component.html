@@ -3,12 +3,14 @@
 
 <hr>
 
+
+
 <div class="row">
     <div class="col-4">
         <div class="col text-right">
             <label class="col-form-label"><strong>Área: </strong></label>
-                <select id="areaSeleccionada" name="areaSeleccionada">
-                    <option selected="true" value="TODO">TODO</option>
+                <select [(ngModel)]="areaSeleccionada" (change)="capturar()" id="areaSeleccionada" name="areaSeleccionada" >
+                    <option value="TODO">TODO</option>
                     <option *ngFor="let carrera of carreras"
                             [value]="carrera.descripcion">
                             {{ carrera.descripcion }}
@@ -21,8 +23,8 @@
     <div class="col-4">
         <div class="col text-center">
             <label class="col-form-label"><strong>Categoría: </strong></label>
-                <select>
-                    <option selected="true" value="TODO">TODO</option>
+                <select [(ngModel)]="categoriaSeleccionada" (change)="capturar()">
+                    <option value="TODO">TODO</option>
                     <option *ngFor="let categoria of categorias"
                             [value]="categoria.descripcion">
                             {{ categoria.descripcion }}
@@ -37,6 +39,7 @@
     </div>
 
 </div>
+
 
 
 
