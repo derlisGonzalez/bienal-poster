@@ -11,7 +11,7 @@ import { CategoriaModel } from 'src/app/models/categoria.model';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import { CarreraModel } from 'src/app/models/carrera.model';
 import { CarrerasService } from 'src/app/services/carreras.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -21,9 +21,6 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class ReporteProyectoComponent implements OnInit {
 
-  forma: FormGroup;
-  
-  
   public categorias: CategoriaModel[] = [];
   public criterios: CriterioModel[] = [];
   public disertantes: DisertanteModel[] = [];
@@ -41,15 +38,9 @@ export class ReporteProyectoComponent implements OnInit {
   categoriaSeleccionada: string;
   public categoria: string;
 
-  constructor(  private fb: FormBuilder,
-                private proyectosService: ProyectosService,
+  constructor(  private proyectosService: ProyectosService,
                 private categoriasService: CategoriasService,
-                private carrerasService: CarrerasService ) { 
-
-                  //this.crearFormulario();
-                  
-
-  }
+                private carrerasService: CarrerasService ) {  }
 
   ngOnInit() {
 
@@ -105,17 +96,7 @@ export class ReporteProyectoComponent implements OnInit {
 
       this.capturar();
   }
-
-  /*crearFormulario() {
-    this.forma = this.fb.group({
-      carrera: [''],
-      categoria: ['']
-    });
-
-  }*/
-
-  
-
+ 
   capturar() {
     // Pasamos el valor seleccionado a la variable verSeleccion
     //this.categoria = this.opcionSeleccionado;
@@ -140,22 +121,21 @@ export class ReporteProyectoComponent implements OnInit {
       SE TIENE QUE VALIDAR CON EL AREA Y CATEGORIA SELECCIONADA
       ---------------------------------------------------------
       */
-
-      if (this.carrera == 'TODO' && this.categoria == 'TODO') {
+      if (this.carrera == 'TODO' && this.categoria == 'TODO') {//UFNCIONA
 
         this.proyectos2 = this.proyectos.filter(item => item );
 
-      }else if(this.carrera !== 'TODO' && this.categoria !== 'TODO'){
+      }else if(this.carrera !== 'TODO' && this.categoria !== 'TODO'){//FUNCIONA
 
         this.proyectos2 = this.proyectos.filter(item => item.area === this.carrera && item.categoria === this.categoria);
 
-      }else if(this.carrera == 'TODO' && this.categoria !== 'TODO'){
+      }else if(this.carrera == 'TODO' && this.categoria !== 'TODO'){//NO FUNCIONA
 
-        this.proyectos2 = this.proyectos.filter(item => item.area !== this.carrera && item.categoria === this.categoria);
+        this.proyectos2 = this.proyectos.filter(item =>item.categoria === this.categoria);
 
-      }else if(this.carrera !== 'TODO' && this.categoria == 'TODO'){
+      }else if(this.carrera !== 'TODO' && this.categoria == 'TODO'){//NO FUNCIONA
 
-        this.proyectos2 = this.proyectos.filter(item => item.area === this.carrera && item.categoria !== this.categoria);
+        this.proyectos2 = this.proyectos.filter(item => item.area === this.carrera);
 
       }
       //this.proyectos2 = this.proyectos.filter(item => (item.categoria === this.categoria && item.area === this.carrera) || (item.categoria !== this.categoria && item.area !==  this.carrera));
