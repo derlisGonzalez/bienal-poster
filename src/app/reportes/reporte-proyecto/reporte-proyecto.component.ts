@@ -53,22 +53,24 @@ export class ReporteProyectoComponent implements OnInit {
 
   ngOnInit() {
 
-
-
-
     this.categoriasService.getCategorias()
     .subscribe( categorias => {
       this.categorias = categorias;
 
-      // console.log( this.paises );
+      this.categorias.unshift({
+        descripcion: 'TODO',
+        id: '',
+      });
     });
 
 
     this.carrerasService.getCarreras()
     .subscribe( carreras => {
       this.carreras = carreras;
-
-      // console.log( this.paises );
+      this.carreras.unshift({
+        descripcion: 'TODO',
+        id: '',
+      });
     });
     
     this.cargando = true;
@@ -138,7 +140,25 @@ export class ReporteProyectoComponent implements OnInit {
       SE TIENE QUE VALIDAR CON EL AREA Y CATEGORIA SELECCIONADA
       ---------------------------------------------------------
       */
-      this.proyectos2 = this.proyectos.filter(item => (item.categoria === this.categoria && item.area === this.carrera) || (item.categoria !== this.categoria && item.area !==  this.carrera));
+
+      if (this.carrera == 'TODO' && this.categoria == 'TODO') {
+
+        this.proyectos2 = this.proyectos.filter(item => item );
+
+      }else if(this.carrera !== 'TODO' && this.categoria !== 'TODO'){
+
+        this.proyectos2 = this.proyectos.filter(item => item.area === this.carrera && item.categoria === this.categoria);
+
+      }else if(this.carrera == 'TODO' && this.categoria !== 'TODO'){
+
+        this.proyectos2 = this.proyectos.filter(item => item.area !== this.carrera && item.categoria === this.categoria);
+
+      }else if(this.carrera !== 'TODO' && this.categoria == 'TODO'){
+
+        this.proyectos2 = this.proyectos.filter(item => item.area === this.carrera && item.categoria !== this.categoria);
+
+      }
+      //this.proyectos2 = this.proyectos.filter(item => (item.categoria === this.categoria && item.area === this.carrera) || (item.categoria !== this.categoria && item.area !==  this.carrera));
 
       //PARA IMPRIMIR DE MAYOR A MENOR DE ACUERDO AL PUNTAJE
       this.proyectos2.sort((a, b) => b.totalPuntaje - a.totalPuntaje);
@@ -249,7 +269,6 @@ export class ReporteProyectoComponent implements OnInit {
                                          '\nÁREA: '+item.area+
                                          '\nPUNTAJE: '+item.totalPuntaje+
                                          '\nRESUMEN: '+item.cuerpo+'\n'+'\n\n'),
-            'alajsldlasjdlkajs',
           ],
           
           //pageBreak: 'before'
