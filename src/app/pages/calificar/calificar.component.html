@@ -1,6 +1,6 @@
 <app-header></app-header><br>
 
-<div class="container" *ngIf="roleUser == 'evaluador'">
+<div class="container-fluid" *ngIf="roleUser == 'evaluador'">
 
     <!-- <div class="row">
     <div class="col  text-left">
@@ -9,236 +9,238 @@
     <div class="col text-right">
         <button class="btn btn-danger" routerLink="/evaluadores"><i class="fa fa-arrow-left"></i>Regresar</button>
     </div>
-</div> -->
-<div class="row text-right">
-    <div class="col">
-        <button class="btn btn-danger" routerLink="/calificaciones">
-            <i class="fa fa-arrow-left"></i>
-            Regresar
-        </button>
-    </div>
-</div>
-<div class="row">
-    <h4>
-        Calificar el proyecto: <small>{{ proyecto.titulo }}</small>
-    </h4>
-    <hr>
-    <h2>
-        Codigo: <small>{{ proyecto.codigo }}</small>
-    </h2>
-   
-</div>
+    </div> -->
+    <div class="row">
 
+        <div class="col-6 text-left">
+            <h2 class="">
+                <strong>Código: {{ proyecto.codigo }}</strong>
+            </h2>
+        
+        </div>
 
+        <div class="col-6 text-right">
+            <button class="btn btn-danger" routerLink="/calificaciones">
+                <i class="fa fa-arrow-left"></i>
+                Regresar
+            </button>
+        </div>
 
-<div class="row animated fadeIn faster">
-    <div class="col">
-        <!-- se llama al metodo guardar de proyecto.componet.ts -->
-        <form (ngSubmit)="guardar( f )" #f="ngForm">
-
-            <div class="text-left">
-                <h2 class="text-center">Criterios de evaluación</h2>
-
-                <!-- EVALUADOR 1 -->
-                <div *ngIf="proyecto.evaluador1.estado == true" class="text-center font-weight-bold">
-                    <p>Evaluador {{ proyecto.evaluador1.nombre}}</p>                    
-                </div>
-                <hr>
-                <!-- 
-                SE OCULTARA LA ETIQUETA HTML 
-                SI EL EVALUADOR LOGEADO NO COINCIDE 
-                CON EL EVALUADOR CORRESPONDIENTE AL PROYECTO
-                -->
-
-                <div *ngFor="let criterio of proyecto.evaluador1.criterios">
-                    <div *ngIf="proyecto.evaluador1.estado == true" class="form group">
-                        <label [(ngModel)]="proyecto.criterio" name="criterios" required>
-                            {{ criterio.descripcion }}{{criterio.puntajeAsignado}}
-                        </label>
-                        <br>
-                        <div class=" text-right">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input"
-                                       type="radio" 
-                                       name="inlineRadioOptions{{criterio.id}}"
-                                       id="radio_0{{criterio.id}}"
-                                       value=0
-                                       [(ngModel)]="criterio.puntajeAsignado"
-                                       (click)="removerObjeto(criterio)"
-                                       style="cursor: pointer;">
-                                <label class="form-check-label" for="radio_0{{criterio.id}}">0</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input"
-                                       type="radio"
-                                       name="inlineRadioOptions{{criterio.id}}"
-                                       id="radio_1{{criterio.id}}"
-                                       value=1
-                                       [(ngModel)]="criterio.puntajeAsignado"
-                                       (click)="removerObjeto(criterio)"
-                                       style="cursor: pointer;">
-                                <label class="form-check-label" for="radio_1{{criterio.id}}">1</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input"
-                                       type="radio"
-                                       name="inlineRadioOptions{{criterio.id}}"
-                                       id="radio_2{{criterio.id}}" 
-                                       value=2
-                                       [(ngModel)]="criterio.puntajeAsignado"
-                                       (click)="removerObjeto(criterio)"
-                                       style="cursor: pointer;">
-                                <label class="form-check-label" for="radio_2{{criterio.id}}">2</label>
-                            </div>
-                        </div>
-                    </div>
-                    <hr *ngIf="proyecto.evaluador1.estado == true">
-                </div>
-
-                <!-- EVALUADOR 2 -->
-                <!-- <div *ngIf="proyecto.evaluador1.estado == false" class="text-center font-weight-bold">
-                    <p>Evaluador {{ proyecto.evaluador2.nombre}}</p>
-                </div> -->
-                <!-- <hr> -->
-                <!--SE OCULTARA LA ETIQUETA HTML 
-                SI EL EVALUADOR LOGEADO NO COINCIDE 
-                CON EL EVALUADOR CORRESPONDIENTE AL PROYECTO -->
-                <!-- <div *ngFor="let criterio of proyecto.evaluador2.criterios">
-                    <div *ngIf="proyecto.evaluador1.estado == false" class="form group">
-                        <label [(ngModel)]="proyecto.criterio" name="criterios" required>
-                            {{ criterio.descripcion }}{{criterio.puntajeAsignado}}
-                        </label>
-                        <div class="text-right">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input"
-                                       type="radio"
-                                       name="inlineRadioOptions{{criterio.id}}"
-                                       id="radio_0{{criterio.id}}"
-                                       value=0 
-                                       (click)="removerObjeto(criterio)"
-                                       [(ngModel)]="criterio.puntajeAsignado"
-                                       style="cursor: pointer;">
-                                       
-                                <label class="form-check-label" for="radio_0{{criterio.id}}">0</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input"
-                                       type="radio"
-                                       name="inlineRadioOptions{{criterio.id}}"
-                                       id="radio_1{{criterio.id}}"
-                                       value=1
-                                       (click)="removerObjeto(criterio)"
-                                       [(ngModel)]="criterio.puntajeAsignado"
-                                       style="cursor: pointer;">
-                                <label class="form-check-label" for="radio_1{{criterio.id}}">1</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input"
-                                       type="radio"
-                                       name="inlineRadioOptions{{criterio.id}}"
-                                       id="radio_2{{criterio.id}}"
-                                       value=2
-                                       (click)="removerObjeto(criterio)"
-                                       [(ngModel)]="criterio.puntajeAsignado"
-                                       style="cursor: pointer;">
-                                <label class="form-check-label" for="radio_2{{criterio.id}}">2</label>
-                            </div>
-                        </div>
-                    </div>
-                    <hr *ngIf="proyecto.evaluador1.estado == false">
-                </div> -->
-
-
-                <!-- EVALUADOR 3 -->
-                <!-- <div class="text-center font-weight-bold">
-                    <p>Evaluador {{ proyecto.evaluador3.nombre}}</p>
-                </div>
-                <hr> -->
-                <!-- 
-                SE OCULTARA LA ETIQUETA HTML 
-                SI EL EVALUADOR LOGEADO NO COINCIDE 
-                CON EL EVALUADOR CORRESPONDIENTE AL PROYECTO 
-                -->
-                <!-- <div *ngFor="let criterio of proyecto.evaluador3.criterios">
-                    <div class="form group">
-                        <label [(ngModel)]="proyecto.criterio" name="criterios" required>{{ criterio.descripcion }}{{criterio.puntajeAsignado}}</label>
-                        <div class="text-right">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input"
-                                       type="radio"
-                                       name="inlineRadioOptions{{criterio.id}}"
-                                       id="radio_0{{criterio.id}}"
-                                       value=0
-                                       (click)="removerObjeto(criterio)"
-                                       [(ngModel)]="criterio.puntajeAsignado"
-                                       style="cursor: pointer;">
-                                <label class="form-check-label" for="radio_0{{criterio.id}}">0</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input"
-                                       type="radio"
-                                       name="inlineRadioOptions{{criterio.id}}"
-                                       id="radio_1{{criterio.id}}"
-                                       value=1
-                                       (click)="removerObjeto(criterio)"
-                                       [(ngModel)]="criterio.puntajeAsignado"
-                                       style="cursor: pointer;">
-                                <label class="form-check-label" for="radio_1{{criterio.id}}">1</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input"
-                                       type="radio"
-                                       name="inlineRadioOptions{{criterio.id}}"
-                                       id="radio_2{{criterio.id}}"
-                                       value=2
-                                       (click)="removerObjeto(criterio)"
-                                       [(ngModel)]="criterio.puntajeAsignado"
-                                       style="cursor: pointer;">
-                                <label class="form-check-label" for="radio_2{{criterio.id}}">2</label>
-                            </div>
-                        </div>
-
-                    </div>
-                    <hr>
-                </div> -->
+        <div class="col-12">
                 
-            </div>
-            <hr>
-
-          
-            <div class="form-group text-center">
-                 <button *ngIf="proyecto.evaluador1.estado == true" (click)="subTotal1()" class="btn btn-primary"type="submit" class="btn btn-primary w-25">
-                    <i class="fa fa-save"></i>
-                    Guardar
-                </button>
-                <!-- <button *ngIf="proyecto.evaluador1.estado == false" (click)="subTotal2()" class="btn btn-primary"type="submit" class="btn btn-primary w-25">
-                    <i class="fa fa-save"></i>
-                    Guardar
-                </button> -->
-                <!-- <button (click)="subTotal3()"class="btn btn-primary"type="submit" class="btn btn-primary w-25">
-                    <i class="fa fa-save"></i>
-                    Guardar
-                </button> -->
-            </div>
-        </form>
-
-        <div class="row text-right">
-            <div class="col">
-
-                <button class="btn btn-danger" routerLink="/calificaciones">
-                    <i class="fa fa-arrow-left"></i>
-                    Regresar
-                </button>
-            </div>
+            <h4 class="">{{ proyecto.titulo }} </h4>
 
         </div>
-        <br>
-
-        
-
 
     </div>
-</div>
+
+    <div class="row animated fadeIn faster">
+        <div class="col">
+            <!-- se llama al metodo guardar de proyecto.componet.ts -->
+              <hr>
+            <form (ngSubmit)="guardar( f )" #f="ngForm">
+
+                <div class="text-left">
+                    <h4 class="text-center"><strong>Criterios de evaluación</strong></h4>
+
+                    <!-- EVALUADOR 1 -->
+                    <div *ngIf="proyecto.evaluador1.estado == true" class="text-center font-weight-bold">
+                        <!-- <p>Evaluador {{ proyecto.evaluador1.nombre}}</p> -->
+                    </div>
+                    <hr>
+                    <!-- 
+                    SE OCULTARA LA ETIQUETA HTML 
+                    SI EL EVALUADOR LOGEADO NO COINCIDE 
+                    CON EL EVALUADOR CORRESPONDIENTE AL PROYECTO
+                    -->
+
+                    <div *ngFor="let criterio of proyecto.evaluador1.criterios">
+                        <div *ngIf="proyecto.evaluador1.estado == true" class="form group">
+                            <label [(ngModel)]="proyecto.criterio" name="criterios" required>
+                                {{ criterio.descripcion }}{{criterio.puntajeAsignado}}
+                            </label>
+                            <br>
+                            <div class=" text-right">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input"
+                                        type="radio" 
+                                        name="inlineRadioOptions{{criterio.id}}"
+                                        id="radio_0{{criterio.id}}"
+                                        value=0
+                                        [(ngModel)]="criterio.puntajeAsignado"
+                                        (click)="removerObjeto(criterio)"
+                                        style="cursor: pointer;">
+                                    <label class="form-check-label" for="radio_0{{criterio.id}}">0</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input"
+                                        type="radio"
+                                        name="inlineRadioOptions{{criterio.id}}"
+                                        id="radio_1{{criterio.id}}"
+                                        value=1
+                                        [(ngModel)]="criterio.puntajeAsignado"
+                                        (click)="removerObjeto(criterio)"
+                                        style="cursor: pointer;">
+                                    <label class="form-check-label" for="radio_1{{criterio.id}}">1</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input"
+                                        type="radio"
+                                        name="inlineRadioOptions{{criterio.id}}"
+                                        id="radio_2{{criterio.id}}" 
+                                        value=2
+                                        [(ngModel)]="criterio.puntajeAsignado"
+                                        (click)="removerObjeto(criterio)"
+                                        style="cursor: pointer;">
+                                    <label class="form-check-label" for="radio_2{{criterio.id}}">2</label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr *ngIf="proyecto.evaluador1.estado == true">
+                    </div>
+
+                    <!-- EVALUADOR 2 -->
+                    <!-- <div *ngIf="proyecto.evaluador1.estado == false" class="text-center font-weight-bold">
+                        <p>Evaluador {{ proyecto.evaluador2.nombre}}</p>
+                    </div> -->
+                    <!-- <hr> -->
+                    <!--SE OCULTARA LA ETIQUETA HTML 
+                    SI EL EVALUADOR LOGEADO NO COINCIDE 
+                    CON EL EVALUADOR CORRESPONDIENTE AL PROYECTO -->
+                    <!-- <div *ngFor="let criterio of proyecto.evaluador2.criterios">
+                        <div *ngIf="proyecto.evaluador1.estado == false" class="form group">
+                            <label [(ngModel)]="proyecto.criterio" name="criterios" required>
+                                {{ criterio.descripcion }}{{criterio.puntajeAsignado}}
+                            </label>
+                            <div class="text-right">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input"
+                                        type="radio"
+                                        name="inlineRadioOptions{{criterio.id}}"
+                                        id="radio_0{{criterio.id}}"
+                                        value=0 
+                                        (click)="removerObjeto(criterio)"
+                                        [(ngModel)]="criterio.puntajeAsignado"
+                                        style="cursor: pointer;">
+                                        
+                                    <label class="form-check-label" for="radio_0{{criterio.id}}">0</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input"
+                                        type="radio"
+                                        name="inlineRadioOptions{{criterio.id}}"
+                                        id="radio_1{{criterio.id}}"
+                                        value=1
+                                        (click)="removerObjeto(criterio)"
+                                        [(ngModel)]="criterio.puntajeAsignado"
+                                        style="cursor: pointer;">
+                                    <label class="form-check-label" for="radio_1{{criterio.id}}">1</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input"
+                                        type="radio"
+                                        name="inlineRadioOptions{{criterio.id}}"
+                                        id="radio_2{{criterio.id}}"
+                                        value=2
+                                        (click)="removerObjeto(criterio)"
+                                        [(ngModel)]="criterio.puntajeAsignado"
+                                        style="cursor: pointer;">
+                                    <label class="form-check-label" for="radio_2{{criterio.id}}">2</label>
+                                </div>
+                            </div>
+                        </div>
+                        <hr *ngIf="proyecto.evaluador1.estado == false">
+                    </div> -->
+
+
+                    <!-- EVALUADOR 3 -->
+                    <!-- <div class="text-center font-weight-bold">
+                        <p>Evaluador {{ proyecto.evaluador3.nombre}}</p>
+                    </div>
+                    <hr> -->
+                    <!-- 
+                    SE OCULTARA LA ETIQUETA HTML 
+                    SI EL EVALUADOR LOGEADO NO COINCIDE 
+                    CON EL EVALUADOR CORRESPONDIENTE AL PROYECTO 
+                    -->
+                    <!-- <div *ngFor="let criterio of proyecto.evaluador3.criterios">
+                        <div class="form group">
+                            <label [(ngModel)]="proyecto.criterio" name="criterios" required>{{ criterio.descripcion }}{{criterio.puntajeAsignado}}</label>
+                            <div class="text-right">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input"
+                                        type="radio"
+                                        name="inlineRadioOptions{{criterio.id}}"
+                                        id="radio_0{{criterio.id}}"
+                                        value=0
+                                        (click)="removerObjeto(criterio)"
+                                        [(ngModel)]="criterio.puntajeAsignado"
+                                        style="cursor: pointer;">
+                                    <label class="form-check-label" for="radio_0{{criterio.id}}">0</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input"
+                                        type="radio"
+                                        name="inlineRadioOptions{{criterio.id}}"
+                                        id="radio_1{{criterio.id}}"
+                                        value=1
+                                        (click)="removerObjeto(criterio)"
+                                        [(ngModel)]="criterio.puntajeAsignado"
+                                        style="cursor: pointer;">
+                                    <label class="form-check-label" for="radio_1{{criterio.id}}">1</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input"
+                                        type="radio"
+                                        name="inlineRadioOptions{{criterio.id}}"
+                                        id="radio_2{{criterio.id}}"
+                                        value=2
+                                        (click)="removerObjeto(criterio)"
+                                        [(ngModel)]="criterio.puntajeAsignado"
+                                        style="cursor: pointer;">
+                                    <label class="form-check-label" for="radio_2{{criterio.id}}">2</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <hr>
+                    </div> -->
+                    
+                </div>
+                <hr>
+
+            
+                <div class="row form-group text-center">
+
+
+                    <div class="col-6 col-sm-6">
+
+                        <button class="btn btn-danger" routerLink="/calificaciones">
+                            <i class="fa fa-arrow-left"></i>
+                            Regresar
+                        </button>
+                    </div>
+
+                    <div class="col-6 col-sm-6">
+                        <button *ngIf="proyecto.evaluador1.estado == true" (click)="subTotal1()" class="btn btn-primary"type="submit" class="btn btn-primary">
+                        <i class="fa fa-save"></i>
+                            Guardar
+                        </button>
+                    </div>
+
+                    <!-- <button *ngIf="proyecto.evaluador1.estado == false" (click)="subTotal2()" class="btn btn-primary"type="submit" class="btn btn-primary w-25">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                    </button> -->
+                    <!-- <button (click)="subTotal3()"class="btn btn-primary"type="submit" class="btn btn-primary w-25">
+                        <i class="fa fa-save"></i>
+                        Guardar
+                    </button> -->
+                </div>
+            </form>
+
+        </div>
+    </div>
 </div>
 
 <div class="row alert alert-warning mt-3 animated fadeIn faster" *ngIf="roleUser == 'admin'">

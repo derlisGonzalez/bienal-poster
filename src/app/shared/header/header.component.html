@@ -1,30 +1,73 @@
 
     <header class="topbar">
-        <nav class="navbar top-navbar navbar-expand-md navbar-light">
 
-            <div class="navbar-header">
-                <a class="navbar-brand" routerLink="/inicio">
-                    <b>
-                    <img src="../../../assets/images/logo.png" style="height: 40px;" alt="homepage" class="dark-logo" />
-                    <img src="../../../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
-                        </b>
-                    <span>
-                        <img src="../../../assets/images/logo-light-text.png" class="light-logo" alt="homepage" />
-                    </span>
-                </a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <img routerLink="/inicio" src="../../../assets/images/logo-bienal.png" style="height: 40px;" alt="homepage" class="dark-logo d-inline-block align-top" />
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li *ngIf="roleUser == 'evaluador'" class="nav-item">
+                  <a routerLink="/calificaciones" class="nav-link" href="#"><strong>Calificaciones</strong><span class="sr-only">(current)</span></a>
+                </li>
+
+                <li *ngIf="roleUser == 'admin'" class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Registros
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="/categorias">Categorías</a>
+                    <a class="dropdown-item" routerLink="/criterios">Criterios</a>
+                    <a class="dropdown-item" routerLink="/areas">Areas Temáticas</a>
+                    <a class="dropdown-item" routerLink="/autores">Autores</a>
+                    <a class="dropdown-item" routerLink="/evaluadores">Evaluadores</a>
+                    <a class="dropdown-item" routerLink="/proyectos">Proyectos</a>
+                    <a class="dropdown-item" routerLink="/usuarios">Administradores</a>
+
+                  </div>
+                </li>
+
+
+                <li *ngIf="roleUser == 'admin'" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Informes
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" routerLink="/lista-proyectos">Reporte de proyectos</a>
+
+                    </div>
+                  </li>
+
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <a class="nav-link disabled" href="#">{{ userActivo }}</a>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="salir()">Cerrar Sesión</button>
+              </form>
             </div>
+          </nav>
 
-            
-            <div class="navbar-collapse">
 
+
+        <!-- <nav class="navbar top-navbar navbar-expand-sm navbar-light">
+            <a class="navbar-brand" routerLink="/inicio">
+                <b>
+                <img src="../../../assets/images/logo.png" style="height: 40px;" alt="homepage" class="dark-logo d-inline-block align-top" />
+                </b>
+            </a>
+            <div class="navbar navbar-collapse">
                 <ul class="navbar-nav mr-auto">
-                    
                 </ul>
-                <label class="text-info"> {{ userActivo }}</label>
+                <label class="text-info tex-left"> {{ userActivo }}</label>
                 <ul class="navbar-nav my-lg-0">
-                                       
                     <li class="nav-item dropdown">
-                        <a  class="nav-link dropdown-toggle waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-stream btn btn-primary"></i>
+                        <a  class="nav-link dropdown-toggle waves-dark"
+                            href=""
+                            data-toggle="dropdown"
+                            aria-haspopup="true"
+                            aria-expanded="false">
+                            <i class="fas fa-stream btn btn-primary"></i>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right animated fadeIn fast">
                             <ul class="dropdown">
@@ -38,14 +81,13 @@
                                 <li *ngIf="roleUser == 'evaluador'"><a routerLink="/calificaciones"><i class="ti-settings"></i> Calificaciones</a></li>
                                 <li *ngIf="roleUser == 'admin'"><a routerLink="/usuarios"><i class="ti-settings"></i> Administradores</a></li>
                                 <li *ngIf="roleUser == 'admin'"><a routerLink="/lista-proyectos"><i class="ti-settings"></i> Reporte de proyectos</a></li>
-
                                 <li><a routerLink="/inicio">Inicio</a></li>
-                                <li> <i class="fa-solid fa-house"></i><a href="" (click)="salir()"> <strong> Cerrar Sesión</strong></a></li>
-                                                                
+                                <li> <i class="fa-solid fa-house"></i><a href="" (click)="salir()"> <strong> Cerrar Sesión</strong></a></li>                               
                             </ul>
                         </div>
                     </li>
                 </ul>
             </div>
-        </nav>
+        </nav> -->
+
     </header>

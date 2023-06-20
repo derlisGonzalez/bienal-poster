@@ -32,7 +32,6 @@ export class ReporteProyectoComponent implements OnInit {
   proyectos2: ProyectoModel[] = [];
   cargando = false;
 
-
   areaSeleccionada: string;
   public carrera: string;
   categoriaSeleccionada: string;
@@ -54,7 +53,6 @@ export class ReporteProyectoComponent implements OnInit {
       });
     });
 
-
     this.carrerasService.getCarreras()
     .subscribe( carreras => {
       this.carreras = carreras;
@@ -70,15 +68,12 @@ export class ReporteProyectoComponent implements OnInit {
         console.log(resp);
         this.proyectos = resp;
 
-
         //PARA IMPRIMIR DE MAYOR A MENOR DE ACUERDO AL PUNTAJE
         this.proyectos.sort((a, b) => b.totalPuntaje - a.totalPuntaje);
         
         this.cargando = false;
         
       });
-
-
 
       /*this.forma.controls["carrera"].valueChanges.subscribe((c: CarreraModel) => {
         console.log(c)
@@ -113,7 +108,6 @@ export class ReporteProyectoComponent implements OnInit {
 
     this.proyectosService.getProyectos()
     .subscribe( respuesta => {
-
 
       this.proyectos = respuesta;
       /*
