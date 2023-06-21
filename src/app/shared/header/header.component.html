@@ -15,7 +15,7 @@
 
                 <li *ngIf="roleUser == 'admin'" class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Registros
+                    <strong>Registros</strong>
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" routerLink="/categorias">Categorías</a>
@@ -32,7 +32,7 @@
 
                 <li *ngIf="roleUser == 'admin'" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Informes
+                      <strong>Informes</strong>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item" routerLink="/lista-proyectos">Reporte de proyectos</a>
@@ -42,8 +42,8 @@
 
               </ul>
               <form class="form-inline my-2 my-lg-0">
-                <a class="nav-link disabled" href="#">{{ userActivo }}</a>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="salir()">Cerrar Sesión</button>
+                <a class="nav-link disabled" href="#"><strong>{{ userActivo }}</strong></a>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" (click)="salir()"><strong>Cerrar Sesión</strong></button>
               </form>
             </div>
           </nav>

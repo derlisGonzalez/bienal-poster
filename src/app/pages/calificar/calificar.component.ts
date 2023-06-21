@@ -182,6 +182,44 @@ export class CalificarComponent implements OnInit {
  }
 
 
+ finalizarMasTarde(){
+  let suma = 0;
+  this.puntos.forEach( function(punto){
+    suma    += Number(punto.puntajeAsignado);
+  })
+  
+
+  console.log("Suma: ", suma);
+
+  //this.proyecto.evaluador1.subtotal = suma;
+  //this.proyecto.totalPuntaje += suma;
+  //this.proyecto.estado = false;
+  //this.proyecto.evaluador1.estado = false;
+  /*if (this.proyecto.evaluador1.estado == false && this.proyecto.evaluador2.estado == false) {
+    let subtotal = (this.proyecto.totalPuntaje / 2);
+    let sub = subtotal.toFixed(2);
+    this.proyecto.promedio = Number(sub);
+    this.proyecto.estado = false;
+  }*/
+  
+
+  //console.log(this.proyecto.evaluador1.subtotal);
+  
+  //const suma = this.puntos.map(item => Number(item.puntajeAsignado)).reduce((prev, curr) => prev + curr, 0);
+  //console.log(suma);
+
+  //console.log(value.id);
+
+  /*for (let index = 0; index < this.puntos.length; index++) {
+    suma += Number(value);
+
+    //this.puntos["id"]
+  }*/
+
+  console.log("La suma es : ", suma);
+
+  
+ }
 
  subTotal1() {
   let suma = 0;
@@ -306,6 +344,73 @@ export class CalificarComponent implements OnInit {
  }
 
   guardar( form: NgForm ) {
+
+    /*if ( this.puntos.length < this.lenght ) {
+      Swal.fire({
+        title: 'Calificación incompleta',
+        text: `¿Quieres finalizar mas tarde?`,
+        icon: 'question',
+        showConfirmButton: true,
+        showCancelButton: true
+      }).then( resp => {
+        if ( resp.value ) {
+          this.finalizarMasTarde();
+        }
+      });
+
+    }*/
+    
+
+    //CAMBIAR VALOR DE ACUERDO A LA CANTIDAD DE CRITERIOS
+    if ( this.puntos.length < this.lenght ) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Calificación incompleta'
+        //footer: '<a href="">Why do I have this issue?</a>'
+      })
+      console.log('Formulario no válido');
+      return;
+
+    }
+
+    Swal.fire({
+      title: 'Espere',
+      text: 'Calificación guardada',
+      icon: 'info',
+      allowOutsideClick: false
+    });
+
+    //Swal.showLoading();
+
+    let peticion: Observable<any>;
+    if ( this.proyecto.id ) {
+      //se agrega los los crierios en el proyecto sin las calificaciones
+      peticion = this.proyectosService.actualizarProyecto( this.proyecto );
+      //peticion = this.proyectosService.actualizarSubTotal(this.proyecto.evaluador1.subtotal);
+    } else {
+      peticion = this.proyectosService.crearProyecto(this.proyecto );
+    }
+
+
+    peticion.subscribe( resp => {
+
+    /*Swal.fire({
+      title: this.carrera.descripcion,
+      text: 'Se actualizó correctamente',
+      type: 'success'
+    });*/
+
+    });
+
+    console.log(form);
+    console.log(this.proyecto);
+    this.router.navigateByUrl('/calificaciones');
+
+  }
+
+
+  guardarMasTarde( form: NgForm ) {
     
     //CAMBIAR VALOR DE ACUERDO A LA CANTIDAD DE CRITERIOS
     if ( this.puntos.length < this.lenght ) {
