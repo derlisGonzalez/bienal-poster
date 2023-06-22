@@ -1,11 +1,7 @@
 <app-header></app-header><br>
 
 
-<div class="container" *ngIf="roleUser == 'admin'">
-
-    <h1><strong>Registro de área</strong></h1>
-    <hr>
-    
+<div class="container" *ngIf="roleUser == 'admin'"> 
     
     <!-- <div>
       
@@ -25,16 +21,18 @@
         </ul>
     </div> -->
     
-    <div class="row text-right">
-        <div class="col">
+    <div class="row">
+        <div class="col-lg-8 text-left">
+            <h1><strong>Registro de área</strong></h1>
+        </div>
+        <div class="col-lg-4 text-right">
             <button class="btn btn-danger" routerLink="/areas">
-          <i class="fa fa-arrow-left"></i>
-          Regresar
-        </button>
+                <i class="fa fa-arrow-left"></i>
+                Regresar
+            </button>
         </div>
     </div>
-    
-    
+    <hr>
     
     <div class="row animated fadeIn faster">
         <div class="col">

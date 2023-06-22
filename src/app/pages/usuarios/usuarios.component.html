@@ -1,11 +1,9 @@
 <app-header></app-header><br>
 
-
 <div class="container" *ngIf="roleUser == 'admin'">
 
     <h1><strong>Lista de administradores</strong></h1>
     <hr>
-    
     
     <div class="row">
         <div class="col text-right">
@@ -15,8 +13,7 @@
         </button>
         </div>
     </div>
-    
-    <!--  -->
+
     <table *ngIf="!cargando && evaluadores.length > 0" class="table table-striped mt-3 animated fadeIn faster animated fadeIn faster">
         <thead class="thead-dark">
             <tr>
@@ -41,20 +38,19 @@
                     <button class="btn btn-danger" (click)="borrarEvaluador( evaluador, i ) ">
                     <i class="fa fa-trash"></i>
                     </button>
-    
-    
+
                 </td>
             </tr>
         </tbody>
     </table>
-    <!--  -->
+
     <div *ngIf="!cargando && evaluadores.length === 0" class="alert alert-warning text-center mt-3 animated fadeIn faster">
         <h4 class="alert-heading">No hay registros</h4>
         <p>
             <i class="fa fa-exclamation fa-2x"></i>
         </p>
     </div>
-    <!--  -->
+
     <div *ngIf="cargando" class="alert alert-info text-center mt-3 animated fadeIn faster">
         <h4 class="alert-heading">Cargando</h4>
         <p>
