@@ -1,40 +1,74 @@
-<div class="container text-center">
-    <hr>
-    <h1>REPORTE DE PROYECTO</h1>
-    <hr>
-    <h3><strong>TÍtulo: </strong><strong></strong>{{proyecto.titulo}}</h3>
-    <h3><strong>Autor: </strong>{{proyecto.autor}}</h3>
-    <h3><strong>Evaluador: </strong>{{proyecto.evaluador1.nombre}}</h3>
-    <h3><strong>CategorÍa: </strong>{{proyecto.categoria}}</h3>
-    <h3><strong>Código: </strong>{{proyecto.codigo}}</h3>
-    <h4><strong>Resumen: </strong>{{proyecto.cuerpo}}</h4><hr>
-    <h2><strong>Criterios y puntajes</strong></h2>
-    <tr *ngFor="let criterio of proyecto.evaluador1.criterios; let i = index">
-        <th scope="row">*</th>
-        <td class="text-left">{{ criterio.descripcion }}</td>
-        <td class="text-right"><strong>{{ criterio.puntajeAsignado }}</strong></td>
-    </tr>
-    <hr>
-    <h3><strong>Puntaje total: </strong>{{proyecto.totalPuntaje}}</h3><hr>
+<div class="container">
 
     <br>
-    <div class="text-center">
-        <button (click)="pdfMetodo()" class="btn btn-primary btn-bloc w-25">
-            <i class="fa fa-save"></i>
-            Crear PDF
-        </button>
-    </div>
-
-    <br>
-
-
-    <div class="row text-center">
-        <div class="col">
-            <button class="btn btn-danger" routerLink="/lista-proyectos">
+    
+    <div class="row">
+        <div class="col col-lg-6 text-right">
+            <button class="btn btn-danger btn-bloc" routerLink="/lista-proyectos">
                 <i class="fa fa-arrow-left"></i>
                 Regresar
             </button>
         </div>
+
+        <div class="col col-lg-6">
+            <button (click)="pdfMetodo()" class="btn btn-primary btn-bloc">
+                <i class="fa fa-save"></i>
+                Crear PDF
+            </button>
+        </div>
     </div>
 
+    <hr>
+    <h1 class="text-center">REPORTE DE PROYECTO</h1>
+    <hr>
+    <div class="row">
+
+        <h3 class="col-lg-8"><strong>Título: </strong><strong></strong>{{proyecto.titulo}}</h3>
+        <h3 class="col-lg-4 text-right"><strong>Autor: </strong>{{proyecto.autor}}</h3>
+        <h3 class="col-lg-4"><strong>Evaluador: </strong>{{proyecto.evaluador1.nombre}}</h3>
+        <h3 class="col-lg-4 text-center"><strong>Categoría: </strong>{{proyecto.categoria}}</h3>
+        <h3 class="col-lg-4 text-right"><strong>Código: </strong>{{proyecto.codigo}}</h3>
+        <h4 class="col-lg-12"><strong>Resumen: </strong>{{proyecto.cuerpo}}</h4>
+
+    </div>
+    <hr>
+
+    <h2 class="text-center"><strong>Criterios y puntajes</strong></h2>
+
+    <table class="table table-striped mt-3 animated fadeIn faster animated fadeIn faster">
+        <thead class="thead">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Criterio</th>
+                <th class="text-center" scope="col">Puntaje</th>
+                <!-- <th scope="col">Estado</th> -->
+            </tr>
+        </thead>
+        <tbody>
+    
+            <tr *ngFor="let criterio of proyecto.evaluador1.criterios; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ criterio.descripcion }}</td>
+                <td class="text-center">{{ criterio.puntajeAsignado }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- <div class="row">
+
+        
+        <tr *ngFor="let criterio of proyecto.evaluador1.criterios; let i = index">
+            <th scope="row">*</th>
+            <td class="text-left">{{ criterio.descripcion }}</td>
+            <td class="text-right"><strong>{{ criterio.puntajeAsignado }}</strong></td>
+        </tr>
+
+    </div> -->
+
+    <hr>
+    <h3 class="text-center"><strong>Puntaje total: </strong>{{proyecto.totalPuntaje}}</h3><hr>
+
+    <br>
+
 </div>
+<br>
