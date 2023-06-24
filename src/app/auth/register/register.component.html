@@ -1,146 +1,156 @@
-<br>
-<div class="login-box card">
-<div class="card-body">
-    <a class="text-center db"><img style="margin-left: 25px;" src="../assets/images/logo.png" /><br/></a>
-    <br>
-    <h3 class="box-title m-t-40 m-b-0">Regístrate ahora</h3>
-    
-        <!-- [formGroup]="registerForm" -->
-    <form autocomplete="off" class="form-horizontal form-material"
-            [formGroup]="forma"
-            (ngSubmit)="onSubmit()">
-
-
-        <div class="form-group m-t-20">
-            <!-- <span *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger animated fadeIn">El nombre es obligatorio</span> -->
-            <div class="col-xs-12">
-                <input class="form-control"
-                        type="text" 
-                        formControlName="nombre"
-                        [class.is-invalid]="nombreNoValido"
-                        [(ngModel)]="evaluador.nombre"
-                        placeholder="Nombre y apellido">
-                        <small *ngIf="nombreNoValido" class="text-danger">
-                            Ingrese 5 letras
-                        </small>
-            </div>
-        </div>
-        <div class="form-group ">
-            <!-- <span *ngIf="f.submitted && f.controls['email'].errors"class="text-danger animated fadeIn">El correo es obligatorio</span> -->
-            <div class="col-xs-12">
-                <input class="form-control" 
-                        type="email" 
-                        formControlName="email"
-                        [(ngModel)]="evaluador.email"
-                        
-                        placeholder="Email"
-                        [class.is-invalid]="correoNoValido">
-                        <small *ngIf="correoNoValido" class="text-danger">
-                            Ingrese el correo
-                    </small>
-            </div>
-        </div>
-
-        <div class="form-group ">
-            <div class="col-xs-12">
-                <input class="form-control" 
-                        type="text" 
-                        formControlName="documento"
-                        [(ngModel)]="evaluador.documento"
-                        
-                        placeholder="Numero de documento"
-                        [class.is-invalid]="documentoNoValido">
-                        <small *ngIf="documentoNoValido" class="text-danger">
-                            Documento no válido
-                    </small>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="col-8 col-form-label">Área Temática</label>
-            <div class="col-12" placeholder="Seleccione Area">
-                <select class="form-control" [disabled]="carreras.length === 0"
-                        [(ngModel)]="carrera" formControlName="carrera">
-                <option *ngFor="let carrera of carreras" [ngValue]="carrera">
-                        <!-- [value]="carrera.id"> -->
-                    {{ carrera.descripcion }}
-                </option>
-                </select>
-
-            </div>
-        </div>
-
-        <div class="form-group ">
-            <!-- <span *ngIf="f.submitted && f.controls['password'].errors" class="text-danger animated fadeIn">Al menos 6 letras</span> -->
-            <div class="col-xs-12">
-                <input class="form-control" 
-                        type="password" 
-                        formControlName="password" 
-                        [(ngModel)]="evaluador.password"
-                        minlength="6"
-                        [class.is-invalid]="pass1NoValido"
-                        placeholder="Contraseña">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <input class="form-control" 
-                        type="password" 
-                        formControlName="password2" 
-                        [(ngModel)]="evaluador.password2"
-                        [class.is-invalid]="pass2NoValido"
-                        placeholder="Repetir Contraseña">
-            </div>
-        </div>
-
-
-        <!-- <div class="row">
-            <div class="col text-danger">
-
-                <p *ngIf="campoNoValido('nombre')">* El nombre es obligatorio</p>
-                <p *ngIf="campoNoValido('email')">* El email es obligatorio y tiene que ser válido</p>
-                <p *ngIf="contrasenasNoValidas()">* Las contraseñas deben de ser iguales</p>
-                <p *ngIf="aceptaTerminos()">* Debe de aceptar los términos de uso</p>
-
-            </div>
-        </div> -->
+<app-header></app-header><br>
+<div class="card">
+    <div class="card-body">
         
+        <div class="row">
+            <!-- <a class="db"><img class="text-center" style="margin-left: 25px;" src="../assets/images/logo.png" /><br/></a> -->
+            <h3 class="col-lg-6 box-title m-t-40 m-b-0"><strong>Registro de evaluadores</strong></h3>
 
-        <!-- <div class="form-group row">
-            <div class="col-md-12">
-                <div class="checkbox checkbox-primary p-t-0">
+            <div class="col-lg-6 text-right">
+                <button class="btn btn-danger" routerLink="/evaluadores">
+                    <i class="fa fa-arrow-left"></i>
+                    Regresar
+                </button>
+            </div>
 
-                    <input [(ngModel)]="recordarme"
-                            class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                    <label class="label-checkbox100" for="ckb1">
-                        Recordar mi usuario
-                    </label>
-                    
+        </div>
+
+        <!-- [formGroup]="registerForm" -->
+        <form autocomplete="off" class="form-horizontal form-material"
+                [formGroup]="forma"
+                (ngSubmit)="onSubmit()">
+
+
+            <div class="form-group m-t-20">
+                <!-- <span *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger animated fadeIn">El nombre es obligatorio</span> -->
+                <div class="col-xs-12">
+                    <input class="form-control"
+                            type="text" 
+                            formControlName="nombre"
+                            [class.is-invalid]="nombreNoValido"
+                            [(ngModel)]="evaluador.nombre"
+                            placeholder="Nombre y apellido">
+                            <small *ngIf="nombreNoValido" class="text-danger">
+                                Ingrese 5 letras
+                            </small>
                 </div>
             </div>
-        </div> -->
-
-        <!-- <div class="row">
-            <div class="col text-danger">
-
-                <p *ngIf="campoNoValido('nombre')">* El nombre es obligatorio</p>
-                <p *ngIf="campoNoValido('email')">* El email es obligatorio y tiene que ser válido</p>
-                <p *ngIf="contrasenasNoValidas()">* Las contraseñas deben de ser iguales</p>
-                <p *ngIf="aceptaTerminos()">* Debe de aceptar los términos de uso</p>
-
+            <div class="form-group ">
+                <!-- <span *ngIf="f.submitted && f.controls['email'].errors"class="text-danger animated fadeIn">El correo es obligatorio</span> -->
+                <div class="col-xs-12">
+                    <input class="form-control" 
+                            type="email" 
+                            formControlName="email"
+                            [(ngModel)]="evaluador.email"
+                            
+                            placeholder="Email"
+                            [class.is-invalid]="correoNoValido">
+                            <small *ngIf="correoNoValido" class="text-danger">
+                                Ingrese el correo
+                        </small>
+                </div>
             </div>
-        </div> -->
-        
-        <div class="form-group text-center m-t-20">
-            <div class="col-xs-12">
-                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Registrarse</button>
+
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <input class="form-control" 
+                            type="text" 
+                            formControlName="documento"
+                            [(ngModel)]="evaluador.documento"
+                            
+                            placeholder="Numero de documento"
+                            [class.is-invalid]="documentoNoValido">
+                            <small *ngIf="documentoNoValido" class="text-danger">
+                                Documento no válido
+                        </small>
+                </div>
             </div>
-        </div>
-        <div class="form-group m-b-0">
-            <div class="col-sm-12 text-center">
-                <p>Ya tienes una cuenta? <a routerLink="/login" class="text-info m-l-5"><b>Iniciar sesión</b></a></p>
+
+            <div class="form-group row">
+                <label class="col-8 col-form-label">Área Temática</label>
+                <div class="col-12" placeholder="Seleccione Area">
+                    <select class="form-control" [disabled]="carreras.length === 0"
+                            [(ngModel)]="carrera" formControlName="carrera">
+                    <option *ngFor="let carrera of carreras" [ngValue]="carrera">
+                            <!-- [value]="carrera.id"> -->
+                        {{ carrera.descripcion }}
+                    </option>
+                    </select>
+
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+
+            <div class="form-group ">
+                <!-- <span *ngIf="f.submitted && f.controls['password'].errors" class="text-danger animated fadeIn">Al menos 6 letras</span> -->
+                <div class="col-xs-12">
+                    <input class="form-control" 
+                            type="password" 
+                            formControlName="password" 
+                            [(ngModel)]="evaluador.password"
+                            minlength="6"
+                            [class.is-invalid]="pass1NoValido"
+                            placeholder="Contraseña">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <input class="form-control" 
+                            type="password" 
+                            formControlName="password2" 
+                            [(ngModel)]="evaluador.password2"
+                            [class.is-invalid]="pass2NoValido"
+                            placeholder="Repetir Contraseña">
+                </div>
+            </div>
+
+
+            <!-- <div class="row">
+                <div class="col text-danger">
+
+                    <p *ngIf="campoNoValido('nombre')">* El nombre es obligatorio</p>
+                    <p *ngIf="campoNoValido('email')">* El email es obligatorio y tiene que ser válido</p>
+                    <p *ngIf="contrasenasNoValidas()">* Las contraseñas deben de ser iguales</p>
+                    <p *ngIf="aceptaTerminos()">* Debe de aceptar los términos de uso</p>
+
+                </div>
+            </div> -->
+            
+
+            <!-- <div class="form-group row">
+                <div class="col-md-12">
+                    <div class="checkbox checkbox-primary p-t-0">
+
+                        <input [(ngModel)]="recordarme"
+                                class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                        <label class="label-checkbox100" for="ckb1">
+                            Recordar mi usuario
+                        </label>
+                        
+                    </div>
+                </div>
+            </div> -->
+
+            <!-- <div class="row">
+                <div class="col text-danger">
+
+                    <p *ngIf="campoNoValido('nombre')">* El nombre es obligatorio</p>
+                    <p *ngIf="campoNoValido('email')">* El email es obligatorio y tiene que ser válido</p>
+                    <p *ngIf="contrasenasNoValidas()">* Las contraseñas deben de ser iguales</p>
+                    <p *ngIf="aceptaTerminos()">* Debe de aceptar los términos de uso</p>
+
+                </div>
+            </div> -->
+            
+            <div class="form-group text-center m-t-20">
+                <div class="col-xs-12">
+                    <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Registrar</button>
+                </div>
+            </div>
+            <!-- <div class="form-group m-b-0">
+                <div class="col-sm-12 text-center">
+                    <p>Ya tienes una cuenta? <a routerLink="/login" class="text-info m-l-5"><b>Iniciar sesión</b></a></p>
+                </div>
+            </div> -->
+        </form>
+    </div>
 </div>

@@ -143,11 +143,11 @@ export class AuthService {
     .pipe(
       map( resp => {
         console.log( "entro en el mapa ")
-        this.guardarToken( resp['idToken'] );
-        localStorage.setItem( 'email', resp['email']);
+        //this.guardarToken( resp['idToken'] );
+        //localStorage.setItem( 'email', resp['email']);
         //localStorage.setItem( 'nombre', resp['nombre']);
-        console.log( "UID del usuario logueado: "+ resp['localId']);
-        console.log( "Email: "+ resp['email']);
+        //console.log( "UID del usuario logueado: "+ resp['localId']);
+        //console.log( "Email: "+ resp['email']);
         
         return resp;
       })

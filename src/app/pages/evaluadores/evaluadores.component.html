@@ -2,12 +2,15 @@
 
 <div class="container" *ngIf="roleUser == 'admin'">
 
-    <h1><strong>Lista de evaluadores</strong></h1><hr>
+    
     
     
     <div class="row">
-        <div class="col text-right">
-            <button routerLink="/evaluador/nuevo" class="btn btn-primary">
+
+        <h1 class="col-lg-6"><strong>Lista de evaluadores</strong></h1>
+
+        <div class="col-lg-6 text-right">
+            <button routerLink="/register" class="btn btn-primary">
           <i class="fa fa-plus"></i>
           Agregar
         </button>

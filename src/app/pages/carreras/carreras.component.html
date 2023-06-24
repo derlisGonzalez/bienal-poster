@@ -1,16 +1,19 @@
 <app-header></app-header><br>
 
 <div class="container" *ngIf="roleUser == 'admin'">
-    <h1><strong>Lista de áreas</strong></h1>
-    <hr>
+
     
     
     <div class="row">
+
+        <div class="col text-left">
+            <h1><strong>Lista de áreas</strong></h1>
+        </div>
         <div class="col text-right">
             <button routerLink="/area/nuevo" class="btn btn-primary">
-          <i class="fa fa-plus"></i>
-          Agregar
-        </button>
+            <i class="fa fa-plus"></i>
+            Agregar
+            </button>
         </div>
     </div>
     

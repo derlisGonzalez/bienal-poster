@@ -168,17 +168,17 @@ export class RegisterComponent {
       .subscribe( resp => {
         
         console.log(resp);
-        console.log("Local id del usuario activo: "+resp['localId']);
+        //console.log("Local id del usuario activo: "+resp['localId']);
 
         const uid = resp['localId'];
         //if (uid == this.auth.getEvaluadorLogueado()) {
-          this.auth.getEvaluadorLogueado(uid)
+          /*this.auth.getEvaluadorLogueado(uid)
           .subscribe(respuesta => {
             console.log("DATOS DEL USUARIO LOGUEADO... "+ respuesta);
             //this.evaluador = resp;
             //delete this.evaluador.carrera.evaluadores
             //this.evaluador.id = id;
-          });
+          });*/
         //}
   
         
@@ -229,12 +229,14 @@ export class RegisterComponent {
         Swal.close();
      
         //const uid = resp.locali;
-        if ( this.recordarme ) {
+        /*if ( this.recordarme ) {
           localStorage.setItem('email', this.usuario.email);
-        }
+        }*/
 
-        this.router.navigateByUrl('/inicio');
+        //this.router.navigateByUrl('/inicio');
 
+        this.forma.reset();
+        
       }, (err) => {
         console.log(err.error.error.message);
         Swal.fire({
@@ -258,6 +260,7 @@ export class RegisterComponent {
         console.log(resp2);
       });*/
 
+      
 
   }
 
@@ -339,6 +342,8 @@ export class RegisterComponent {
         text: err.error.error.message
       });
     });
+
+    
   }
   
 
