@@ -4,9 +4,9 @@
         
         <div class="row">
             <!-- <a class="db"><img class="text-center" style="margin-left: 25px;" src="../assets/images/logo.png" /><br/></a> -->
-            <h3 class="col-lg-6 box-title m-t-40 m-b-0"><strong>Registro de evaluadores</strong></h3>
+            <h3 class="col-lg-6 col-sm-6 box-title m-t-40 m-b-0"><strong>Registro de evaluadores</strong></h3>
 
-            <div class="col-lg-6 text-right">
+            <div class="col-lg-6 col-sm-6 text-right">
                 <button class="btn btn-danger" routerLink="/evaluadores">
                     <i class="fa fa-arrow-left"></i>
                     Regresar
@@ -24,7 +24,7 @@
             <div class="form-group m-t-20">
                 <!-- <span *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger animated fadeIn">El nombre es obligatorio</span> -->
                 <div class="col-xs-12">
-                    <input class="form-control"
+                    <input class="form-control text-capitalize"
                             type="text" 
                             formControlName="nombre"
                             [class.is-invalid]="nombreNoValido"
@@ -103,7 +103,6 @@
                 </div>
             </div>
 
-
             <!-- <div class="row">
                 <div class="col text-danger">
 
@@ -115,7 +114,6 @@
                 </div>
             </div> -->
             
-
             <!-- <div class="form-group row">
                 <div class="col-md-12">
                     <div class="checkbox checkbox-primary p-t-0">
@@ -152,5 +150,7 @@
                 </div>
             </div> -->
         </form>
+        
     </div>
+
 </div>

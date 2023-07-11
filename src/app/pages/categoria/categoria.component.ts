@@ -130,12 +130,13 @@ export class CategoriaComponent implements OnInit {
     console.log(this.categoria);
 
 
-    this.forma.reset({  });
+    //this.forma.reset({  });
   
     //this.vaciarCampo();
     
     //location.reload();
 
+    this.forma.reset();
 
   }
 

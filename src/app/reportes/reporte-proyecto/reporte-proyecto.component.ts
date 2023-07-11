@@ -92,14 +92,14 @@ export class ReporteProyectoComponent implements OnInit {
       this.capturar();
   }
  
-  capturar() {
+  capturar() {  
     // Pasamos el valor seleccionado a la variable verSeleccion
     //this.categoria = this.opcionSeleccionado;
     this.carrera = this.areaSeleccionada;
     this.categoria = this.categoriaSeleccionada;
     console.log(this.carrera);
     console.log(this.categoria);
-}
+  }
   pdfMetodo(){
       
     //let areaSeleccionada = document.getElementById("areaSeleccionada");
@@ -138,122 +138,69 @@ export class ReporteProyectoComponent implements OnInit {
       this.proyectos2.sort((a, b) => b.totalPuntaje - a.totalPuntaje);
     });
 
+    /*
+    PROCEDIMIENTO PARA LA CREACION DE LISTA
+    DEL ARRAY DE OBJETOS
+    */
+    const rows = [];
+    this.proyectos2.forEach(item => {
+      rows.push(["TÍTULO: " + item.titulo,
+                 "AUTOR: " +  item.autor,
+                 "PUNTAJE: " +  item.totalPuntaje,
+                 "CATEGORÍA: " +  item.categoria,
+                 "ÁREA: " +  item.area]);
+    });
+
+
+    /*
+    PROCEDIMIENTO PARA LA CREACION TABLA
+    DEL ARRAY DE OBJETOS
+    */
+    const table = [];
+    table.push(['TÍTULO', 'AUTOR', 'PUNTAJE']);
+    this.proyectos2.forEach(item => {
+      table.push([item.titulo, item.autor, item.totalPuntaje]);
+    });
+
+
+
 
 
     const pdfDefinition: any = {
 
+      header: function(currentPage, pageCount, pageSize) {
+        // you can apply any logic and return any valid pdfmake element
+        return [
+          { text: 'Informe de proyectos', alignment: (currentPage % 2) ? 'center' : 'center', fontSize: 20, bold: true },
+          { canvas: [ { type: 'rect', x: 170, y: 32, w: pageSize.width - 170, h: 40 } ] }
+        ]
+      },
+
       content: [
 
         {
-          //image: '/assets/images/logo-unican.png',
-          //text: 'Listado de Proyectos\n\n',
-          //style: 'encabezado',
-          //alignment: 'center'
-        },
-        /*{
-          text: [
-            {text: 'Título: ', fontSize: 15, bold: true}, {text: this.proyecto.titulo, fontSize: 15},"\n",
-            {text: 'Autor: ', fontSize: 15, bold: true},{text: this.proyecto.autor, fontSize: 15},"\n",
-            {text: 'Evaluador: ', fontSize: 15, bold: true}, {text: this.proyecto.evaluador1.nombre, fontSize: 15},"\n", 
-            {text: 'Categoría: ', fontSize: 15, bold: true},{text: this.proyecto.categoria, fontSize: 15},"\n",
-            {text: 'Código: ', fontSize: 15, bold: true}, {text: this.proyecto.codigo, fontSize: 15},"\n", 
-            {text: 'Resumen: ', fontSize: 15, bold: true},{text: this.proyecto.cuerpo, fontSize: 15},"\n",
-          ]
-        },*/
-        /*{
-          text: 'Titulo: '+ this.proyecto.titulo,
-          style: 'titulo'
-        },
-        {
-          text: 'Autor: '+ this.proyecto.autor,
-          style: 'autor'
-        },
-        {
-          text: 'Evaluador: '+ this.proyecto.evaluador1.nombre,
-          style: 'evaluador'
-        },
-        {
-          text: 'Categoría: '+ this.proyecto.categoria,
-          style: 'categoria'
-        },
-        {
-          text: 'Codigo: '+ this.proyecto.codigo,
-          style: 'codigo'
-        },
-        {
-          text: 'Resumen: '+ this.proyecto.cuerpo,
-          style: 'resumen'
-        },*/
-        /*{ text: '\nCriterios: ' ,
-          style: 'criterios',
-          fontSize: 15,
-          bold: true 
-          },*/
+          table: {
+            body: table
+          },
 
-          /*{text: 'zebra style', margin: [0, 20, 0, 8]},
-          {
-            style: 'tableExample',
-            table: {
-              body: [
-                ['Sample value 1', 'Sample value 2', 'Sample value 3'],
-                ['Sample value 1', 'Sample value 2', 'Sample value 3'],
-                ['Sample value 1', 'Sample value 2', 'Sample value 3'],
-                ['Sample value 1', 'Sample value 2', 'Sample value 3'],
-                ['Sample value 1', 'Sample value 2', 'Sample value 3'],
-              ]
-            },
-            layout: {
-              fillColor: function (rowIndex, node, columnIndex) {
-                return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
-              }
+          layout: {
+            fillColor: function (rowIndex, node, columnIndex) {
+              return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
             }
-          },*/
+          },
 
+          pageBreak: 'after'
+        },
 
-          /*
-          {text: 'Tabla', style: 'subheader'},
-          {
-            style: 'tableExample',
-            table: {
-              headerRows: 1,
-              // dontBreakRows: true,
-              // keepWithHeaderRows: 1,
-              body: [
-                [{text: 'Título', style: 'tableHeader'}, {text: 'Autor', style: 'tableHeader'}, {text: 'Puntaje', style: 'tableHeader'}],
-                [this.proyectos.map((item) => item.titulo), this.proyectos.map((item) => item.autor), this.proyectos.map((item) => item.totalPuntaje)],
-   
-              ]
-            },
-            layout: {
-              fillColor: function (rowIndex, node, columnIndex) {
-                return (rowIndex % 2 === 0) ? '#CCCCCC' : null;
-              }
-            }
-          },*/
+        /*
+        METODO PARA LISTAR PROYECTOS EN EL PDF
+        */
+        /*{
 
-
-          {
-
-          //alignment: 'justify',
-          ul:
-          [ 
-            this.proyectos2.map((item) => 'TÍTULO: '+item.titulo+
-                                         '\nAUTOR: '+item.autor+
-                                         '\nCATEGORÍA: '+item.categoria+
-                                         '\nÁREA: '+item.area+
-                                         '\nPUNTAJE: '+item.totalPuntaje+
-                                         '\nRESUMEN: '+item.cuerpo+'\n'+'\n\n'),
-          ],
+          separator: ')',
+          ol: rows
           
-          //pageBreak: 'before'
-        }
-
-        /*{
-          text: '\nPuntaje total: '+ this.proyecto.totalPuntaje,
-          style: 'total',
-          alignment: 'center',
-        }*/
-        
+        },*/
         
       ],
 
@@ -261,13 +208,6 @@ export class ReporteProyectoComponent implements OnInit {
         return '\n.                 Página ' + currentPage.toString() + ' de ' + pageCount;
       },
 
-      header: function(currentPage, pageCount, pageSize) {
-        // you can apply any logic and return any valid pdfmake element
-        return [
-          { text: 'Informe de proyectos', alignment: (currentPage % 2) ? 'center' : 'center', fontSize: 18, bold: true },
-          { canvas: [ { type: 'rect', x: 170, y: 32, w: pageSize.width - 170, h: 40 } ] }
-        ]
-      },
       
       styles: {
         titulo: {

@@ -55,15 +55,15 @@
                     -->
 
                     <div *ngFor="let criterio of proyecto.evaluador1.criterios">
-                        <div *ngIf="proyecto.evaluador1.estado == true" class=" row form group">
+                        <div *ngIf="proyecto.evaluador1.estado == true" class="row form group">
 
-                            <div class="col-9 col-sm-8">
+                            <div class="col-10 col-sm-9">
                                 <label [(ngModel)]="proyecto.criterio" name="criterios" required>
                                     <strong>{{ criterio.descripcion }} {{criterio.puntajeAsignado}}</strong>
                                 </label>
                             </div>
 
-                            <div class="col-3 col-sm-4 text-right">
+                            <div class="col-2 col-sm-3 text-right">
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input"
                                         type="radio" 
