@@ -408,7 +408,6 @@ export class CalificarComponent implements OnInit {
 
   }
 
-
   guardarMasTarde( form: NgForm ) {
     
     //CAMBIAR VALOR DE ACUERDO A LA CANTIDAD DE CRITERIOS
@@ -441,7 +440,6 @@ export class CalificarComponent implements OnInit {
     } else {
       peticion = this.proyectosService.crearProyecto(this.proyecto );
     }
-
 
     peticion.subscribe( resp => {
 
