@@ -57,7 +57,6 @@ export class CalificarComponent implements OnInit {
             
                   const indice = this.evaluadores.findIndex((elemento, indice) => {
                   if (elemento.email === localStorage.getItem('email')) {
-                    //console.log(indice);
                     //console.log(this.evaluadores[indice]);
                     const data = this.evaluadores[indice];
             
@@ -459,7 +458,6 @@ export class CalificarComponent implements OnInit {
     this.router.navigateByUrl('/calificaciones');
 
   }
-
 
   /*cargarDisertantes() {
 
