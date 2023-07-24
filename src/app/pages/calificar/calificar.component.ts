@@ -180,14 +180,12 @@ export class CalificarComponent implements OnInit {
       
  }
 
-
  finalizarMasTarde(){
   let suma = 0;
   this.puntos.forEach( function(punto){
     suma    += Number(punto.puntajeAsignado);
   })
   
-
   console.log("Suma: ", suma);
 
   //this.proyecto.evaluador1.subtotal = suma;
@@ -291,8 +289,6 @@ export class CalificarComponent implements OnInit {
   }*/
 
   //console.log("La suma es : ", suma);  
-
-  
  }
 
 
@@ -328,8 +324,6 @@ export class CalificarComponent implements OnInit {
   //}
 
   //console.log("La suma es : ", suma);  
-
-  
  }*/
 
 
