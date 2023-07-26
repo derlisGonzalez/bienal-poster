@@ -6,7 +6,7 @@
 
 <div class="row">
     <div class="col-4">
-        <div class="col text-right">
+        <div class="text-right">
             <label class="col-form-label"><strong>Área: </strong></label>
                 <select [(ngModel)]="areaSeleccionada" (change)="capturar()" >
                     <option *ngFor="let carrera of carreras; let index = index"
@@ -20,7 +20,7 @@
     </div>
 
     <div class="col-4">
-        <div class="col text-center">
+        <div class="text-center">
             <label class="col-form-label"><strong>Categoría: </strong></label>
                 <select [(ngModel)]="categoriaSeleccionada" (change)="capturar()">
                     <option *ngFor="let categoria of categorias; let index = index"

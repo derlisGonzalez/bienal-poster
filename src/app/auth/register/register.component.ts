@@ -220,6 +220,7 @@ export class RegisterComponent {
           //this.evaluador.email = resp['email'];
           //this.evaluador.nombre = resp['nombre'];
           //this.evaluador.habilitado = resp['nombre'];
+
           console.log(resp3);
         });
         
@@ -234,6 +235,7 @@ export class RegisterComponent {
         }*/
 
         //this.router.navigateByUrl('/inicio');
+
 
         this.forma.reset();
         
@@ -262,6 +264,9 @@ export class RegisterComponent {
 
       
 
+      //PARA GUARDAR LA COTRASENHA EN EL OBJETO EVALUADORES
+      /*this.evaluador.password = null;
+      this.evaluador.password2 = null;*/
   }
 
 

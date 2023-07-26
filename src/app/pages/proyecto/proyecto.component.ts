@@ -259,13 +259,12 @@ export class ProyectoComponent implements OnInit {
       }),
       evaluador1: ['', Validators.required],
       evaluador2: [''],
-      cuerpo: ['', [Validators.required, Validators.minLength(50)]],
+      cuerpo: ['', [Validators.required, Validators.minLength(10)]],
       //email  : ['', [ Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')] ],
       //usuario : ['', , this.validadores.existeUsuario ],
       //pass1   : ['', Validators.required ],
       //pass2   : ['', Validators.required ],
       /* criterios: this.fb.group({
- 
          el_expositor_seadecua_al_tiempo_estipulado: this.fb.group({
            p1: [0, Validators.required ],
            p2: [0, Validators.required ],

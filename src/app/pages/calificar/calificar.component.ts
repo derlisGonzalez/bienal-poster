@@ -213,7 +213,6 @@ export class CalificarComponent implements OnInit {
     //this.puntos["id"]
   }*/
 
-  console.log("La suma es : ", suma);
 
   
  }
@@ -223,13 +222,21 @@ export class CalificarComponent implements OnInit {
   this.puntos.forEach( function(punto){
     suma    += Number(punto.puntajeAsignado);
   })
-  
 
-  console.log("Suma: ", suma);
+  if ( this.puntos.length === this.lenght ) {
+    this.proyecto.totalPuntaje += suma;
+    this.proyecto.estado = false;
+
+    //return;
+
+  }
+
+  //console.log("Suma: ", suma);
 
   //this.proyecto.evaluador1.subtotal = suma;
-  this.proyecto.totalPuntaje += suma;
-  this.proyecto.estado = false;
+  /*this.proyecto.totalPuntaje == 0;
+  this.proyecto.estado = true;*/
+
   //this.proyecto.evaluador1.estado = false;
   /*if (this.proyecto.evaluador1.estado == false && this.proyecto.evaluador2.estado == false) {
     let subtotal = (this.proyecto.totalPuntaje / 2);
@@ -362,6 +369,9 @@ export class CalificarComponent implements OnInit {
         text: 'Calificación incompleta'
         //footer: '<a href="">Why do I have this issue?</a>'
       })
+
+      this.proyecto.totalPuntaje == 0;
+      this.proyecto.estado = true;
       console.log('Formulario no válido');
       return;
 
