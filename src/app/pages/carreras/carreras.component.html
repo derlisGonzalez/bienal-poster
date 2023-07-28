@@ -6,10 +6,10 @@
     
     <div class="row">
 
-        <div class="col text-left">
+        <div class="col-12 col-lg-8 text-left">
             <h1><strong>Lista de áreas</strong></h1>
         </div>
-        <div class="col text-right">
+        <div class="col-12 col-lg-4 text-right">
             <button routerLink="/area/nuevo" class="btn btn-primary">
             <i class="fa fa-plus"></i>
             Agregar
@@ -35,16 +35,15 @@
                 <td>{{ carrera.descripcion }}</td>
     
                 <td class="text-right">
-                    <!--  -->
-                    <button class="btn btn-info mr-1" [routerLink]="['/area', carrera.id ]">
+                    
+                    <button class="btn btn-info" [routerLink]="['/area', carrera.id ]">
                     <i class="fa fa-pen"></i>
                     </button>
                     <!--  -->
                     <button class="btn btn-danger" (click)="borrarCarrera( carrera, i ) ">
                     <i class="fa fa-trash"></i>
                     </button>
-    
-    
+
                 </td>
             </tr>
         </tbody>

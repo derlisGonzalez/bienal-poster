@@ -5,10 +5,14 @@
     
     <div class="row">
 
-        
-    <h1 class="col-lg-6 text-left"><strong>Lista de administradores</strong></h1>
+        <div class="col-12 col-lg-6 text-left">
+
+            <h1><strong>Lista de administradores</strong></h1>
+
+
+        </div>
     
-        <div class="col-lg-6 text-right">
+        <div class="col-12 col-lg-6 text-right">
             <button routerLink="/usuario/nuevo" class="btn btn-primary">
           <i class="fa fa-plus"></i>
           Agregar
@@ -16,35 +20,42 @@
         </div>
     </div>
 
-    <table *ngIf="!cargando && evaluadores.length > 0" class="table table-striped mt-3 animated fadeIn faster animated fadeIn faster">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Rol</th>
-                <th class="text-right" scope="col">Opciones</th>
-            </tr>
-        </thead>
-        <tbody>
-    
-            <tr *ngFor="let evaluador of evaluadores; let i = index">
-                <th scope="row">{{ i + 1 }}</th>
-                <td>{{ evaluador.nombre }}</td>
-                <td>{{ evaluador.role }}</td>
-                <td class="text-right">
-                    <!--  -->
-                    <button class="btn btn-info mr-1" [routerLink]="['/usuario', evaluador.id ]">
-                    <i class="fa fa-pen"></i>
-                    </button>
-                    <!--  -->
-                    <button class="btn btn-danger" (click)="borrarEvaluador( evaluador, i ) ">
-                    <i class="fa fa-trash"></i>
-                    </button>
+    <div class="table-responsive">
 
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <table *ngIf="!cargando && evaluadores.length > 0" class="table table-striped mt-3 animated fadeIn faster animated fadeIn faster">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Rol</th>
+                    <th class="text-right" scope="col">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+        
+                <tr *ngFor="let evaluador of evaluadores; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ evaluador.nombre }}</td>
+                    <td>{{ evaluador.role }}</td>
+                    <td class="text-right">
+                        <!--  -->
+                        <button class="btn btn-info" [routerLink]="['/usuario', evaluador.id ]">
+                        <i class="fa fa-pen"></i>
+                        </button>
+                        <!--  -->
+                        <button class="btn btn-danger" (click)="borrarEvaluador( evaluador, i ) ">
+                        <i class="fa fa-trash"></i>
+                        </button>
+    
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    
+
 
     <div *ngIf="!cargando && evaluadores.length === 0" class="alert alert-warning text-center mt-3 animated fadeIn faster">
         <h4 class="alert-heading">No hay registros</h4>

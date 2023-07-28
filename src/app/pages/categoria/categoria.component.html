@@ -4,10 +4,10 @@
 <div class="container" *ngIf="roleUser == 'admin'">
 
     <div class="row">
-        <div class="col-lg-8 text-left">
-            <h1><strong>Registro de categoría</strong></h1>
+        <div class="col-12 col-lg-8 text-left">
+            <h1 class="responsive-text"><strong>Registro de categoría</strong></h1>
         </div>
-        <div class="col-lg-4 text-right">
+        <div class="col-12 col-lg-4 text-right">
             <button class="btn btn-danger" routerLink="/categorias">
                 <i class="fa fa-arrow-left"></i>
                 Regresar
@@ -36,7 +36,7 @@
                 <div class="form-group">
                     <label>Descripción</label>
                     <input type="text"
-                            class="form-control text-capitalize"
+                            class="form-control"
                             placeholder="Descripción de la categoría"
                             [(ngModel)]="categoria.descripcion"
                             formControlName="descripcion">
@@ -44,7 +44,7 @@
     
                 <hr>
                 <div class="form-group text-center">
-                    <button type="submit" class="btn btn-primary w-25">
+                    <button type="submit" class="btn btn-primary my-btn">
                         <i class="fa fa-save"></i>
                         Guardar
                     </button>
@@ -69,8 +69,8 @@
 
     <div class="col-12 text-center">
         <button routerLink="/inicio" class="btn btn-danger">
-      <i class="fa fa-arrow-left"></i>
-      Inicio
-    </button>
+        <i class="fa fa-arrow-left"></i>
+        Inicio
+        </button>
     </div>
 </div>

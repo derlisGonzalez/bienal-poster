@@ -4,10 +4,14 @@
         
         <div class="row">
             <!-- <a class="db"><img class="text-center" style="margin-left: 25px;" src="../assets/images/logo.png" /><br/></a> -->
-            <h3 class="col-lg-6 col-sm-6 box-title m-t-40 m-b-0"><strong>Registro de evaluadores</strong></h3>
+            <div class="col-12 col-lg-6 col-sm-6">
+                <h3><strong>Registro de evaluadores</strong></h3>
 
-            <div class="col-lg-6 col-sm-6 text-right">
-                <button class="btn btn-danger" routerLink="/evaluadores">
+
+            </div>
+
+            <div class="col-12 col-lg-6 col-sm-6 text-right">
+                <button style="margin-bottom: 5px;" class="btn btn-danger" routerLink="/evaluadores">
                     <i class="fa fa-arrow-left"></i>
                     Regresar
                 </button>
@@ -33,6 +37,7 @@
                             <small *ngIf="nombreNoValido" class="text-danger">
                                 Ingrese 5 letras
                             </small>
+                            
                 </div>
             </div>
             <div class="form-group ">

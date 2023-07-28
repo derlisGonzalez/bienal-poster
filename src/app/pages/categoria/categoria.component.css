@@ -1,0 +1,13 @@
+/*.responsive-text {
+    font-size: 4vh; /* El tamaño de fuente será el 4% del alto de la ventana gráfica 
+  }*/
+
+
+  /* Media query para pantallas pequeñas */
+@media screen and (max-width: 600px) {
+    .my-btn {
+      display: block; /* Hace que el botón ocupe todo el ancho disponible */
+      width: 100%; /* Establece el ancho al 100% */
+      margin-bottom: 10px; /* Añade un margen inferior para separar botones en pantallas pequeñas */
+    }
+  }

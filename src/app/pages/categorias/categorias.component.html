@@ -7,12 +7,12 @@
     
     <div class="row">
         
-        <div class="col-lg-8 text-left">
+        <div class="col-12 col-lg-8 text-left">
             <h1>Lista de Categorías</h1>
         </div>
         
 
-        <div class="col-lg-4 text-right">
+        <div class="col-12 col-lg-4 text-right">
             <button routerLink="/categoria/nuevo" class="btn btn-primary">
             <i class="fa fa-plus"></i>
                 Agregar
@@ -38,14 +38,17 @@
                 <td>{{ categoria.descripcion }}</td>
     
                 <td class="text-right">
-                    <!--  -->
-                    <button class="btn btn-info mr-1" [routerLink]="['/categoria', categoria.id ]">
-                    <i class="fa fa-pen"></i>
-                    </button>
-                    <!--  -->
-                    <button class="btn btn-danger" (click)="borrarCategoria( categoria, i ) ">
-                    <i class="fa fa-trash"></i>
-                    </button>
+
+                        <!--  -->
+                        <button class="btn btn-info" [routerLink]="['/categoria', categoria.id ]">
+                        <i class="fa fa-pen"></i>
+                        </button>
+                        <!--  -->
+                        <button class="btn btn-danger" (click)="borrarCategoria( categoria, i ) ">
+                        <i class="fa fa-trash"></i>
+                        </button>
+
+                    
     
     
                 </td>

@@ -237,7 +237,8 @@ export class RegisterComponent {
         //this.router.navigateByUrl('/inicio');
 
 
-        this.forma.reset();
+        //this.forma.reset();
+        
         
       }, (err) => {
         console.log(err.error.error.message);
@@ -262,9 +263,8 @@ export class RegisterComponent {
         console.log(resp2);
       });*/
 
-      
-
-      //PARA GUARDAR LA COTRASENHA EN EL OBJETO EVALUADORES
+    
+      //PARA NO GUARDAR LA COTRASENHA EN EL OBJETO EVALUADORES
       /*this.evaluador.password = null;
       this.evaluador.password2 = null;*/
   }

@@ -5,7 +5,7 @@
 <hr>
 
 <div class="row">
-    <div class="col-4">
+    <div class="col-lg-4 col-6">
         <div class="text-right">
             <label class="col-form-label"><strong>Área: </strong></label>
                 <select [(ngModel)]="areaSeleccionada" (change)="capturar()" >
@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    <div class="col-4">
+    <div style="margin-bottom: 20px;" class="col-lg-4 col-6">
         <div class="text-center">
             <label class="col-form-label"><strong>Categoría: </strong></label>
                 <select [(ngModel)]="categoriaSeleccionada" (change)="capturar()">
@@ -33,49 +33,54 @@
         </div>
     </div>
 
-    <div class="col-4">
+    <div class="col-lg-4 col-12">
         <button id="div-totop" class="btn col-lg-6 btn-info btn-block cmn-divfloat" (click)="pdfMetodo()">Crear PDF <i class="fa fa-file-pdf"></i></button>
     </div>
 
 </div>
 
-<table *ngIf="!cargando && proyectos.length > 0" class="table mt-3 animated fadeIn faster animated fadeIn faster">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Título</th>
-            
-            <!-- <th scope="col">Codigo</th> -->
-            <th scope="col">Autor</th>
-            <th scope="col">Puntaje</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Opciones</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="table-responsive">
 
-        <tr *ngFor="let proyecto of proyectos; let i = index">
-            <th scope="row">{{ i + 1 }}</th>
-            <td>{{ proyecto.titulo }}</td>
-            
-            <td>{{ proyecto.autor }}</td>
-            <td><strong>{{ proyecto.totalPuntaje}}</strong></td>
-            <td>{{ proyecto.estado }}</td>
-            <td class="text-right">
-                <!--  -->
-                <button class="btn btn-info mr-1" [routerLink]="['/proyecto-pdf', proyecto.id ]">
-                <i class="fa fa-eye"></i>
-                </button>
-                <!--  -->
-                <!-- <button class="btn btn-danger" (click)="borrarProyecto( proyecto, i ) ">
-                <i class="fa fa-trash"></i>
-                </button> -->
+    <table *ngIf="!cargando && proyectos.length > 0" class="table mt-3 animated fadeIn faster animated fadeIn faster">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Título</th>
+                
+                <!-- <th scope="col">Codigo</th> -->
+                <th scope="col">Autor</th>
+                <th scope="col">Puntaje</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <tr *ngFor="let proyecto of proyectos; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ proyecto.titulo }}</td>
+                
+                <td>{{ proyecto.autor }}</td>
+                <td><strong>{{ proyecto.totalPuntaje}}</strong></td>
+                <td>{{ proyecto.estado }}</td>
+                <td class="text-right">
+                    <!--  -->
+                    <button class="btn btn-info" [routerLink]="['/proyecto-pdf', proyecto.id ]">
+                    <i class="fa fa-eye"></i>
+                    </button>
+                    <!--  -->
+                    <!-- <button class="btn btn-danger" (click)="borrarProyecto( proyecto, i ) ">
+                    <i class="fa fa-trash"></i>
+                    </button> -->
+    
+    
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
+</div>
 
-            </td>
-        </tr>
-    </tbody>
-</table>
 
 
 <div *ngIf="!cargando && proyectos.length === 0" class="alert alert-warning text-center mt-3 animated fadeIn faster">

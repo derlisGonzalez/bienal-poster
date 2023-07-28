@@ -7,11 +7,11 @@
 
     <div class="row">
 
-        <div class="col text-left">
+        <div class="col-12 col-lg-8 text-left">
             <h1><strong>Lista de criterios</strong></h1>
         </div>
 
-        <div class="col text-right">
+        <div class="col-12 col-lg-4 text-right">
             <button routerLink="/criterio/nuevo" class="btn btn-primary">
                 <i class="fa fa-plus"></i>
                 Agregar
@@ -37,17 +37,16 @@
                 <th scope="row">{{ i + 1 }}</th>
                 <td>{{ criterio.descripcion }}</td>
     
-                <td class="text-right">
-                    <!--  -->
-                    <button class="btn btn-info mr-1" [routerLink]="['/criterio', criterio.id ]">
-                    <i class="fa fa-pen"></i>
+                <td class="text-right"> 
+
+                    <button class="btn btn-info" [routerLink]="['/criterio', criterio.id ]">
+                        <i class="fa fa-pen"></i>
                     </button>
-                    <!--  -->
+            
                     <button class="btn btn-danger" (click)="borrarCriterio( criterio, i ) ">
-                    <i class="fa fa-trash"></i>
+                        <i class="fa fa-trash"></i>
                     </button>
-    
-    
+
                 </td>
             </tr>
         </tbody>
