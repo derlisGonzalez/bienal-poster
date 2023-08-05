@@ -1,3 +1,4 @@
+import { CarreraComponent } from './../../pages/carrera/carrera.component';
 import { Component, OnInit } from '@angular/core';
 import { ProyectoModel } from 'src/app/models/proyecto.model';
 import { ProyectosService } from 'src/app/services/proyectos.service';
@@ -165,11 +166,12 @@ export class ReporteProyectoComponent implements OnInit {
 
 
 
-
     const pdfDefinition: any = {
 
+      
       header: function(currentPage, pageCount, pageSize) {
         // you can apply any logic and return any valid pdfmake element
+
         return [
           { text: 'Informe de proyectos', alignment: (currentPage % 2) ? 'center' : 'center', fontSize: 20, bold: true },
           { canvas: [ { type: 'rect', x: 170, y: 32, w: pageSize.width - 170, h: 40 } ] }
@@ -189,7 +191,7 @@ export class ReporteProyectoComponent implements OnInit {
             }
           },
 
-          pageBreak: 'after'
+          //pageBreak: 'after'
         },
 
         /*

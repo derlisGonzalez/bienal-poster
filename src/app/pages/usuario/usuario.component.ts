@@ -255,6 +255,7 @@ export class UsuarioComponent implements OnInit {
     
             //this.router.navigateByUrl('/inicio');
     
+            this.forma.reset();
           }, (err) => {
             console.log(err.error.error.message);
             Swal.fire({

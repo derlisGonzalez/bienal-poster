@@ -341,6 +341,9 @@ export class ProyectoComponent implements OnInit {
         icon: 'success'
       });
 
+      
+      this.forma.reset();
+
     });
 
     console.log();

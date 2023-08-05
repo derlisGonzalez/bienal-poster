@@ -1,3 +1,4 @@
+<app-header></app-header><br>
 <div class="container">
 
     <br>
@@ -23,36 +24,41 @@
     <hr>
     <div class="row">
 
-        <h3 class="col-lg-12"><strong>Título: </strong><strong></strong>{{proyecto.titulo}}</h3>
-        <h3 class="col-lg-12"><strong>Autor: </strong>{{proyecto.autor}}</h3>
-        <h3 class="col-lg-4"><strong>Evaluador: </strong>{{proyecto.evaluador1.nombre}}</h3>
-        <h3 class="col-lg-4 text-center"><strong>Categoría: </strong>{{proyecto.categoria}}</h3>
-        <h3 class="col-lg-4 text-right"><strong>Código: </strong>{{proyecto.codigo}}</h3>
-        <h4 class="col-lg-12"><strong>Resumen: </strong>{{proyecto.cuerpo}}</h4>
+        <h3 class="col-12 col-lg-12"><strong>Título: </strong><strong></strong>{{proyecto.titulo}}</h3>
+        <h3 class="col-12 col-lg-12"><strong>Autor: </strong>{{proyecto.autor}}</h3>
+        <h3 class="col-12 col-lg-4"><strong>Evaluador: </strong>{{proyecto.evaluador1.nombre}}</h3>
+        <h3 class="col-12 col-lg-4"><strong>Categoría: </strong>{{proyecto.categoria}}</h3>
+        <h3 class="col-12 col-lg-4"><strong>Código: </strong>{{proyecto.codigo}}</h3>
+        <p class="col-12 col-lg-12"><strong>Resumen: </strong>{{proyecto.cuerpo}}</p>
 
     </div>
     <hr>
 
     <h2 class="text-center"><strong>Criterios y puntajes</strong></h2>
 
-    <table class="table table-sm table-striped mt-3 animated fadeIn faster animated fadeIn faster">
-        <thead class="thead">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Criterio</th>
-                <th class="text-center" scope="col">Puntaje</th>
-                <!-- <th scope="col">Estado</th> -->
-            </tr>
-        </thead>
-        <tbody>
-    
-            <tr *ngFor="let criterio of proyecto.evaluador1.criterios; let i = index">
-                <th scope="row">{{ i + 1 }}</th>
-                <td>{{ criterio.descripcion }}</td>
-                <td class="text-center">{{ criterio.puntajeAsignado }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="table-responsive">
+
+        <table class="table table-sm table-striped mt-3 animated fadeIn faster animated fadeIn faster">
+            <thead class="thead">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Criterio</th>
+                    <th class="text-center" scope="col">Puntaje</th>
+                    <!-- <th scope="col">Estado</th> -->
+                </tr>
+            </thead>
+            <tbody>
+        
+                <tr *ngFor="let criterio of proyecto.evaluador1.criterios; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ criterio.descripcion }}</td>
+                    <td class="text-center">{{ criterio.puntajeAsignado }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
 
     <!-- <div class="row">
 

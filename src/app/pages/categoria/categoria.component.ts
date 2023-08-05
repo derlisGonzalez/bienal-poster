@@ -59,6 +59,7 @@ export class CategoriaComponent implements OnInit {
         
       });
       this.crearFormulario();
+     
     }
 
   ngOnInit() {
@@ -73,13 +74,15 @@ export class CategoriaComponent implements OnInit {
         });
 
     }
+
+   
   }
 
 
   crearFormulario() {
     this.forma = this.fb.group({
       id: [''],
-      descripcion: ['', Validators.required],
+      descripcion: ['', Validators.required,]
     });
 
   }
@@ -124,19 +127,22 @@ export class CategoriaComponent implements OnInit {
         text: 'Se actualizó correctamente',
         icon: 'success'
       });
+
+    this.forma.reset({ });
+
     });
 
     console.log(this.forma);
     console.log(this.categoria);
 
 
-    //this.forma.reset({  });
+    //this.forma.reset({ });
   
     //this.vaciarCampo();
     
     //location.reload();
 
-    this.forma.reset();
+    //this.forma.reset();
 
   }
 

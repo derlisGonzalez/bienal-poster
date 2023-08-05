@@ -222,6 +222,8 @@ export class RegisterComponent {
           //this.evaluador.habilitado = resp['nombre'];
 
           console.log(resp3);
+          this.forma.reset();
+
         });
         
 
@@ -238,7 +240,6 @@ export class RegisterComponent {
 
 
         //this.forma.reset();
-        
         
       }, (err) => {
         console.log(err.error.error.message);
@@ -267,6 +268,7 @@ export class RegisterComponent {
       //PARA NO GUARDAR LA COTRASENHA EN EL OBJETO EVALUADORES
       /*this.evaluador.password = null;
       this.evaluador.password2 = null;*/
+
   }
 
 
@@ -310,6 +312,8 @@ export class RegisterComponent {
         text: 'Se actualizó correctamente',
         icon: 'success'
       });
+
+     // this.forma.reset();
     });
 
 
@@ -337,7 +341,7 @@ export class RegisterComponent {
         localStorage.setItem('email', this.usuario.email);
       }*/
 
-      this.router.navigateByUrl('/inicio');
+     //this.router.navigateByUrl('/inicio');
 
     }, (err) => {
       console.log(err.error.error.message);

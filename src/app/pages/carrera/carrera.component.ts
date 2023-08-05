@@ -113,6 +113,11 @@ export class CarreraComponent implements OnInit {
       icon: 'success'
     });
 
+    location.reload();
+
+    //form.reset();
+
+
     });
 
     console.log(form);

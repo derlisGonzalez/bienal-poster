@@ -178,6 +178,8 @@ export class DisertanteComponent implements OnInit {
       icon: 'success'
     });
 
+    this.forma.reset();
+
     });
 
     console.log(this.forma);

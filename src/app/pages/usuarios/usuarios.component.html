@@ -28,6 +28,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Rol</th>
+                    <th scope="col">Correo</th>
                     <th class="text-right" scope="col">Opciones</th>
                 </tr>
             </thead>
@@ -36,7 +37,8 @@
                 <tr *ngFor="let evaluador of evaluadores; let i = index">
                     <th scope="row">{{ i + 1 }}</th>
                     <td>{{ evaluador.nombre }}</td>
-                    <td>{{ evaluador.role }}</td>
+                    <td>{{ evaluador.role | uppercase}}</td>
+                    <td>{{ evaluador.email }}</td>
                     <td class="text-right">
                         <!--  -->
                         <button class="btn btn-info" [routerLink]="['/usuario', evaluador.id ]">

@@ -114,6 +114,9 @@ export class CriterioComponent implements OnInit {
       icon: 'success'
     });
 
+    form.reset();
+
+
     });
 
     console.log(form);
