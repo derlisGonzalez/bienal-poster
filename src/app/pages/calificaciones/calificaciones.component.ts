@@ -54,6 +54,8 @@ export class CalificacionesComponent implements OnInit {
                   //console.log(data);
                  
                 });
+
+
                 }
 
   ngOnInit()  {
@@ -65,6 +67,8 @@ export class CalificacionesComponent implements OnInit {
         this.proyectos = resp;
         this.cargando = false;
       });
+
+      
   }
 
 

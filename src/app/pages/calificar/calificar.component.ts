@@ -410,6 +410,7 @@ export class CalificarComponent implements OnInit {
     console.log(this.proyecto);
     this.router.navigateByUrl('/calificaciones');
 
+
   }
 
   guardarMasTarde( form: NgForm ) {

@@ -1,0 +1,8 @@
+  /* Media query para pantallas pequeñas */
+  @media screen and (max-width: 600px) {
+    .my-btn {
+      display: block; /* Hace que el botón ocupe todo el ancho disponible */
+      width: 100%; /* Establece el ancho al 100% */
+      margin-bottom: 10px; /* Añade un margen inferior para separar botones en pantallas pequeñas */
+    }
+  }

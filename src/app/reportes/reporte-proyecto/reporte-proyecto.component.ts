@@ -90,7 +90,7 @@ export class ReporteProyectoComponent implements OnInit {
 
       this.btnFloat();
 
-      this.capturar();
+      //this.capturar();
   }
  
   capturar() {  
@@ -100,10 +100,8 @@ export class ReporteProyectoComponent implements OnInit {
     this.categoria = this.categoriaSeleccionada;
     console.log(this.carrera);
     console.log(this.categoria);
-  }
-  pdfMetodo(){
-      
-    //let areaSeleccionada = document.getElementById("areaSeleccionada");
+
+        //let areaSeleccionada = document.getElementById("areaSeleccionada");
     //console.log(areaSeleccionada);
     //alert(selected);
 
@@ -138,6 +136,8 @@ export class ReporteProyectoComponent implements OnInit {
       //PARA IMPRIMIR DE MAYOR A MENOR DE ACUERDO AL PUNTAJE
       this.proyectos2.sort((a, b) => b.totalPuntaje - a.totalPuntaje);
     });
+  }
+  pdfMetodo(){
 
     /*
     PROCEDIMIENTO PARA LA CREACION DE LISTA
@@ -179,6 +179,12 @@ export class ReporteProyectoComponent implements OnInit {
       },
 
       content: [
+        {
+
+           text: 'Filtrado por área: '+'[' + this.carrera + ']' + ' y categoría: ' + '['+this.categoria + ']', fontSize: 13, bold: true 
+
+        },
+        
 
         {
           table: {
@@ -236,6 +242,7 @@ export class ReporteProyectoComponent implements OnInit {
       }
     }
     pdfMake.createPdf( pdfDefinition).open();
+    location.reload();
   }
 
   /*pdf(){
