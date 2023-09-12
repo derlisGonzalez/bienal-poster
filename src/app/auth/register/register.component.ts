@@ -70,10 +70,10 @@ export class RegisterComponent {
     this.carrerasService.getCarreras()
       .subscribe(carreras => {
         this.carreras = carreras;
-        this.carreras.unshift({
+       /* this.carreras.unshift({
           descripcion: '[ Seleccione su Área]',
           id: ''
-        })
+        })*/
         console.log(this.carreras);
       });
 
@@ -96,7 +96,6 @@ export class RegisterComponent {
   /*get pasatiempos() {
     return this.forma.get('pasatiempos') as FormArray;
   }*/
-
   
   get nombreNoValido() {
     return this.forma.get('nombre').invalid && this.forma.get('nombre').touched

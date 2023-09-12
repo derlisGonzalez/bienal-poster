@@ -44,7 +44,7 @@ export class CategoriaComponent implements OnInit {
           //console.log(this.evaluadores[indice]);
           const data = this.evaluadores[indice];
 
-          console.log(data.role);
+          //console.log(data.role);
 
           localStorage.setItem('role', data.role);
 
@@ -132,8 +132,8 @@ export class CategoriaComponent implements OnInit {
 
     });
 
-    console.log(this.forma);
-    console.log(this.categoria);
+    //console.log(this.forma);
+    //console.log(this.categoria);
 
 
     //this.forma.reset({ });

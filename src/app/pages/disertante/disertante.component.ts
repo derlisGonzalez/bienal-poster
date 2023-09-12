@@ -55,7 +55,7 @@ export class DisertanteComponent implements OnInit {
                     //console.log(this.evaluadores[indice]);
                     const data = this.evaluadores[indice];
             
-                    console.log(data.role);
+                    //console.log(data.role);
             
                     localStorage.setItem('role', data.role);
             
@@ -96,10 +96,10 @@ export class DisertanteComponent implements OnInit {
     .subscribe( categorias => {
       this.categorias = categorias;
 
-      this.categorias.unshift({
+      /*this.categorias.unshift({
         descripcion: '[ Seleccione Categoria]',
         id: ''
-      })
+      })*/
 
       // console.log( this.paises );
     });
@@ -109,10 +109,10 @@ export class DisertanteComponent implements OnInit {
     .subscribe( carreras => {
       this.carreras = carreras;
 
-      this.carreras.unshift({
+      /*this.carreras.unshift({
         descripcion: '[ Seleccione Carrera]',
         id: ''
-      })
+      })*/
 
       // console.log( this.paises );
     });
@@ -182,8 +182,8 @@ export class DisertanteComponent implements OnInit {
 
     });
 
-    console.log(this.forma);
-    console.log(this.disertante);
+    //(this.forma);
+    //console.log(this.disertante);
 
   }
 

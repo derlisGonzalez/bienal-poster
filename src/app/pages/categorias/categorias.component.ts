@@ -37,7 +37,7 @@ export class CategoriasComponent implements OnInit {
         //console.log(this.evaluadores[indice]);
         const data = this.evaluadores[indice];
 
-        console.log(data.role);
+        //console.log(data.role);
 
         localStorage.setItem('role', data.role);
 
@@ -58,7 +58,7 @@ export class CategoriasComponent implements OnInit {
     this.cargando = true;
     this.categoriasService.getCategorias()
       .subscribe( resp => {
-        console.log(resp);
+        //console.log(resp);
         this.categorias = resp;
         this.cargando = false;
       });

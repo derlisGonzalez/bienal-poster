@@ -39,7 +39,7 @@ export class ProyectosComponent implements OnInit {
         //console.log(this.evaluadores[indice]);
         const data = this.evaluadores[indice];
 
-        console.log(data.role);
+        //console.log(data.role);
 
         localStorage.setItem('role', data.role);
 
@@ -60,7 +60,7 @@ export class ProyectosComponent implements OnInit {
     this.cargando = true;
     this.proyectosService.getProyectos()
       .subscribe( resp => {
-        console.log(resp);
+        //console.log(resp);
         this.proyectos = resp;
         this.cargando = false;
       });

@@ -33,6 +33,8 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { VisualizarCarreraComponent } from './reportes/reporte-carreras/visualizar-carrera/visualizar-carrera.component';
 
 import { AuthGuard } from 'src/app/guard/auth.guard';
+import { VerProyectosAsignadosComponent } from './pages/ver-proyectos-asignados/ver-proyectos-asignados.component';
+import { VerMasComponent } from './pages/ver-proyectos-asignados/ver-mas/ver-mas.component';
 
 
 const routes: Routes = [
@@ -60,6 +62,9 @@ const routes: Routes = [
 
   { path: 'calificaciones', component: CalificacionesComponent, canActivate: [AuthGuard] },
   { path: 'calificacion/:id', component: CalificarComponent, canActivate: [AuthGuard] },
+
+  { path: 'proyectos-asignados', component: VerProyectosAsignadosComponent, canActivate: [AuthGuard] },
+  { path: 'ver-mas/:id', component: VerMasComponent, canActivate: [AuthGuard] },
 
   { path: 'calificar', component: ModalCalificarComponent, canActivate: [AuthGuard] },
   { path: 'calificar/:id', component: ModalCalificarComponent, canActivate: [AuthGuard] },

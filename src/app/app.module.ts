@@ -46,6 +46,8 @@ import { AuthService } from './services/auth.service';
 import { AuthGuard } from './guard/auth.guard';
 import { CriterioAceptacionComponent } from './pages/criterio-aceptacion/criterio-aceptacion.component';
 import { CriteriosAceptacionComponent } from './pages/criterios-aceptacion/criterios-aceptacion.component';
+import { VerProyectosAsignadosComponent } from './pages/ver-proyectos-asignados/ver-proyectos-asignados.component';
+import { VerMasComponent } from './pages/ver-proyectos-asignados/ver-mas/ver-mas.component';
 
 
 
@@ -89,6 +91,8 @@ import { CriteriosAceptacionComponent } from './pages/criterios-aceptacion/crite
     BuscadorComponent,
     CriterioAceptacionComponent,
     CriteriosAceptacionComponent,
+    VerProyectosAsignadosComponent,
+    VerMasComponent,
   ],
   imports: [
     BrowserModule,

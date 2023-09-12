@@ -28,7 +28,7 @@
             <div class="form-group m-t-20">
                 <!-- <span *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger animated fadeIn">El nombre es obligatorio</span> -->
                 <div class="col-xs-12">
-                    <input class="form-control text-capitalize"
+                    <input class="form-control"
                             type="text" 
                             formControlName="nombre"
                             [class.is-invalid]="nombreNoValido"
@@ -73,7 +73,7 @@
 
             <div class="form-group row">
                 <label class="col-8 col-form-label">Área Temática</label>
-                <div class="col-12" placeholder="Seleccione Area">
+                <div class="col-12">
                     <select class="form-control" [disabled]="carreras.length === 0"
                             [(ngModel)]="carrera" formControlName="carrera">
                     <option *ngFor="let carrera of carreras" [ngValue]="carrera">

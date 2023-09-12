@@ -76,7 +76,7 @@ export class ProyectoComponent implements OnInit {
         //console.log(this.evaluadores[indice]);
         const data = this.evaluadores[indice];
 
-        console.log(data.role);
+        //console.log(data.role);
 
         localStorage.setItem('role', data.role);
 
@@ -93,7 +93,6 @@ export class ProyectoComponent implements OnInit {
 
   }
 
-
   ngOnInit() {
     // let valorTotal = this.proyecto.totalPuntaje;
     const id = this.route.snapshot.paramMap.get('id');
@@ -106,22 +105,18 @@ export class ProyectoComponent implements OnInit {
         });
     }
 
-
-
     this.carrerasService.getCarreras()
       .subscribe(carreras => {
         this.carreras = carreras;
-        this.carreras.unshift({
+        /*this.carreras.unshift({
           descripcion: '[ Seleccione Área]',
           id: ''
-        })
+        })*/
         //console.log(this.carreras)
       });
 
-
-      
       this.forma.controls["carrera"].valueChanges.subscribe((area: CarreraModel) => {
-        console.log(area.descripcion);
+        //console.log(area.descripcion);
         this.areaTematica = area.descripcion;
         
       });
@@ -131,25 +126,21 @@ export class ProyectoComponent implements OnInit {
         this.disertantesService.getDisertantes()
         .subscribe(disertantes => {
           this.disertantes = disertantes;
-          this.disertantes.unshift({
+          /*this.disertantes.unshift({
             nombre: '[ Seleccione Autor]',
             id: ''
-          })
+          })*/
         });
 
       //}
 
-      
-
-
-
       this.categoriasService.getCategorias()
       .subscribe( categorias => {
         this.categorias = categorias;
-        this.categorias.unshift({
+        /*this.categorias.unshift({
           descripcion: '[ Seleccione Categoría]',
           id: ''
-        })
+        })*/
   
         // console.log( this.paises );
       });
@@ -174,12 +165,11 @@ export class ProyectoComponent implements OnInit {
     this.criteriosService.getCriterios()
       .subscribe(criterios => {
         this.criterios = criterios
-        console.log(this.criterios);
+        //console.log(this.criterios);
       });
 
-
     this.forma.controls["carrera"].valueChanges.subscribe((c: CarreraModel) => {
-      console.log(c)
+      //console.log(c)
       this.carrera = c
       this.evaluadores = c.evaluadores
     })
@@ -199,10 +189,6 @@ export class ProyectoComponent implements OnInit {
     })*/
 
   }
-
-
-
-
 
   get evaluadoresProyecto() {
     return this.forma.get('evaluadoresProyecto') as FormArray;
@@ -291,7 +277,6 @@ export class ProyectoComponent implements OnInit {
     })
   }
 
-
   agregarEvaluador() {
     this.evaluadoresProyecto.push(  this.fb.control('')  );
   }
@@ -299,7 +284,6 @@ export class ProyectoComponent implements OnInit {
   borrarEvaluador(i: number) {
     this.evaluadoresProyecto.removeAt(i);
   }
-
 
   guardar() {
 
@@ -324,7 +308,6 @@ export class ProyectoComponent implements OnInit {
 
     let peticion: Observable<any>;
 
-    
     this.proyecto.area = this.areaTematica;
     if (this.proyecto.id) {
       peticion = this.proyectosService.actualizarProyecto(this.proyecto);
@@ -346,9 +329,9 @@ export class ProyectoComponent implements OnInit {
 
     });
 
-    console.log();
-    console.log(this.proyecto);
-    console.log(this.forma);
+    //console.log();
+    //console.log(this.proyecto);
+    //console.log(this.forma);
   }
 
   // guardar( form: NgForm ) {
@@ -414,7 +397,7 @@ actualizarCarrera(proyecto: ProyectoModel) {
   newCarrera.proyectos.push(newProyecto)
   let response = this.carrerasService.actualizarCarera(newCarrera)
   response.subscribe(resp =>{
-    console.log(resp)
+    //console.log(resp)
   })
 }
 }

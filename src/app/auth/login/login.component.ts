@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
     this.auth.login( this.usuario )
       .subscribe( resp => {
 
-        console.log(resp);
+        //console.log(resp);
         Swal.close();
 
         /*if ( this.recordarme ) {
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
           // resp.forEach( function(punto){
           //   suma    += Number(punto.puntajeAsignado);
           // })
-          console.log(respEval);
+          //console.log(respEval);
   
           this.evaluadores = respEval;
           //console.log(this.evaluadores[45].filter(correo));
@@ -80,10 +80,10 @@ export class LoginComponent implements OnInit {
           const indice = this.evaluadores.findIndex((elemento, indice) => {
           if (elemento.email === localStorage.getItem('email')) {
             //console.log(indice);
-            console.log(this.evaluadores[indice]);
+            //console.log(this.evaluadores[indice]);
             const data = this.evaluadores[indice];
 
-            console.log(data.role);
+            //console.log(data.role);
 
             localStorage.setItem('role', data.role);
 
@@ -101,7 +101,7 @@ export class LoginComponent implements OnInit {
         //if (uid == this.auth.getEvaluadorLogueado()) {
           this.auth.getEvaluadorLogueado(uid)
           .subscribe(respuesta => {
-            console.log("DATOS DEL USUARIO LOGUEADO... "+ respuesta);
+            //console.log("DATOS DEL USUARIO LOGUEADO... "+ respuesta);
             //this.evaluador = resp;
             //delete this.evaluador.carrera.evaluadores
             //this.evaluador.id = id;

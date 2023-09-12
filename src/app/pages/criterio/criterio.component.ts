@@ -41,7 +41,7 @@ export class CriterioComponent implements OnInit {
         //console.log(this.evaluadores[indice]);
         const data = this.evaluadores[indice];
 
-        console.log(data.role);
+        //console.log(data.role);
 
         localStorage.setItem('role', data.role);
 
@@ -119,8 +119,8 @@ export class CriterioComponent implements OnInit {
 
     });
 
-    console.log(form);
-    console.log(this.criterio);
+    //console.log(form);
+    //console.log(this.criterio);
 
     //location.reload();
 

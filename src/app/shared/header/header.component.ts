@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
                       //console.log(this.evaluadores[indice]);
                       const data = this.evaluadores[indice];
           
-                      console.log(data.role);
+                      //console.log(data.role);
           
                       localStorage.setItem('role', data.role);
 
@@ -57,7 +57,7 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log("Usuario logueado: "+localStorage.getItem('email'));
+    //console.log("Usuario logueado: "+localStorage.getItem('email'));
     //localStorage.removeItem('role');
     
   }

@@ -19,7 +19,7 @@ export class InicioComponent implements OnInit {
     this.cargando = true;
     this.proyectosService.getProyectos()
       .subscribe( resp => {
-        console.log(resp);
+        //console.log(resp);
         this.proyectos = resp;
         this.cargando = false;
       });

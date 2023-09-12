@@ -1,0 +1,39 @@
+<app-header></app-header><br>
+
+<div class="container" *ngIf="roleUser == 'evaluador'">
+
+    <div class="card-columns" *ngFor="let proyecto of proyectos; let i = index">
+
+        <div class="card" *ngIf="proyecto.evaluador1.email == userActivo">
+
+            <!-- <div *ngIf="proyecto.estado === true" class="card-body"> -->
+            <div  class="card-body">
+
+                <h3 class="card-title text-center"><strong>{{ proyecto.titulo }}</strong></h3>
+                <h4 class="card-title text-center"><strong>Código: {{ proyecto.codigo | uppercase }} </strong></h4>
+                
+                <!-- <p class="card-text">{{ proyecto.id }}</p> -->
+                <!-- <p class="btn btn-primary btn-block">{{ proyecto.estado }}</p> -->
+
+                <button [routerLink]="['/ver-mas', proyecto.id ]" type="button" class="btn btn-primary btn-block">Ver más...</button>
+                <!-- <a [routerLink]="['/calificacion',i]" class="btn btn-outline-primary btn-block">Calificar</a> -->
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="row alert alert-warning mt-3 animated fadeIn faster" *ngIf="roleUser == 'admin'">
+    <div class="col-12 text-center">
+        <h1>Usuario no autorizado!!</h1>
+        <br>
+    </div>
+    <div class="col-12 text-center">
+        <button routerLink="/inicio" class="btn btn-danger">
+      <i class="fa fa-arrow-left"></i>
+      Inicio
+    </button>
+    </div>
+</div>

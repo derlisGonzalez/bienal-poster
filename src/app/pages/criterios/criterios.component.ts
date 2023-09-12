@@ -37,7 +37,7 @@ export class CriteriosComponent implements OnInit {
         //console.log(this.evaluadores[indice]);
         const data = this.evaluadores[indice];
 
-        console.log(data.role);
+        //console.log(data.role);
 
         localStorage.setItem('role', data.role);
 
@@ -58,7 +58,7 @@ export class CriteriosComponent implements OnInit {
     this.cargando = true;
     this.criteriosService.getCriterios()
       .subscribe( resp => {
-        console.log(resp);
+        //console.log(resp);
         this.criterios = resp;
         this.cargando = false;
         //console.log(this.criterios.length);
